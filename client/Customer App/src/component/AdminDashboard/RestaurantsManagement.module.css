@@ -1,0 +1,286 @@
+.pageHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 28px;
+}
+
+.pageTitle {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+  color: #1c1c1c;
+}
+
+.pageSubtitle {
+  margin: 4px 0 0;
+  font-size: 14px;
+  color: #888;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.statCard {
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #eceae4;
+  padding: 16px;
+}
+
+.statIcon {
+  font-size: 20px;
+}
+
+.statValue {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1c1c1c;
+  margin-top: 8px;
+}
+
+.statLabel {
+  font-size: 13px;
+  color: #888;
+}
+
+.searchBar {
+  margin-bottom: 16px;
+}
+
+.searchInput {
+  padding: 9px 14px;
+  border-radius: 8px;
+  border: 1px solid #dddbd4;
+  font-size: 14px;
+  width: 300px;
+  outline: none;
+}
+
+.restaurantGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.restaurantCard {
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #eceae4;
+  padding: 20px;
+}
+
+.restaurantHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.restaurantInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cuisineEmoji {
+  font-size: 28px;
+}
+
+.restaurantName {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1c1c1c;
+}
+
+.restaurantMeta {
+  font-size: 12px;
+  color: #888;
+}
+
+.statusBadge {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  height: fit-content;
+}
+
+.restaurantDetails {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.detailItem {
+  background: #f9f8f5;
+  border-radius: 7px;
+  padding: 8px 12px;
+}
+
+.detailLabel {
+  font-size: 11px;
+  color: #888;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.detailValue {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1c1c1c;
+  margin-top: 2px;
+}
+
+.restaurantActions {
+  display: flex;
+  gap: 8px;
+}
+
+.manageBtn {
+  flex: 1;
+  padding: 8px;
+  border-radius: 7px;
+  border: 1px solid #dddbd4;
+  background: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.statusToggleBtn {
+  padding: 8px 14px;
+  border-radius: 7px;
+  border: none;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.suspend {
+  background: #feecEc;
+  color: #c0321e;
+}
+
+.activate {
+  background: #eafbf0;
+  color: #1a7a45;
+}
+
+/* Modal Styles */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: #fff;
+  border-radius: 16px;
+  padding: 32px;
+  width: 460px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.modalTitle {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.modalClose {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #888;
+}
+
+.modalRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #f5f4f1;
+  font-size: 14px;
+}
+
+.modalRowLabel {
+  color: #888;
+}
+
+.modalRowValue {
+  font-weight: 600;
+}
+
+.modalCommission {
+  margin-top: 20px;
+}
+
+.modalLabel {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 6px;
+}
+
+.modalInput {
+  width: 100%;
+  padding: 9px 12px;
+  border-radius: 7px;
+  border: 1px solid #dddbd4;
+  font-size: 14px;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.modalActions {
+  margin-top: 16px;
+  display: flex;
+  gap: 10px;
+}
+
+.modalBtnPrimary {
+  flex: 1;
+  padding: 10px;
+  background: #c8441a;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.modalBtnSecondary {
+  flex: 1;
+  padding: 10px;
+  background: #f5f4f1;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+@media (max-width: 992px) {
+  .restaurantGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+}

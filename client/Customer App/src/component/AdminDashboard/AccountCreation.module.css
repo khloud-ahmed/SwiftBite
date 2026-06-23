@@ -1,0 +1,211 @@
+.page {
+  width: 100%;
+}
+
+.header {
+  margin-bottom: 28px;
+}
+
+.title {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+  color: #1c1c1c;
+}
+
+.subtitle {
+  margin: 4px 0 0;
+  font-size: 14px;
+  color: #888;
+}
+
+.successAlert {
+  background: #eafbf0;
+  border: 1px solid #9fdcc0;
+  border-radius: 10px;
+  padding: 14px 20px;
+  margin-bottom: 20px;
+  color: #1a7a45;
+  font-weight: 600;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 24px;
+}
+
+.roleCard,
+.formCard {
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #eceae4;
+}
+
+.roleCard {
+  padding: 20px;
+  height: fit-content;
+}
+
+.formCard {
+  padding: 28px;
+}
+
+.sectionLabel {
+  margin: 0 0 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.roleBtn {
+  width: 100%;
+  text-align: left;
+  padding: 12px 14px;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  border: 1px solid #eceae4;
+  background: #fff;
+  color: #444;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.roleBtn.active {
+  border: 2px solid #c8441a;
+  background: #fff5f2;
+  color: #c8441a;
+  font-weight: 700;
+}
+
+.roleInfo {
+  margin-top: 20px;
+  padding: 14px;
+  background: #f5f4f1;
+  border-radius: 8px;
+}
+
+.roleInfo p {
+  margin: 0;
+  font-size: 12px;
+  color: #666;
+  line-height: 1.6;
+}
+
+.formTitle {
+  margin: 0 0 24px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #1c1c1c;
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.grid3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+}
+
+.label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 6px;
+}
+
+.required {
+  color: #c8441a;
+}
+
+.input,
+.select {
+  width: 100%;
+  padding: 9px 12px;
+  border-radius: 7px;
+  border: 1px solid #dddbd4;
+  font-size: 14px;
+  outline: none;
+  box-sizing: border-box;
+  color: #1c1c1c;
+  background: #fff;
+}
+
+.select {
+  cursor: pointer;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0 16px;
+}
+
+.dividerLabel {
+  font-size: 13px;
+  font-weight: 700;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.dividerLine {
+  flex: 1;
+  height: 1px;
+  background: #eceae4;
+}
+
+.commissionNote {
+  margin: 4px 0 0;
+  font-size: 11px;
+  color: #888;
+}
+
+.actions {
+  margin-top: 28px;
+  display: flex;
+  gap: 12px;
+}
+
+.btnPrimary {
+  padding: 11px 28px;
+  background: #c8441a;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btnSecondary {
+  padding: 11px 20px;
+  background: transparent;
+  border: 1px solid #dddbd4;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #555;
+}
+
+@media (max-width: 992px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .grid2,
+  .grid3 {
+    grid-template-columns: 1fr;
+  }
+}

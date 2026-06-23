@@ -1,5 +1,6 @@
 import style from "../Navbar/navbar.module.css";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   const [search, setSearch] = useState("");
@@ -8,7 +9,9 @@ function Navbar() {
     <nav className={style.navbar}>
       {/* Logo */}
       <div className={style.logo}>
-        <h1>SwiftBite</h1>
+        <Link to="/">
+          <h1>SwiftBite</h1>
+        </Link>
       </div>
 
       {/* Search */}
@@ -25,32 +28,32 @@ function Navbar() {
       {/* Navigation Links */}
       <ul className={style.navList}>
         <li className={style.active}>
-          <a href="/">Browse</a>
+          <Link to="/">Browse</Link>
         </li>
 
         <li>
-          <a href="/">Offers</a>
+          <Link to="/offers">Offers</Link>
         </li>
 
         <li>
-          <a href="/">Support</a>
+          <Link to="/support">Support</Link>
         </li>
       </ul>
 
       {/* Right Side */}
       <div className={style.actions}>
-        <button className={style.locationBtn}>
+        <Link to="/location" className={style.locationBtn}>
           New York, NY
-        </button>
+        </Link>
 
-        <div className={style.cart}>
+        <Link to="/cart" className={style.cart}>
           Cart
           <span className={style.badge}>3</span>
-        </div>
+        </Link>
 
-        <button className={style.signBtn}>
+        <Link to="/login" className={style.signBtn}>
           Sign In
-        </button>
+        </Link>
       </div>
     </nav>
   );
