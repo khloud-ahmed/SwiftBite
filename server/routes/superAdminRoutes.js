@@ -1,3 +1,59 @@
+
+/**
+ * @swagger
+ * /super-admin/create-restaurant-admin:
+ *   post:
+ *     summary: Create Restaurant Admin
+ *     tags: [Super Admin]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - name
+ *               - email
+ *               - password
+ *               - phoneNumber
+ *               - restaurantName
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 example: Ahmed Mohamed
+ *               email:
+ *                 type: string
+ *                 example: admin@restaurant.com
+ *               password:
+ *                 type: string
+ *                 example: 123456
+ *               phoneNumber:
+ *                 type: string
+ *                 example: 01012345678
+ *               restaurantName:
+ *                 type: string
+ *                 example: Pizza House
+ *     responses:
+ *       201:
+ *         description: Restaurant admin created successfully
+ *       401:
+ *         description: Unauthorized
+ *       403:
+ *         description: Forbidden
+ *       500:
+ *         description: Internal server error
+ */
+
+
+
+
+
+
+
+
+
+
+
 const express = require("express");
 const router = express.Router();
 

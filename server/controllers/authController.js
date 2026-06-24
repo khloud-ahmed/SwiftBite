@@ -1,8 +1,36 @@
+/**
+ * @swagger
+ * /api/auth/login:
+ *   post:
+ *     summary: Login User
+ *     tags:
+ *       - Authentication
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - email
+ *               - password
+ *             properties:
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Login successful
+ *       401:
+ *         description: Invalid credentials
+ */
+
+
+
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
-const { registerValidation, loginValidation } =
-  require("../controllers/validation/userValidation");
-  
+const { registerValidation, loginValidation } = require("../controllers/validation/userValidation");
 
 const signToken = (id, role) => {
   return jwt.sign({ id, role }, process.env.JWT_SECRET, {
@@ -10,11 +38,12 @@ const signToken = (id, role) => {
   });
 };
 
-// REGISTER customer for only customer
+// REGISTER customer
+// REGISTER customer 
 const register = async (req, res, next) => {
   try {
-    const { name, email, password,phoneNumber} = req.body;
-// prevent creatien if there is an error
+    const { name, email, password, phoneNumber } = req.body;
+
     const { error } = registerValidation(req.body);
     if (error) {
       return res.status(400).json({ msg: error.details[0].message });
@@ -33,20 +62,17 @@ const register = async (req, res, next) => {
       role: "customer",
     });
 
-    const token = signToken(user._id, user.role);
-
     res.status(201).json({
       status: "success",
-      token,
       data: user,
-      redirectTo: "/home",
+      redirectTo: "/login", // التحويل إلى صفحة تسجيل الدخول
     });
   } catch (error) {
     next(error);
   }
 };
 
-// LOGIN (all roles)
+// LOGIN 
 const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -63,34 +89,29 @@ const login = async (req, res, next) => {
     }
 
     const isMatch = await user.comparePassword(password);
-
     if (!isMatch) {
       return res.status(400).json({ msg: "Invalid credentials" });
     }
 
     const token = signToken(user._id, user.role);
 
-    let redirectTo = "/";
+    // توجيه المستخدم للصفحة الرئيسية بعد تسجيل الدخول الناجح
+    let redirectTo = "/"; 
 
-    switch (user.role) {
-      case "super_admin":
-        redirectTo = "/dashboard";
-        break;
-      case "restaurant_admin":
-        redirectTo = "/restaurant-dashboard";
-        break;
-      case "driver":
-        redirectTo = "/driver-dashboard";
-        break;
-      default:
-        redirectTo = "/home";
+    if (user.role === "super_admin") {
+      redirectTo = "/dashboard";
     }
 
     res.status(200).json({
       status: "success",
       token,
-      user,
-      redirectTo,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+      },
+      redirectTo, 
     });
   } catch (error) {
     next(error);

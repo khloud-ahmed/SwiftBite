@@ -1,5 +1,6 @@
 require("dotenv").config();
-
+const swaggerUi = require("swagger-ui-express");
+const swaggerSpec = require("./swagger");
 const express = require("express");
 const app = express();
 
@@ -40,6 +41,12 @@ connectDB();
 app.get("/test", (req, res) => {
   res.json({ msg: "API is working 🚀" });
 });
+//swager
+app.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerSpec)
+);
 
 // =======================
 // 🔐 Routes
