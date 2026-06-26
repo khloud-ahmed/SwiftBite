@@ -1,0 +1,82 @@
+.page {
+  background: #f5f6fa;
+  min-height: 100vh;
+  padding: 30px;
+}
+
+.header h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1d1d1d;
+  margin-bottom: 30px;
+}
+
+.formCard {
+  background: white;
+  border-radius: 20px;
+  padding: 35px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.uploadBox {
+  width: 100%;
+  min-height: 180px;
+  border: 2px dashed #e5b79a;
+  border-radius: 15px;
+  background: #fff6f0;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: 0.3s;
+}
+
+.uploadBox:hover {
+  border-color: #b55a00;
+}
+
+.uploadContent {
+  text-align: center;
+}
+
+.uploadContent i {
+  font-size: 40px;
+  color: #b55a00;
+}
+
+.uploadContent h5 {
+  color: #b55a00;
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+.uploadContent p {
+  color: #888;
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+.saveBtn {
+  background: #b55a00;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 10px 30px;
+  font-weight: 600;
+}
+
+.saveBtn:hover {
+  background: #944a00;
+}
+
+:global(.form-control),
+:global(.form-select) {
+  border-radius: 10px;
+  padding: 12px;
+}
+
+:global(.form-label) {
+  font-weight: 600;
+}

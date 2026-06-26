@@ -1,0 +1,33 @@
+.menuSection{
+
+    margin-top:60px;
+
+    padding-inline:40px;
+
+    padding-bottom:80px;
+
+    background:#fafafa;
+
+}
+
+@media(max-width:992px){
+
+.menuSection{
+
+padding-inline:20px;
+
+}
+
+}
+
+@media(max-width:576px){
+
+.menuSection{
+
+margin-top:40px;
+
+padding-inline:15px;
+
+}
+
+}

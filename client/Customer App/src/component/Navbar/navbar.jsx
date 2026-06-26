@@ -1,60 +1,94 @@
-import style from "../Navbar/navbar.module.css";
+import styles from "./Navbar.module.css";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import { FaShoppingCart, FaMapMarkerAlt, FaUserCircle } from "react-icons/fa";
 
-function Navbar() {
+function Navbar({
+  links = [],
+  activeLink = "",
+  showSearch = true,
+  showLocation = true,
+  showSignIn = true,
+  showCart = true,
+  cartCount = 0,
+}) {
   const [search, setSearch] = useState("");
 
   return (
-    <nav className={style.navbar}>
+    <nav className={`${styles.navbar} navbar navbar-expand-lg bg-white`}>
+
       {/* Logo */}
-      <div className={style.logo}>
-        <Link to="/">
-          <h1>SwiftBite</h1>
-        </Link>
-      </div>
 
-      {/* Search */}
-      <div className={style.searchContainer}>
-        <input
-          type="text"
-          placeholder="Search for restaurants, cuisines..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className={style.searchInput}
-        />
-      </div>
+      <Link to="/" className={styles.logo}>
+        SwiftBite
+      </Link>
 
-      {/* Navigation Links */}
-      <ul className={style.navList}>
-        <li className={style.active}>
-          <Link to="/">Browse</Link>
-        </li>
+      {/* Links */}
 
-        <li>
-          <Link to="/offers">Offers</Link>
-        </li>
-
-        <li>
-          <Link to="/support">Support</Link>
-        </li>
+      <ul className={styles.navList}>
+        {links.map((item) => (
+          <li key={item.name}>
+            <NavLink
+              to={item.path}
+              className={
+                activeLink === item.name
+                  ? styles.active
+                  : styles.link
+              }
+            >
+              {item.name}
+            </NavLink>
+          </li>
+        ))}
       </ul>
 
-      {/* Right Side */}
-      <div className={style.actions}>
-        <Link to="/location" className={style.locationBtn}>
-          New York, NY
-        </Link>
+      {/* Search */}
 
-        <Link to="/cart" className={style.cart}>
-          Cart
-          <span className={style.badge}>3</span>
-        </Link>
+      {showSearch && (
+        <div className={styles.searchContainer}>
+          <input
+            type="text"
+            placeholder="Search restaurants..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className={styles.searchInput}
+          />
+        </div>
+      )}
 
-        <Link to="/login" className={style.signBtn}>
-          Sign In
-        </Link>
+      {/* Right */}
+
+      <div className={styles.actions}>
+
+        {showLocation && (
+          <button className={styles.locationBtn}>
+            <FaMapMarkerAlt />
+            New York
+          </button>
+        )}
+
+        {showCart && (
+          <Link to="/cart" className={styles.cart}>
+            <FaShoppingCart />
+
+            {cartCount > 0 && (
+              <span className={styles.badge}>
+                {cartCount}
+              </span>
+            )}
+          </Link>
+        )}
+
+        {showSignIn ? (
+          <Link to="/login" className={styles.signBtn}>
+            Sign In
+          </Link>
+        ) : (
+          <FaUserCircle className={styles.profileIcon} />
+        )}
+
       </div>
+
     </nav>
   );
 }

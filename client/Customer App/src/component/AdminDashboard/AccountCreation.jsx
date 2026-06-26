@@ -11,13 +11,13 @@ export default function AccountCreation() {
     restaurantName: "", cuisine: "", address: "", commission: "15"
   });
   const [submitted, setSubmitted] = useState(false);
-//rest functionn
+
   const set = (k, v) => 
     setForm(f => 
       ({ ...f, [k]: v
 
        }));
-       //////////
+       
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,7 +25,7 @@ export default function AccountCreation() {
     setSubmitted(true);
     setTimeout(() => setSubmitted(false), 3000);
   };
-//once admin click on crear account return empty form again 
+
   const resetForm = () => {
     setForm({
       fullName: "", email: "", phone: "", password: "",

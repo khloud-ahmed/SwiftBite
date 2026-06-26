@@ -1,94 +1,108 @@
-.navbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 15px 40px;
-  background: white;
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 50px;
+    background:#fff;
+    box-shadow:0 2px 15px rgba(0,0,0,.05);
 }
 
-/* Logo */
-.logo h1 {
-  color: #a04100;
-  font-weight: bold;
-  cursor: pointer;
-  text-decoration:none;
+.logo{
+    text-decoration:none;
+    font-size:28px;
+    font-weight:bold;
+    color:#ff6b00;
 }
 
-/* Search */
-.searchInput {
-  width: 350px;
-  padding: 12px 20px;
-  border: 1px solid #e2bfb0;
-  border-radius: 25px;
-  outline: none;
+.navList{
+    display:flex;
+    gap:25px;
+    list-style:none;
+    margin:0;
+    padding:0;
 }
 
-/* Navigation */
-.navList {
-  display: flex;
-  gap: 25px;
-  list-style: none;
+.link{
+    text-decoration:none;
+    color:#555;
+    font-weight:500;
+    transition:.3s;
 }
 
-.navList a {
-  text-decoration: none;
-  color: #444;
-  font-weight: 500;
+.link:hover{
+    color:#ff6b00;
 }
 
-.active {
-  border-bottom: 3px solid #a04100;
-  padding-bottom: 5px;
+.active{
+    text-decoration:none;
+    color:#ff6b00;
+    font-weight:600;
+    border-bottom:3px solid #ff6b00;
+    padding-bottom:5px;
 }
 
-.active a {
-  color: #a04100;
+.searchContainer{
+    flex:1;
+    display:flex;
+    justify-content:center;
 }
 
-/* Right Side */
-.actions {
-  display: flex;
-  align-items: center;
-  gap: 15px;
+.searchInput{
+    width:350px;
+    border:1px solid #ddd;
+    outline:none;
+    padding:12px 18px;
+    border-radius:30px;
 }
 
-.locationBtn {
-  border: none;
-  background: #f8e6dc;
-  color: #a04100;
-  padding: 10px 15px;
-  border-radius: 20px;
-  cursor: pointer;
+.actions{
+    display:flex;
+    align-items:center;
+    gap:18px;
 }
 
-.cart {
-  position: relative;
-  padding: 10px;
-  cursor: pointer;
-  font-weight: 500;
+.locationBtn{
+    border:none;
+    background:#fff4ec;
+    color:#ff6b00;
+    padding:10px 18px;
+    border-radius:25px;
+    display:flex;
+    gap:8px;
+    align-items:center;
 }
 
-.badge {
-  position: absolute;
-  top: -5px;
-  right: -5px;
-  background: #a04100;
-  color: white;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  font-size: 12px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.cart{
+    position:relative;
+    color:#444;
+    font-size:22px;
 }
 
-.signBtn {
-  border: none;
-  background: #a04100;
-  color: white;
-  padding: 10px 18px;
-  border-radius: 25px;
-  cursor: pointer;
+.badge{
+    position:absolute;
+    top:-8px;
+    right:-8px;
+    width:18px;
+    height:18px;
+    background:#ff6b00;
+    color:#fff;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:10px;
+}
+
+.signBtn{
+    background:#ff6b00;
+    color:white;
+    padding:10px 22px;
+    border-radius:25px;
+    text-decoration:none;
+}
+
+.profileIcon{
+    font-size:28px;
+    color:#555;
+    cursor:pointer;
 }

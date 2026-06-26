@@ -1,0 +1,112 @@
+.sidebar{
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.06);
+
+    position:sticky;
+
+    top:90px;
+
+}
+
+.heading{
+
+    font-size:22px;
+
+    font-weight:700;
+
+    margin-bottom:25px;
+
+}
+
+.category{
+
+    width:100%;
+
+    border:none;
+
+    background:#f8f8f8;
+
+    margin-bottom:15px;
+
+    padding:15px;
+
+    border-radius:15px;
+
+    text-align:left;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    transition:.3s;
+
+    font-weight:500;
+
+}
+
+.category:hover{
+
+    background:#fff3eb;
+
+    color:#ff6b00;
+
+}
+
+.active{
+
+    background:#ff6b00;
+
+    color:white;
+
+}
+
+.active:hover{
+
+    background:#ff6b00;
+
+    color:white;
+
+}
+
+.icon{
+
+    font-size:20px;
+
+}
+@media(max-width:992px){
+
+.sidebar{
+
+margin-bottom:30px;
+
+position:static;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.category{
+
+padding:12px;
+
+font-size:14px;
+
+}
+
+.heading{
+
+text-align:center;
+
+}
+
+}
