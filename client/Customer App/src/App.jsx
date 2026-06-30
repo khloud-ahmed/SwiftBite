@@ -5,7 +5,7 @@ import RestaurantDetails from "./Pages/RestaurantDetails/RestaurantDetails";
 import Login from "./Pages/Login/Login";
 import Register from "./Pages/Register/Register";
 import AdminDashboard from "./Pages/AdminDashboard/AdminDashboard";
-
+import RestaurantDashboard from "./Pages/RestaurantDashboard/RestaurantDashboard";
 
 function App() {
   return (
@@ -35,6 +35,10 @@ function App() {
         path="/admin"
         element={<AdminDashboard />}
     />
+    <Route
+        path="/restaurant-dashboard"
+        element={<RestaurantDashboard />}
+      />
 
 </Routes>
   );
