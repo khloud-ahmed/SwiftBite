@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Create Account | SwiftBite</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script src="./demo-store.js"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#ffdbcc",
+                        "on-tertiary-container": "#2f3132",
+                        "surface-dim": "#dbdad9",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "on-primary-fixed": "#351000",
+                        "on-primary-container": "#572000",
+                        "primary-container": "#ff6b00",
+                        "secondary-container": "#e2dfde",
+                        "tertiary-fixed": "#e2e2e2",
+                        "secondary-fixed": "#e5e2e1",
+                        "outline": "#8e7164",
+                        "on-error-container": "#93000a",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#1b1c1c",
+                        "on-background": "#1b1c1c",
+                        "surface-bright": "#fbf9f8",
+                        "surface-container-high": "#e9e8e7",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "surface-variant": "#e4e2e2",
+                        "surface-container-low": "#f5f3f3",
+                        "surface-container-highest": "#e4e2e2",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "on-primary-fixed-variant": "#7a3000",
+                        "primary-fixed-dim": "#ffb693",
+                        "secondary": "#5f5e5e",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "on-error": "#ffffff",
+                        "surface": "#fbf9f8",
+                        "on-secondary-fixed-variant": "#474746",
+                        "on-tertiary": "#ffffff",
+                        "inverse-on-surface": "#f2f0f0",
+                        "tertiary-container": "#989999",
+                        "on-secondary-container": "#636262",
+                        "surface-tint": "#a04100",
+                        "on-primary": "#ffffff",
+                        "surface-container": "#efeded",
+                        "background": "#fbf9f8",
+                        "outline-variant": "#e2bfb0",
+                        "tertiary": "#5d5f5f",
+                        "primary": "#a04100",
+                        "inverse-primary": "#ffb693",
+                        "on-surface-variant": "#5a4136",
+                        "inverse-surface": "#303031",
+                        "on-secondary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "container-max-width": "1280px",
+                        "stack-lg": "32px",
+                        "margin-mobile": "16px",
+                        "stack-md": "16px",
+                        "gutter": "24px",
+                        "unit": "8px",
+                        "margin-desktop": "40px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Work Sans"],
+                        "headline-lg": ["Work Sans"],
+                        "display-lg": ["Work Sans"],
+                        "headline-lg-mobile": ["Work Sans"],
+                        "headline-md": ["Work Sans"],
+                        "body-lg": ["Work Sans"],
+                        "label-sm": ["Work Sans"],
+                        "body-md": ["Work Sans"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Work Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col">
+<main class="flex-grow flex items-center justify-center px-margin-mobile md:px-gutter py-stack-lg">
+    <div class="max-w-[480px] w-full">
+        <!-- Branding Section -->
+        <div class="text-center mb-stack-lg">
+            <div class="inline-flex items-center gap-unit mb-stack-sm cursor-pointer" onclick="window.location.href='./index.html'">
+                <span class="material-symbols-outlined text-primary text-[40px]" style="font-variation-settings: 'FILL' 1;">restaurant_menu</span>
+                <h1 class="font-headline-md text-headline-md font-bold text-primary tracking-tight">SwiftBite</h1>
+            </div>
+            <h2 class="font-headline-lg text-headline-lg text-on-surface">Create your account</h2>
+            <p class="font-body-md text-body-md text-on-surface-variant mt-stack-sm">Join the fastest delivery network in the city.</p>
+        </div>
+        <!-- Registration Card -->
+        <div class="bg-surface-container-lowest border border-surface-variant rounded-xl shadow-[0px_4px_12px_rgba(0,0,0,0.05)] p-stack-lg md:p-10">
+            <form class="space-y-stack-md" id="signup-form">
+                <!-- Full Name -->
+                <div class="space-y-unit">
+                    <label class="font-label-md text-label-md text-on-surface-variant block" for="full_name">Full Name</label>
+                    <div class="relative">
+                        <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline-variant">person</span>
+                        <input required class="w-full pl-12 pr-4 py-3 bg-white border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary-container focus:border-primary-container outline-none transition-all font-body-md text-body-md" id="full_name" placeholder="John Doe" type="text"/>
+                    </div>
+                </div>
+                <!-- Email -->
+                <div class="space-y-unit">
+                    <label class="font-label-md text-label-md text-on-surface-variant block" for="email">Email Address</label>
+                    <div class="relative">
+                        <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline-variant">mail</span>
+                        <input required class="w-full pl-12 pr-4 py-3 bg-white border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary-container focus:border-primary-container outline-none transition-all font-body-md text-body-md" id="email" placeholder="name@example.com" type="email"/>
+                    </div>
+                </div>
+                <!-- Password Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+                    <div class="space-y-unit">
+                        <label class="font-label-md text-label-md text-on-surface-variant block" for="password">Password</label>
+                        <div class="relative">
+                            <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline-variant">lock</span>
+                            <input required class="w-full pl-12 pr-4 py-3 bg-white border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary-container focus:border-primary-container outline-none transition-all font-body-md text-body-md" id="password" placeholder="••••••••" type="password"/>
+                        </div>
+                    </div>
+                    <div class="space-y-unit">
+                        <label class="font-label-md text-label-md text-on-surface-variant block" for="confirm_password">Confirm Password</label>
+                        <div class="relative">
+                            <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline-variant">shield_lock</span>
+                            <input required class="w-full pl-12 pr-4 py-3 bg-white border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary-container focus:border-primary-container outline-none transition-all font-body-md text-body-md" id="confirm_password" placeholder="••••••••" type="password"/>
+                        </div>
+                    </div>
+                </div>
+                <!-- Terms & Conditions -->
+                <div class="flex items-start gap-stack-sm pt-unit">
+                    <div class="flex items-center h-5">
+                        <input required class="w-5 h-5 rounded border-outline-variant text-primary-container focus:ring-primary-container cursor-pointer" id="terms" type="checkbox"/>
+                    </div>
+                    <label class="font-label-sm text-label-sm text-on-surface-variant" for="terms">
+                        By creating an account, I agree to the <a class="text-primary font-semibold hover:underline" href="#">Terms &amp; Conditions</a> and <a class="text-primary font-semibold hover:underline" href="#">Privacy Policy</a>.
+                    </label>
+                </div>
+                <!-- Submit Button -->
+                <button class="w-full bg-primary text-on-primary py-4 rounded-lg font-label-md text-label-md hover:opacity-90 transition-colors duration-200 shadow-sm active:scale-[0.98] transform mt-stack-md" type="submit">
+                    Create Account
+                </button>
+            </form>
+            <!-- Social Divider -->
+            <div class="relative my-stack-lg">
+                <div class="absolute inset-0 flex items-center">
+                    <div class="w-full border-t border-surface-variant"></div>
+                </div>
+                <div class="relative flex justify-center text-label-sm">
+                    <span class="px-gutter bg-surface-container-lowest text-outline">Or continue with</span>
+                </div>
+            </div>
+            <!-- Social Register -->
+            <div class="grid grid-cols-2 gap-stack-md">
+                <button onclick="simulateThirdParty('Google')" class="flex items-center justify-center gap-unit py-3 border border-outline-variant rounded-lg font-label-md text-label-md hover:bg-surface transition-all active:scale-95">
+                    <img alt="Google" class="w-5 h-5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCE_YEUQqQQgUVpRhwhkPtIgmPS9x-0IORZwic5-pU74Q-zJtOi5v43f8oTw7QyDnA1cXJPdlelDIGUCw_KQFgQW8opo2Fvp6zrKdRXE_2ZHyxCOZvMzzByM1pFEAfQXZh9UMZumpBtgQUwiHrasqoO_h-xSbTVywDUJ8_fYymhU8JX65gd3C8rd_2HlE5-fs4-Xc_RXXaIPRN5ohKMhcIiNga6kAGjc1RiCertai6CmvxIWGDLiIAnZFvqjnxon26zTXPFgVh-UURu"/>
+                    <span class="ml-1">Google</span>
+                </button>
+                <button onclick="simulateThirdParty('Facebook')" class="flex items-center justify-center gap-unit py-3 border border-outline-variant rounded-lg font-label-md text-label-md hover:bg-surface transition-all active:scale-95">
+                    <span class="material-symbols-outlined text-[#1877F2]">social_leaderboard</span>
+                    <span class="ml-1">Facebook</span>
+                </button>
+            </div>
+        </div>
+        <!-- Footer Link -->
+        <div class="text-center mt-stack-lg">
+            <p class="font-body-md text-body-md text-on-surface-variant">
+                Already have an account? 
+                <a class="text-primary font-bold hover:underline" href="./signin.html">Sign In</a>
+            </p>
+        </div>
+    </div>
+</main>
+<!-- Support Footer -->
+<footer class="py-stack-md text-center">
+    <div class="flex justify-center gap-gutter font-label-sm text-label-sm text-outline">
+        <a class="hover:text-primary transition-colors" href="#">Help Center</a>
+        <a class="hover:text-primary transition-colors" href="#">Language: English (US)</a>
+        <a class="hover:text-primary transition-colors" href="#">© 2024 SwiftBite</a>
+    </div>
+</footer>
+
+<script>
+    document.getElementById("signup-form").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const email = document.getElementById("email").value;
+        const name = document.getElementById("full_name").value;
+        
+        window.SwiftBiteStore?.setUser({
+            name: name,
+            email: email,
+            phone: "+1 (555) 123-4567",
+            address: "123 Market St, New York, NY"
+        });
+        
+        window.location.href = "./index.html";
+    });
+
+    function simulateThirdParty(provider) {
+        window.SwiftBiteStore?.setUser({
+            name: `SwiftBite ${provider} User`,
+            email: `user@${provider.toLowerCase()}.com`,
+            phone: "+1 (555) 987-6543",
+            address: "742 Evergreen Terrace, Springfield"
+        });
+        window.location.href = "./index.html";
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,2920 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>SwiftBite | Premium Food Delivery & Dashboards</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Work+Sans:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#e9e8e7",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a",
+                        "outline": "#8e7164",
+                        "on-background": "#1b1c1c",
+                        "inverse-on-surface": "#f2f0f0",
+                        "surface-bright": "#fbf9f8",
+                        "on-secondary-fixed-variant": "#474746",
+                        "on-surface-variant": "#5a4136",
+                        "on-surface": "#1b1c1c",
+                        "secondary-fixed": "#e5e2e1",
+                        "background": "#fbf9f8",
+                        "secondary": "#5f5e5e",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#989999",
+                        "surface-container-highest": "#e4e2e2",
+                        "tertiary": "#5d5f5f",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "primary-fixed-dim": "#ffb693",
+                        "surface-variant": "#e4e2e2",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "secondary-container": "#e2dfde",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-container": "#2f3132",
+                        "surface-container-low": "#f5f3f3",
+                        "primary": "#a04100",
+                        "surface-dim": "#dbdad9",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "on-primary-container": "#572000",
+                        "outline-variant": "#e2bfb0",
+                        "inverse-surface": "#303031",
+                        "primary-fixed": "#ffdbcc",
+                        "surface-tint": "#a04100",
+                        "error": "#ba1a1a",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-primary": "#ffb693",
+                        "primary-container": "#ff6b00",
+                        "on-primary-fixed": "#351000",
+                        "on-secondary-container": "#636262",
+                        "surface-container": "#efeded",
+                        "on-primary-fixed-variant": "#7a3000",
+                        "tertiary-fixed": "#e2e2e2",
+                        "surface": "#fbf9f8",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "stack-lg": "32px",
+                        "gutter": "24px",
+                        "margin-desktop": "40px",
+                        "margin-mobile": "16px",
+                        "unit": "8px",
+                        "container-max": "1280px",
+                        "stack-md": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Work Sans"],
+                        "label-md": ["Work Sans"],
+                        "headline-md": ["Work Sans"],
+                        "headline-sm": ["Work Sans"],
+                        "body-md": ["Work Sans"],
+                        "display-lg": ["Work Sans"],
+                        "body-lg": ["Work Sans"],
+                        "headline-lg": ["Work Sans"],
+                        "label-sm": ["Work Sans"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .filled-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+        body {
+            background-color: #fbf9f8;
+            font-family: 'Work Sans', sans-serif;
+        }
+        .no-scrollbar::-webkit-scrollbar, .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar, .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .kanban-column {
+            min-height: calc(100vh - 180px);
+        }
+        .order-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .order-card:hover {
+            transform: translateY(-4px);
+        }
+        .offer-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .offer-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(160,65,0,0.12); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+        .faq-item.open .faq-answer { max-height: 200px; }
+        .faq-item.open .faq-chevron { transform: rotate(180deg); }
+        .faq-chevron { transition: transform 0.3s ease; }
+        .map-gradient-overlay {
+            background: linear-gradient(to right, rgba(251, 249, 248, 0.9) 0%, rgba(251, 249, 248, 0) 40%);
+        }
+        @media (max-width: 768px) {
+            .map-gradient-overlay {
+                background: linear-gradient(to top, rgba(251, 249, 248, 0.9) 0%, rgba(251, 249, 248, 0) 40%);
+            }
+        }
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #a04100 !important;
+            box-shadow: 0 0 0 2px rgba(160, 65, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface">
+
+<!-- --- 1. Global Customer Header --- -->
+<header id="main-header" class="fixed top-0 w-full z-50 bg-surface shadow-sm transition-all duration-200">
+    <div class="flex justify-between items-center h-16 px-gutter max-w-container-max mx-auto">
+        <div class="flex items-center gap-stack-lg flex-1">
+            <span class="font-headline-md text-headline-md font-bold text-primary cursor-pointer" onclick="window.location.hash = '#/'">SwiftBite</span>
+            <div class="hidden md:flex items-center bg-surface-container-low px-4 py-2 rounded-full border border-outline-variant w-full max-w-md">
+                <span class="material-symbols-outlined text-outline-variant mr-2" data-icon="search">search</span>
+                <input id="restaurant-search" class="bg-transparent border-none focus:ring-0 text-body-md w-full placeholder:text-outline-variant" placeholder="Search for restaurants, cuisines..." type="text"/>
+            </div>
+        </div>
+        <nav class="hidden lg:flex items-center gap-gutter px-gutter">
+            <a class="text-primary font-bold border-b-2 border-primary py-1 font-body-md text-body-md" href="#/">Browse</a>
+            <a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#/offers">Offers</a>
+            <a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#/support">Support</a>
+        </nav>
+        <div class="flex items-center gap-stack-md">
+            <div class="hidden sm:flex items-center text-primary bg-primary-fixed px-3 py-1.5 rounded-full mr-2">
+                <span class="material-symbols-outlined text-[20px] mr-1" data-icon="location_on">location_on</span>
+                <span class="font-label-md text-label-md" id="user-location-text">New York, NY</span>
+            </div>
+            <button onclick="window.location.hash = '#/checkout'" class="relative p-2 text-on-surface-variant hover:text-primary transition-colors">
+                <span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+                <span class="absolute top-0 right-0 bg-primary text-on-primary text-[10px] w-4 h-4 flex items-center justify-center rounded-full cart-count">0</span>
+            </button>
+            <div id="auth-header-container">
+                <button onclick="window.location.hash = '#/signin'" class="hidden md:flex items-center gap-2 px-4 py-2 bg-primary text-on-primary rounded-full font-label-md text-label-md hover:opacity-90 transition-all">
+                    <span class="material-symbols-outlined text-[20px]" data-icon="account_circle">account_circle</span>
+                    Sign In
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- --- 2. Views Container --- -->
+<div id="app-views-wrapper" class="min-h-screen">
+
+    <!-- === VIEW: BROWSE (Customer Home) === -->
+    <section id="view-browse" class="view-panel hidden pt-16">
+        <!-- Hero Section -->
+        <section class="relative bg-primary overflow-hidden">
+            <div class="max-w-container-max mx-auto px-gutter py-16 md:py-24 grid md:grid-cols-2 items-center gap-stack-lg">
+                <div class="z-10 text-on-primary">
+                    <span class="inline-block px-3 py-1 rounded-full bg-on-primary-fixed-variant text-primary-fixed font-label-md text-label-md mb-6">Premium Delivery Experience</span>
+                    <h1 class="font-display-lg text-display-lg mb-6">Crave it? We'll deliver it <span class="text-primary-fixed">Swiftly.</span></h1>
+                    <p class="text-body-lg font-body-lg mb-8 opacity-90 max-w-md">Experience the city's finest restaurants delivered to your doorstep with unmatched speed and care.</p>
+                    <div class="flex flex-wrap gap-stack-md">
+                        <button onclick="document.getElementById('restaurants-grid').scrollIntoView({behavior: 'smooth'})" class="bg-surface-container-lowest text-primary px-8 py-3.5 rounded-xl font-label-md text-label-md hover:scale-105 transition-transform shadow-lg">Explore Restaurants</button>
+                        <button onclick="window.location.hash='#/offers'" class="border border-on-primary/30 bg-on-primary/10 backdrop-blur-sm px-8 py-3.5 rounded-xl font-label-md text-label-md hover:bg-on-primary/20 transition-all text-on-primary">Today's Deals</button>
+                    </div>
+                </div>
+                <div class="relative hidden md:block">
+                    <div class="absolute -right-24 -top-24 w-[500px] h-[500px] bg-primary-container rounded-full opacity-30 blur-3xl"></div>
+                    <img alt="Hero Food" class="rounded-3xl shadow-2xl relative z-10 w-full aspect-[4/3] object-cover border-4 border-on-primary/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2_eY5xCpqfGmvd6MX29VjhWyROvdECqJMRUV9yRQQZ9iplp9LoO8L9cIYTX9u4EUA5Ou3GhiTKX1AqyhXUxhMRx4cyFKgH-jrWS13Wlaq0dmJhyqx4e1kO7P0zSnXnXM-4LUEg7Yxc4Ad4DvPbESYgBVNPxJ-6JPxAHyKlsvEU9BjQ6yHAOTlvvBREBX369l63MGOVRrqpCoqAShl87vUji1nz2aZxegIuAD7NMbruZ_TDNn1MmJoadYUOnLF7p7d-yXrqyNicQuS"/>
+                </div>
+            </div>
+        </section>
+
+        <!-- Category & Filter Bar -->
+        <section class="sticky top-16 z-40 bg-surface/80 backdrop-blur-md border-b border-outline-variant/30 py-4 shadow-sm">
+            <div class="max-w-container-max mx-auto px-gutter flex flex-col gap-4">
+                <!-- Quick Categories -->
+                <div class="flex items-center gap-3 overflow-x-auto pb-2 no-scrollbar" id="category-bar">
+                    <button data-cat="all" class="category-filter-btn flex items-center gap-2 px-5 py-2.5 bg-primary text-on-primary rounded-full font-label-md text-label-md whitespace-nowrap shadow-md">
+                        <span class="material-symbols-outlined text-[20px]" data-icon="restaurant">restaurant</span> All
+                    </button>
+                    <button data-cat="pizza" class="category-filter-btn flex items-center gap-2 px-5 py-2.5 bg-surface-container-lowest text-on-surface-variant border border-outline-variant rounded-full font-label-md text-label-md whitespace-nowrap hover:bg-surface-variant transition-colors">
+                        <span class="material-symbols-outlined text-[20px]" data-icon="local_pizza">local_pizza</span> Pizza
+                    </button>
+                    <button data-cat="sushi" class="category-filter-btn flex items-center gap-2 px-5 py-2.5 bg-surface-container-lowest text-on-surface-variant border border-outline-variant rounded-full font-label-md text-label-md whitespace-nowrap hover:bg-surface-variant transition-colors">
+                        <span class="material-symbols-outlined text-[20px]" data-icon="set_meal">set_meal</span> Sushi
+                    </button>
+                    <button data-cat="burgers" class="category-filter-btn flex items-center gap-2 px-5 py-2.5 bg-surface-container-lowest text-on-surface-variant border border-outline-variant rounded-full font-label-md text-label-md whitespace-nowrap hover:bg-surface-variant transition-colors">
+                        <span class="material-symbols-outlined text-[20px]" data-icon="lunch_dining">lunch_dining</span> Burgers
+                    </button>
+                    <button data-cat="desserts" class="category-filter-btn flex items-center gap-2 px-5 py-2.5 bg-surface-container-lowest text-on-surface-variant border border-outline-variant rounded-full font-label-md text-label-md whitespace-nowrap hover:bg-surface-variant transition-colors">
+                        <span class="material-symbols-outlined text-[20px]" data-icon="icecream">icecream</span> Desserts
+                    </button>
+                    <button data-cat="healthy" class="category-filter-btn flex items-center gap-2 px-5 py-2.5 bg-surface-container-lowest text-on-surface-variant border border-outline-variant rounded-full font-label-md text-label-md whitespace-nowrap hover:bg-surface-variant transition-colors">
+                        <span class="material-symbols-outlined text-[20px]" data-icon="eco">eco</span> Healthy
+                    </button>
+                </div>
+                <!-- Secondary Filters -->
+                <div class="flex items-center justify-between border-t border-outline-variant/20 pt-4">
+                    <div class="flex items-center gap-4">
+                        <div class="flex items-center gap-2 text-on-surface-variant font-label-md text-label-md border-r border-outline-variant/40 pr-4">
+                            <span class="material-symbols-outlined text-[20px]" data-icon="tune">tune</span>
+                            Filters
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-body-sm text-outline px-2">Rating:</span>
+                            <button id="rating-filter" class="px-3 py-1 rounded-lg bg-surface-container-low border border-outline-variant/60 text-body-md font-semibold hover:bg-surface-variant transition-colors">4.7+</button>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 text-on-surface-variant font-label-md text-label-md">
+                        Sort by: <span class="text-primary font-bold flex items-center cursor-pointer">Delivery Time <span class="material-symbols-outlined text-[20px]" data-icon="keyboard_arrow_down">keyboard_arrow_down</span></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Restaurant Grid -->
+        <section class="max-w-container-max mx-auto px-gutter py-12" id="restaurants-grid">
+            <div class="flex items-center justify-between mb-stack-lg">
+                <h2 class="font-headline-lg text-headline-lg">Popular Near You</h2>
+                <a class="text-primary font-label-md text-label-md flex items-center hover:underline" href="#">See All <span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span></a>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-gutter" id="restaurants-list">
+                <!-- Injected dynamically -->
+            </div>
+            <!-- Promotional Banners -->
+            <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-gutter">
+                <div class="md:col-span-2 bg-primary-container rounded-3xl p-8 flex flex-col justify-center text-on-primary-container relative overflow-hidden h-64 shadow-lg">
+                    <div class="relative z-10">
+                        <h2 class="font-headline-lg text-headline-lg mb-2">Get 50% Off Your First Order</h2>
+                        <p class="text-body-lg mb-6 opacity-80">Use code <span class="font-bold border-b-2 border-on-primary-container">SWIFTBITE50</span> at checkout.</p>
+                        <button onclick="window.location.hash='#/offers'" class="bg-surface-container-lowest text-primary font-label-md text-label-md px-6 py-2.5 rounded-xl w-fit hover:scale-105 transition-transform">Claim Offer</button>
+                    </div>
+                    <div class="absolute right-0 top-0 h-full w-1/2 opacity-20 pointer-events-none">
+                        <span class="material-symbols-outlined text-[200px] absolute -right-10 -bottom-10" data-icon="local_mall">local_mall</span>
+                    </div>
+                </div>
+                <div class="bg-surface-container-highest rounded-3xl p-8 flex flex-col items-center justify-center text-center shadow-md border border-outline-variant/20">
+                    <span class="material-symbols-outlined text-primary text-[48px] mb-4" data-icon="stars">stars</span>
+                    <h3 class="font-headline-sm text-headline-sm mb-2">Join SwiftBite+</h3>
+                    <p class="text-body-md text-on-surface-variant mb-6">Unlimited $0 delivery fees for just $9.99/mo.</p>
+                    <button class="text-primary font-label-md text-label-md border-2 border-primary px-6 py-2 rounded-xl w-full hover:bg-primary/5 transition-colors">Learn More</button>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- === VIEW: SINGLE RESTAURANT MENU === -->
+    <section id="view-menu" class="view-panel hidden pt-16">
+        <!-- Restaurant Cover -->
+        <header class="relative w-full h-[320px] bg-surface-variant overflow-hidden">
+            <img id="rest-cover" class="w-full h-full object-cover" src=""/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 w-full px-gutter pb-8 max-w-container-max mx-auto right-0 flex items-end gap-6">
+                <div class="w-24 h-24 bg-white rounded-xl shadow-lg p-2 mb-2 hidden md:block">
+                    <img id="rest-logo" class="w-full h-full object-cover rounded-lg" src=""/>
+                </div>
+                <div class="text-white">
+                    <h1 id="rest-name" class="font-headline-lg text-headline-lg mb-1">Restaurant Name</h1>
+                    <div class="flex items-center gap-4 text-body-sm">
+                        <span class="flex items-center gap-1"><span class="material-symbols-outlined text-primary-container text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span> <span id="rest-rating">4.8</span></span>
+                        <span>•</span>
+                        <span id="rest-time">25-35 min</span>
+                        <span>•</span>
+                        <span id="rest-fee-badge" class="bg-primary text-on-primary px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider">Free Delivery</span>
+                    </div>
+                    <p id="rest-cuisines" class="text-white/80 mt-2 font-body-sm">Cuisines details go here</p>
+                </div>
+            </div>
+        </header>
+
+        <div class="max-w-container-max mx-auto px-gutter mt-12 grid grid-cols-1 md:grid-cols-[240px_1fr_320px] gap-gutter items-start">
+            <!-- Left Sidebar: Categories -->
+            <aside class="sticky top-24 hidden md:flex flex-col gap-stack-sm h-fit">
+                <h3 class="font-label-md text-on-surface-variant uppercase tracking-widest px-4 mb-2">Categories</h3>
+                <nav class="flex flex-col gap-1" id="categories-sidebar">
+                    <!-- Injected Dynamically -->
+                </nav>
+            </aside>
+            
+            <!-- Main Content Menu Area -->
+            <section class="flex flex-col gap-stack-lg" id="menu-sections">
+                <!-- Injected Dynamically -->
+            </section>
+            
+            <!-- Right Sidebar: Cart -->
+            <aside class="sticky top-24 flex flex-col h-fit bg-surface-container-low rounded-2xl p-6 border border-outline-variant/30">
+                <div class="flex items-center gap-2 mb-6">
+                    <span class="material-symbols-outlined text-primary">shopping_bag</span>
+                    <h3 class="font-headline-sm text-headline-sm">Your Cart</h3>
+                </div>
+                
+                <div class="flex flex-col gap-4 mb-8" id="cart-items-container">
+                    <!-- Cart items -->
+                </div>
+                
+                <div class="space-y-3 pt-6 border-t border-outline-variant/50">
+                    <div class="flex justify-between text-body-sm text-on-surface-variant">
+                        <span>Subtotal</span>
+                        <span id="cart-subtotal">$0.00</span>
+                    </div>
+                    <div class="flex justify-between text-body-sm text-on-surface-variant">
+                        <span>Delivery Fee</span>
+                        <span id="cart-delivery-fee">$0.00</span>
+                    </div>
+                    <div class="flex justify-between text-body-sm text-on-surface-variant">
+                        <span>Service Fee</span>
+                        <span id="cart-service-fee">$0.00</span>
+                    </div>
+                    <div class="flex justify-between font-headline-sm text-headline-sm pt-4">
+                        <span>Total</span>
+                        <span id="cart-total" class="text-primary font-bold">$0.00</span>
+                    </div>
+                </div>
+                
+                <button id="checkout-btn" class="w-full mt-8 bg-primary text-on-primary py-4 rounded-xl font-label-md flex items-center justify-center gap-2 hover:opacity-95 active:scale-[0.98] transition-all shadow-lg shadow-primary/20">
+                    Go to Checkout
+                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                </button>
+            </aside>
+        </div>
+    </section>
+
+    <!-- === VIEW: SECURE CHECKOUT === -->
+    <section id="view-checkout" class="view-panel hidden pt-16 pb-12">
+        <div class="max-w-container-max mx-auto px-gutter py-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+                <!-- Left Column: Forms -->
+                <div class="lg:col-span-8 flex flex-col gap-stack-lg">
+                    <section>
+                        <h1 class="font-headline-lg text-headline-lg mb-stack-sm">Checkout</h1>
+                        <p class="font-body-md text-body-md text-on-surface-variant">Review your details and complete your order.</p>
+                    </section>
+                    <form id="checkout-form" class="flex flex-col gap-stack-lg">
+                        <!-- Address -->
+                        <div class="bg-surface-container-lowest p-stack-lg rounded-xl shadow-sm border border-outline-variant/30">
+                            <div class="flex items-center gap-stack-sm mb-stack-md">
+                                <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">location_on</span>
+                                <h2 class="font-headline-sm text-headline-sm">Delivery Address</h2>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+                                <div class="md:col-span-2">
+                                    <label class="block font-label-md text-label-md mb-2">Street Address</label>
+                                    <input required id="address-street" class="w-full px-4 py-3 bg-surface border border-outline-variant rounded-lg transition-all text-body-md" placeholder="123 Market St" type="text"/>
+                                </div>
+                                <div>
+                                    <label class="block font-label-md text-label-md mb-2">Apartment / Suite</label>
+                                    <input id="address-apt" class="w-full px-4 py-3 bg-surface border border-outline-variant rounded-lg transition-all text-body-md" placeholder="Apt 4B" type="text"/>
+                                </div>
+                                <div>
+                                    <label class="block font-label-md text-label-md mb-2">City</label>
+                                    <input required id="address-city" class="w-full px-4 py-3 bg-surface border border-outline-variant rounded-lg transition-all text-body-md" placeholder="New York" type="text"/>
+                                </div>
+                            </div>
+                            <div class="mt-stack-md rounded-lg overflow-hidden h-40 relative group">
+                                <img class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8QKQ8tqXIPqINWWqqBVqwojfrQuRzC3Zz9acchxC8HDpD28bgtLBWtGqXKGwsgCWIKwm84J4EEUvcI_4t17hOHNgl4LVBVM5LGpKkzdOXLw2DhfU7xJXua_N36d5YuLoNZKez7qdIn2cjrjuhmSTGHdiMH8oBd_Czn1VwVjzqDIQy0LMhlEI2xU1z96eqVBpJz1BDrp7HtmTHm4vgSum7o8MhlsQuYCK5CZX7XkUoSr8G-OO0lCRbk1Jl6u7N52kJyAiTaHM7jpwx"/>
+                                <div class="absolute inset-0 bg-primary/5 flex items-center justify-center pointer-events-none">
+                                    <div class="bg-surface-container-lowest px-4 py-2 rounded-full shadow-md flex items-center gap-2">
+                                        <span class="material-symbols-outlined text-primary text-[18px]" style="font-variation-settings: 'FILL' 1;">my_location</span>
+                                        <span class="font-label-md text-label-md">Pin location for courier</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Payment Method -->
+                        <div class="bg-surface-container-lowest p-stack-lg rounded-xl shadow-sm border border-outline-variant/30">
+                            <div class="flex items-center gap-stack-sm mb-stack-md">
+                                <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">payments</span>
+                                <h2 class="font-headline-sm text-headline-sm">Payment Method</h2>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-stack-sm mb-6">
+                                <button type="button" id="pay-card-btn" class="payment-method-btn flex flex-col items-center gap-stack-sm p-stack-md border-2 border-primary bg-primary-container/5 rounded-xl transition-all">
+                                    <span class="material-symbols-outlined text-primary text-3xl">credit_card</span>
+                                    <span class="font-label-md text-label-md text-primary">Credit Card</span>
+                                </button>
+                                <button type="button" id="pay-paypal-btn" class="payment-method-btn flex flex-col items-center gap-stack-sm p-stack-md border border-outline-variant bg-surface rounded-xl hover:border-primary/50 transition-all">
+                                    <span class="material-symbols-outlined text-on-surface-variant text-3xl">account_balance_wallet</span>
+                                    <span class="font-label-md text-label-md text-on-surface-variant">PayPal</span>
+                                </button>
+                                <button type="button" id="pay-apple-btn" class="payment-method-btn flex flex-col items-center gap-stack-sm p-stack-md border border-outline-variant bg-surface rounded-xl hover:border-primary/50 transition-all">
+                                    <span class="material-symbols-outlined text-on-surface-variant text-3xl">contactless</span>
+                                    <span class="font-label-md text-label-md text-on-surface-variant">Apple Pay</span>
+                                </button>
+                            </div>
+                            <div class="space-y-stack-sm" id="card-inputs-container">
+                                <div>
+                                    <label class="block font-label-md text-label-md mb-2">Cardholder Name</label>
+                                    <input id="pay-name" class="w-full px-4 py-3 bg-surface border border-outline-variant rounded-lg transition-all text-body-md" placeholder="John Doe" type="text"/>
+                                </div>
+                                <div class="grid grid-cols-2 gap-stack-md">
+                                    <div class="col-span-2 sm:col-span-1">
+                                        <label class="block font-label-md text-label-md mb-2">Card Number</label>
+                                        <div class="relative">
+                                            <input id="pay-number" class="w-full px-4 py-3 bg-surface border border-outline-variant rounded-lg transition-all text-body-md pl-12" placeholder="4111 2222 3333 4242" type="text" value="4111 2222 3333 4242"/>
+                                            <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">credit_card</span>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-stack-sm">
+                                        <div>
+                                            <label class="block font-label-md text-label-md mb-2">Expiry</label>
+                                            <input id="pay-expiry" class="w-full px-4 py-3 bg-surface border border-outline-variant rounded-lg transition-all text-body-md text-center" placeholder="12/28" type="text" value="12/28"/>
+                                        </div>
+                                        <div>
+                                            <label class="block font-label-md text-label-md mb-2">CVV</label>
+                                            <input id="pay-cvv" class="w-full px-4 py-3 bg-surface border border-outline-variant rounded-lg transition-all text-body-md text-center" placeholder="***" type="password" value="123"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Promo Code -->
+                        <div class="bg-surface-container-lowest p-stack-lg rounded-xl shadow-sm border border-outline-variant/30">
+                            <div class="flex items-center gap-stack-sm mb-stack-md">
+                                <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">confirmation_number</span>
+                                <h2 class="font-headline-sm text-headline-sm">Promo Code</h2>
+                            </div>
+                            <div class="flex gap-stack-sm">
+                                <input id="promo-input" class="flex-grow px-4 py-3 bg-surface border border-outline-variant rounded-lg transition-all text-body-md uppercase font-bold tracking-widest" placeholder="Enter code (try SWIFTBITE50)" type="text"/>
+                                <button type="button" id="apply-promo-btn" class="bg-secondary text-on-secondary px-stack-lg py-3 rounded-lg font-label-md text-label-md hover:opacity-90 transition-colors">Apply</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- Right Column: Order Summary -->
+                <div class="lg:col-span-4">
+                    <div class="sticky top-24 flex flex-col gap-stack-md">
+                        <div class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/30 overflow-hidden">
+                            <div class="bg-primary px-stack-lg py-stack-md text-on-primary">
+                                <h2 class="font-headline-sm text-headline-sm">Order Summary</h2>
+                            </div>
+                            <div class="p-stack-lg space-y-stack-md">
+                                <div class="space-y-stack-sm pb-stack-md border-b border-outline-variant/20" id="summary-items">
+                                    <!-- Injected -->
+                                </div>
+                                <div class="space-y-stack-sm py-stack-sm">
+                                    <div class="flex justify-between text-body-md text-on-surface-variant">
+                                        <span>Subtotal</span>
+                                        <span id="summary-subtotal">$0.00</span>
+                                    </div>
+                                    <div class="flex justify-between text-body-md text-on-surface-variant">
+                                        <span>Delivery Fee</span>
+                                        <span id="summary-delivery">$0.00</span>
+                                    </div>
+                                    <div class="flex justify-between text-body-md text-on-surface-variant">
+                                        <span>Service Fee</span>
+                                        <span>$2.00</span>
+                                    </div>
+                                    <div class="flex justify-between text-body-md text-on-surface-variant" id="discount-row" style="display:none;">
+                                        <span>Discount (50% Off)</span>
+                                        <span class="text-green-600 font-bold" id="summary-discount">-$0.00</span>
+                                    </div>
+                                    <div class="flex justify-between text-body-md text-on-surface-variant">
+                                        <span>Taxes (8%)</span>
+                                        <span id="summary-tax">$0.00</span>
+                                    </div>
+                                </div>
+                                <div class="pt-stack-md border-t border-outline-variant/40">
+                                    <div class="flex justify-between items-center mb-stack-md">
+                                        <span class="font-headline-sm text-headline-sm">Total</span>
+                                        <span class="font-headline-sm text-headline-sm text-primary font-bold" id="summary-total">$0.00</span>
+                                    </div>
+                                    <button form="checkout-form" type="submit" id="place-order-btn" class="w-full bg-primary text-on-primary py-4 rounded-xl font-headline-sm text-headline-sm hover:opacity-95 active:scale-[0.98] transition-all shadow-md flex items-center justify-center gap-stack-sm">
+                                        Place Order
+                                        <span class="material-symbols-outlined">arrow_forward</span>
+                                    </button>
+                                    <p class="mt-stack-md text-center text-body-sm text-outline flex items-center justify-center gap-1">
+                                        <span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">security</span>
+                                        SSL Encrypted Payment
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- === VIEW: ORDER TRACKER === -->
+    <section id="view-track" class="view-panel hidden relative h-screen w-full">
+        <!-- Full-Width Map Interface -->
+        <div class="absolute inset-0 z-0 bg-surface-variant overflow-hidden">
+            <img alt="City Tracking Map" class="w-full h-full object-cover grayscale-[20%] opacity-80 animate-pulse" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBma2duEnGj49-7IJ4W9rNMgW3D5js7c0xQlik-4WDyYyMU7JaQSUdnap0tDtethycev4YDrt0TQCNteSwuRN5k1XpFg97CWAC0J7TPs8jSUewUAWjh2nu2XMwso9yYnf9i44bxp4QF4ILyqlsTI1RyrNzZg2JWvZ9lzCF12-_rGmh3FN52Mxm42OGTyB12ZM12I_HPQ79L1KAZnZ0G4Ely9PRs8ezinrQPTx9OuPxNeAFxfg16CAN8okx2SlP90qj8mn8EiQpSWLVI"/>
+            <!-- Map Overlays / Pins -->
+            <div id="courier-pin" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-1000">
+                <div class="relative flex flex-col items-center">
+                    <div class="bg-primary p-2 rounded-full shadow-lg border-2 border-on-primary">
+                        <span class="material-symbols-outlined text-on-primary text-[32px]">delivery_dining</span>
+                    </div>
+                    <div id="courier-status-bubble" class="mt-2 bg-surface px-3 py-1 rounded-full shadow-md text-label-md font-label-md text-primary font-bold">
+                        On the way
+                    </div>
+                </div>
+            </div>
+            <!-- Destination Pin -->
+            <div class="absolute top-1/3 right-1/4">
+                <div class="relative flex flex-col items-center">
+                    <div class="bg-on-surface p-1 rounded-full shadow-lg border-2 border-surface">
+                        <span class="material-symbols-outlined text-surface text-[24px]">home</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Gradient fade for readability of sidebar -->
+            <div class="absolute inset-0 map-gradient-overlay pointer-events-none"></div>
+        </div>
+        <!-- Order Tracking Sidebar/Overlay Card -->
+        <div class="relative z-10 h-full max-w-container-max mx-auto px-gutter pointer-events-none">
+            <div class="h-full flex items-center pt-8">
+                <div id="tracking-card" class="w-full md:w-[420px] bg-surface/95 backdrop-blur-md shadow-xl rounded-xl p-stack-lg border border-outline-variant/30 pointer-events-auto flex flex-col gap-stack-lg">
+                    <!-- Order Status Header -->
+                    <div class="flex flex-col gap-stack-sm">
+                        <span class="text-primary font-label-md text-label-md uppercase tracking-wider">Estimated Arrival</span>
+                        <div class="flex items-end gap-stack-sm">
+                            <span id="estimated-time" class="font-display-lg text-display-lg text-on-surface leading-none">25</span>
+                            <span class="font-headline-sm text-headline-sm text-on-surface pb-1">mins</span>
+                        </div>
+                        <p class="text-on-surface-variant font-body-md text-body-md">Your meal from <span id="track-rest-name" class="font-bold text-on-surface">The Restaurant</span> is <span id="status-desc" class="font-semibold text-primary">being prepared</span>.</p>
+                    </div>
+                    <!-- Progress Stepper -->
+                    <div class="flex flex-col gap-stack-md py-stack-md" id="progress-stepper">
+                        <!-- Dynamic -->
+                    </div>
+                    <!-- Driver Card -->
+                    <div class="bg-surface-container rounded-lg p-stack-md flex flex-col gap-stack-md">
+                        <div class="flex items-center gap-stack-md">
+                            <div class="w-14 h-14 rounded-full overflow-hidden border-2 border-surface shadow-sm">
+                                <img alt="Driver Photo" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBV2v80dZ-xSqWfjrlgKyiqCF_Yf9jLjXYg72yavANQqiTGsADtZ4JARx6Vnd0NEMrA-WJmLec7C6F5xi_0dJpd_yINejJrtQpyVaTRzRnBWYYrJ8wkiQookDjkTwUSmYbGtweiWuSSPIxzpt_XkmTWXmHl40_Na7BLYh03sF-seyOz6T3NTwTMgCNGBps6SLz3R4hk98wb0h1t6CYD_wWEYNH-6ICT2vFJuT4_FGscmaN0QYHpAV2vj7ZUmnRyaUobA5p1YTMTgHvn"/>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-on-surface font-headline-sm text-headline-sm">Marcus Thompson</h4>
+                                <div class="flex items-center gap-2 text-on-surface-variant">
+                                    <span class="text-label-md font-label-md">Electric Scooter</span>
+                                    <span class="w-1 h-1 bg-outline rounded-full"></span>
+                                    <div class="flex items-center text-primary">
+                                        <span class="material-symbols-outlined text-[16px] filled-icon" style="font-variation-settings: 'FILL' 1;">star</span>
+                                        <span class="text-label-md font-label-md ml-1">4.9</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-stack-sm">
+                            <button onclick="alert('Demo: Messaging is disabled.')" class="flex items-center justify-center gap-stack-sm bg-surface text-primary border border-outline-variant py-2.5 rounded-lg hover:bg-primary-container/10 transition-colors font-label-md text-label-md">
+                                <span class="material-symbols-outlined">chat_bubble</span>
+                                Message
+                            </button>
+                            <button onclick="alert('Demo: Calling is disabled.')" class="flex items-center justify-center gap-stack-sm bg-primary text-on-primary py-2.5 rounded-lg hover:opacity-90 transition-all font-label-md text-label-md shadow-md active:scale-95">
+                                <span class="material-symbols-outlined">call</span>
+                                Call
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Order Summary Minimal -->
+                    <div class="pt-stack-sm border-t border-outline-variant/30 flex justify-between items-center">
+                        <div class="flex flex-col">
+                            <span id="track-order-id" class="text-outline text-body-sm font-body-sm font-semibold">Order #SB-82910</span>
+                            <span id="track-order-stats" class="text-on-surface-variant font-label-md text-label-md">0 Items • $0.00</span>
+                        </div>
+                        <button onclick="toggleReceiptModal()" class="text-primary font-label-md text-label-md flex items-center hover:underline decoration-2 underline-offset-4 pointer-events-auto">
+                            View Receipt
+                            <span class="material-symbols-outlined text-[18px]">chevron_right</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- === VIEW: EXCLUSIVE OFFERS === -->
+    <section id="view-offers" class="view-panel hidden pt-16 pb-12">
+        <div class="max-w-container-max mx-auto px-gutter py-8">
+            <div class="bg-gradient-to-r from-primary via-primary-container to-[#ff9500] rounded-2xl p-8 md:p-12 text-white mb-10 relative overflow-hidden">
+                <span class="material-symbols-outlined text-[220px] absolute -right-4 -bottom-16 opacity-10 rotate-[-15deg]">local_offer</span>
+                <div class="relative z-10 max-w-xl">
+                    <span class="inline-block px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-label-sm font-label-sm mb-4">🔥 Limited Time</span>
+                    <h1 class="font-display-lg text-display-lg font-extrabold mb-4">Exclusive Deals & Offers</h1>
+                    <p class="text-body-lg font-body-lg opacity-90">Save big on your favourite meals. Grab these deals before they're gone!</p>
+                </div>
+            </div>
+            <div class="mb-10">
+                <h2 class="font-headline-md text-headline-md font-bold mb-6 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary">confirmation_number</span>
+                    Active Promo Codes
+                </h2>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="offer-card bg-gradient-to-br from-primary to-primary-container rounded-2xl p-6 text-white relative overflow-hidden cursor-pointer" onclick="copyPromo('SWIFTBITE50')">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-8 translate-x-8"></div>
+                        <span class="material-symbols-outlined text-[48px] opacity-30 mb-4">percent</span>
+                        <h3 class="font-headline-md text-headline-md font-extrabold mb-1">50% OFF</h3>
+                        <p class="text-white/80 text-label-sm mb-4">First order discount. Use at checkout.</p>
+                        <div class="flex items-center justify-between bg-white/15 backdrop-blur-sm rounded-xl px-4 py-2.5">
+                            <code class="font-mono font-bold tracking-widest text-label-md">SWIFTBITE50</code>
+                            <span class="material-symbols-outlined text-[18px]">content_copy</span>
+                        </div>
+                        <p class="text-[11px] text-white/60 mt-3">Min. order $15 • Valid until Dec 31</p>
+                    </div>
+                    <div class="offer-card bg-gradient-to-br from-[#1a1a2e] to-[#16213e] rounded-2xl p-6 text-white relative overflow-hidden cursor-pointer" onclick="copyPromo('FREEDEL')">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-8 translate-x-8"></div>
+                        <span class="material-symbols-outlined text-[48px] opacity-30 mb-4">local_shipping</span>
+                        <h3 class="font-headline-md text-headline-md font-extrabold mb-1">FREE DELIVERY</h3>
+                        <p class="text-white/80 text-label-sm mb-4">No delivery fee on any restaurant.</p>
+                        <div class="flex items-center justify-between bg-white/10 backdrop-blur-sm rounded-xl px-4 py-2.5">
+                            <code class="font-mono font-bold tracking-widest text-label-md">FREEDEL</code>
+                            <span class="material-symbols-outlined text-[18px]">content_copy</span>
+                        </div>
+                        <p class="text-[11px] text-white/60 mt-3">Min. order $20 • This weekend only</p>
+                    </div>
+                    <div class="offer-card bg-gradient-to-br from-[#0f3443] to-[#34e89e] rounded-2xl p-6 text-white relative overflow-hidden cursor-pointer" onclick="copyPromo('HEALTHY20')">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-8 translate-x-8"></div>
+                        <span class="material-symbols-outlined text-[48px] opacity-30 mb-4">eco</span>
+                        <h3 class="font-headline-md text-headline-md font-extrabold mb-1">20% OFF</h3>
+                        <p class="text-white/80 text-label-sm mb-4">On all healthy & vegan restaurants.</p>
+                        <div class="flex items-center justify-between bg-white/10 backdrop-blur-sm rounded-xl px-4 py-2.5">
+                            <code class="font-mono font-bold tracking-widest text-label-md">HEALTHY20</code>
+                            <span class="material-symbols-outlined text-[18px]">content_copy</span>
+                        </div>
+                        <p class="text-[11px] text-white/60 mt-3">Purely Green & partners • No minimum</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-10">
+                <h2 class="font-headline-md text-headline-md font-bold mb-6 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary">star</span>
+                    Featured Restaurant Deals
+                </h2>
+                <div class="grid sm:grid-cols-2 gap-6" id="featured-deals-container">
+                    <!-- Dynamic -->
+                </div>
+            </div>
+            <div>
+                <h2 class="font-headline-md text-headline-md font-bold mb-6 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary">schedule</span>
+                    Happy Hour Specials
+                </h2>
+                <div class="bg-surface-container-lowest rounded-2xl border border-outline-variant/30 overflow-hidden">
+                    <div class="grid sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-outline-variant/20">
+                        <div class="p-6 text-center">
+                            <span class="material-symbols-outlined text-4xl text-primary mb-3">wb_sunny</span>
+                            <h4 class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant mb-1">Lunch Rush</h4>
+                            <p class="font-headline-sm text-headline-sm font-extrabold text-on-surface">11AM – 2PM</p>
+                            <p class="text-on-surface-variant text-label-sm mt-2">15% off all lunch combos</p>
+                            <div class="mt-3 inline-block px-3 py-1 bg-green-100 text-green-700 rounded-full text-[11px] font-bold">ACTIVE NOW</div>
+                        </div>
+                        <div class="p-6 text-center">
+                            <span class="material-symbols-outlined text-4xl text-primary-container mb-3">coffee</span>
+                            <h4 class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant mb-1">Afternoon Chill</h4>
+                            <p class="font-headline-sm text-headline-sm font-extrabold text-on-surface">2PM – 5PM</p>
+                            <p class="text-on-surface-variant text-label-sm mt-2">Free dessert with $25+ orders</p>
+                            <div class="mt-3 inline-block px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-[11px] font-bold">COMING UP</div>
+                        </div>
+                        <div class="p-6 text-center">
+                            <span class="material-symbols-outlined text-4xl text-[#5c3d8f] mb-3">nightlight</span>
+                            <h4 class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant mb-1">Late Night</h4>
+                            <p class="font-headline-sm text-headline-sm font-extrabold text-on-surface">9PM – 12AM</p>
+                            <p class="text-on-surface-variant text-label-sm mt-2">Buy 1 Get 1 on burgers</p>
+                            <div class="mt-3 inline-block px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-[11px] font-bold">TONIGHT</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- === VIEW: HELP & SUPPORT === -->
+    <section id="view-support" class="view-panel hidden pt-16 pb-12">
+        <div class="max-w-container-max mx-auto px-gutter py-8">
+            <div class="text-center mb-12">
+                <div class="inline-flex items-center justify-center w-20 h-20 bg-primary-fixed rounded-full mb-4">
+                    <span class="material-symbols-outlined text-primary text-4xl">support_agent</span>
+                </div>
+                <h1 class="font-display-lg text-display-lg font-extrabold text-on-surface mb-3">How can we help?</h1>
+                <p class="text-body-lg font-body-lg text-on-surface-variant max-w-lg mx-auto">Find answers to common questions or get in touch with our support team.</p>
+                <div class="mt-8 max-w-xl mx-auto relative">
+                    <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+                    <input class="w-full pl-12 pr-6 py-4 bg-surface-container-lowest border border-outline-variant rounded-2xl font-body-md shadow-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20" placeholder="Search help articles..." type="text"/>
+                </div>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+                <div class="bg-surface-container-lowest rounded-2xl border border-outline-variant/30 p-6 text-center hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer group">
+                    <span class="material-symbols-outlined text-3xl text-primary mb-3 group-hover:scale-110 transition-transform inline-block">receipt_long</span>
+                    <h3 class="font-label-md text-label-md font-bold mb-1">Order Issues</h3>
+                    <p class="text-label-sm text-on-surface-variant">Wrong, missing, or late orders</p>
+                </div>
+                <div class="bg-surface-container-lowest rounded-2xl border border-outline-variant/30 p-6 text-center hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer group">
+                    <span class="material-symbols-outlined text-3xl text-primary mb-3 group-hover:scale-110 transition-transform inline-block">payments</span>
+                    <h3 class="font-label-md text-label-md font-bold mb-1">Payments & Refunds</h3>
+                    <p class="text-label-sm text-on-surface-variant">Charges, billing & refund status</p>
+                </div>
+                <div class="bg-surface-container-lowest rounded-2xl border border-outline-variant/30 p-6 text-center hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer group">
+                    <span class="material-symbols-outlined text-3xl text-primary mb-3 group-hover:scale-110 transition-transform inline-block">account_circle</span>
+                    <h3 class="font-label-md text-label-md font-bold mb-1">My Account</h3>
+                    <p class="text-label-sm text-on-surface-variant">Login, profile & settings</p>
+                </div>
+                <div class="bg-surface-container-lowest rounded-2xl border border-outline-variant/30 p-6 text-center hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer group">
+                    <span class="material-symbols-outlined text-3xl text-primary mb-3 group-hover:scale-110 transition-transform inline-block">storefront</span>
+                    <h3 class="font-label-md text-label-md font-bold mb-1">Partner Support</h3>
+                    <p class="text-label-sm text-on-surface-variant">Restaurant & driver help</p>
+                </div>
+            </div>
+            <div class="grid lg:grid-cols-5 gap-10">
+                <div class="lg:col-span-3">
+                    <h2 class="font-headline-md text-headline-md font-bold mb-6 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary">quiz</span>
+                        Frequently Asked Questions
+                    </h2>
+                    <div class="space-y-3" id="faq-list">
+                        <div class="faq-item bg-surface-container-lowest rounded-xl border border-outline-variant/30 overflow-hidden">
+                            <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between px-6 py-4 text-left font-label-md text-label-md font-bold hover:bg-surface-container/50 transition-colors">
+                                <span>How do I track my order?</span>
+                                <span class="material-symbols-outlined faq-chevron text-on-surface-variant">expand_more</span>
+                            </button>
+                            <div class="faq-answer px-6 pb-4 text-on-surface-variant text-body-md">
+                                After placing your order, you'll be redirected to the tracking page automatically. You can also find your order under your Profile → Order History. The tracker shows real-time status updates as your order moves from restaurant prep to delivery.
+                            </div>
+                        </div>
+                        <div class="faq-item bg-surface-container-lowest rounded-xl border border-outline-variant/30 overflow-hidden">
+                            <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between px-6 py-4 text-left font-label-md text-label-md font-bold hover:bg-surface-container/50 transition-colors">
+                                <span>How do I apply a promo code?</span>
+                                <span class="material-symbols-outlined faq-chevron text-on-surface-variant">expand_more</span>
+                            </button>
+                            <div class="faq-answer px-6 pb-4 text-on-surface-variant text-body-md">
+                                On the checkout page, you'll see a "Promo Code" input field. Enter your code (e.g. SWIFTBITE50) and click "Apply". The discount will be reflected in your order summary immediately.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-2 space-y-6">
+                    <div class="bg-gradient-to-br from-primary to-primary-container text-white rounded-2xl p-6 relative overflow-hidden">
+                        <span class="material-symbols-outlined text-[100px] absolute -right-2 -bottom-4 opacity-10">headset_mic</span>
+                        <div class="relative z-10">
+                            <h3 class="font-headline-sm text-headline-sm font-extrabold mb-2">Need More Help?</h3>
+                            <p class="text-white/80 text-label-sm mb-4">Our support team is available 24/7 to help you.</p>
+                            <div class="space-y-3">
+                                <div class="flex items-center gap-3 bg-white/15 backdrop-blur-sm rounded-xl px-4 py-3">
+                                    <span class="material-symbols-outlined">chat</span>
+                                    <div>
+                                        <p class="font-label-md text-label-md">Live Chat</p>
+                                        <p class="text-[11px] text-white/70">Average response: 2 min</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-surface-container-lowest rounded-2xl border border-outline-variant/30 p-6">
+                        <h3 class="font-headline-sm text-headline-sm font-bold mb-4">Send Us a Message</h3>
+                        <form id="support-form" class="space-y-4" onsubmit="event.preventDefault(); submitSupport();">
+                            <div>
+                                <label class="block font-label-md text-label-md mb-1.5">Subject</label>
+                                <select class="w-full px-4 py-2.5 bg-surface border border-outline-variant rounded-lg font-body-md">
+                                    <option>Order Issue</option>
+                                    <option>Payment Problem</option>
+                                    <option>Account Help</option>
+                                    <option>Feedback / Suggestion</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block font-label-md text-label-md mb-1.5">Message</label>
+                                <textarea required class="w-full px-4 py-2.5 bg-surface border border-outline-variant rounded-lg font-body-md h-28" placeholder="Describe your issue..."></textarea>
+                            </div>
+                            <button type="submit" class="w-full py-3 bg-primary text-on-primary rounded-xl font-label-md hover:opacity-90 transition-opacity">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- === VIEW: CUSTOMER PROFILE & HISTORY === -->
+    <section id="view-profile" class="view-panel hidden pt-16 pb-12">
+        <div class="max-w-container-max mx-auto px-gutter py-8">
+            <div class="bg-gradient-to-br from-primary to-primary-container rounded-2xl p-8 md:p-12 text-on-primary mb-8 relative overflow-hidden">
+                <span class="material-symbols-outlined text-[200px] absolute -right-8 -bottom-12 opacity-10 rotate-12">person</span>
+                <div class="flex flex-col md:flex-row items-start md:items-center gap-6 relative z-10">
+                    <div class="w-24 h-24 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border-4 border-white/30 shadow-lg">
+                        <span class="material-symbols-outlined text-5xl text-white" style="font-variation-settings: 'FILL' 1;">person</span>
+                    </div>
+                    <div class="flex-1">
+                        <h1 id="profile-name" class="font-headline-lg text-headline-lg font-extrabold mb-1">Guest User</h1>
+                        <p id="profile-email" class="text-on-primary/80 font-body-md">Please sign in to view your profile</p>
+                        <div class="flex items-center gap-4 mt-3">
+                            <span class="inline-flex items-center gap-1 bg-white/15 backdrop-blur-sm px-3 py-1 rounded-full text-label-sm font-label-sm">
+                                <span class="material-symbols-outlined text-[14px]">star</span>
+                                Gold Member
+                            </span>
+                            <span class="inline-flex items-center gap-1 bg-white/15 backdrop-blur-sm px-3 py-1 rounded-full text-label-sm font-label-sm">
+                                <span class="material-symbols-outlined text-[14px]">local_shipping</span>
+                                <span id="profile-order-count">0</span> Orders
+                            </span>
+                        </div>
+                    </div>
+                    <button onclick="openEditModal()" class="px-5 py-2.5 bg-white/20 backdrop-blur-sm border border-white/30 rounded-xl font-label-md text-label-md hover:bg-white/30 transition-colors flex items-center gap-2">
+                        <span class="material-symbols-outlined text-[18px]">edit</span>
+                        Edit Profile
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Left Column -->
+                <div class="md:col-span-2 space-y-6">
+                    <div class="bg-surface-container-lowest rounded-2xl border border-outline-variant/30 overflow-hidden">
+                        <div class="px-6 py-4 border-b border-outline-variant/20 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary">badge</span>
+                            <h2 class="font-headline-sm text-headline-sm font-bold">Personal Information</h2>
+                        </div>
+                        <div class="p-6 grid sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Full Name</label>
+                                <p id="info-name" class="font-body-md font-semibold text-on-surface">—</p>
+                            </div>
+                            <div>
+                                <label class="block font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Email Address</label>
+                                <p id="info-email" class="font-body-md font-semibold text-on-surface">—</p>
+                            </div>
+                            <div>
+                                <label class="block font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Phone Number</label>
+                                <p id="info-phone" class="font-body-md font-semibold text-on-surface">—</p>
+                            </div>
+                            <div>
+                                <label class="block font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Default Address</label>
+                                <p id="info-address" class="font-body-md font-semibold text-on-surface">—</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-surface-container-lowest rounded-2xl border border-outline-variant/30 overflow-hidden">
+                        <div class="px-6 py-4 border-b border-outline-variant/20 flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-primary">receipt_long</span>
+                                <h2 class="font-headline-sm text-headline-sm font-bold">Order History</h2>
+                            </div>
+                        </div>
+                        <div class="divide-y divide-outline-variant/20" id="order-history-list">
+                            <!-- Dynamic -->
+                        </div>
+                        <div id="no-orders-msg" class="hidden p-12 text-center text-on-surface-variant">
+                            <span class="material-symbols-outlined text-5xl opacity-30 mb-3">shopping_bag</span>
+                            <p class="font-label-md text-label-md">No orders yet. Start exploring restaurants!</p>
+                            <a href="#/" class="inline-block mt-4 px-6 py-2 bg-primary text-on-primary rounded-xl font-label-md hover:opacity-90">Browse Restaurants</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="space-y-6">
+                    <div class="bg-surface-container-lowest rounded-2xl border border-outline-variant/30 overflow-hidden">
+                        <div class="px-6 py-4 border-b border-outline-variant/20">
+                            <h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Quick Actions</h3>
+                        </div>
+                        <div class="p-4 space-y-2">
+                            <a href="#/" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-surface-container transition-colors group">
+                                <span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">explore</span>
+                                <span class="font-label-md">Browse Restaurants</span>
+                            </a>
+                            <a href="#/offers" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-surface-container transition-colors group">
+                                <span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">local_offer</span>
+                                <span class="font-label-md">View Offers</span>
+                            </a>
+                            <a href="#/support" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-surface-container transition-colors group">
+                                <span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">support_agent</span>
+                                <span class="font-label-md">Get Support</span>
+                            </a>
+                            <a href="#/admin" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-surface-container transition-colors group">
+                                <span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">dashboard</span>
+                                <span class="font-label-md">Admin Dashboard</span>
+                            </a>
+                            <a href="#/partner/orders" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-surface-container transition-colors group">
+                                <span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">storefront</span>
+                                <span class="font-label-md">Restaurant Dashboard</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="bg-surface-container-lowest rounded-2xl border border-outline-variant/30 overflow-hidden">
+                        <div class="px-6 py-4 border-b border-outline-variant/20">
+                            <h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Saved Addresses</h3>
+                        </div>
+                        <div class="p-4 space-y-3">
+                            <div class="flex items-start gap-3 px-4 py-3 bg-primary-fixed/30 rounded-xl border border-primary/10">
+                                <span class="material-symbols-outlined text-primary mt-0.5">home</span>
+                                <div>
+                                    <p class="font-label-md text-label-md text-on-surface">Home</p>
+                                    <p id="saved-address-home" class="text-label-sm text-on-surface-variant">123 Market St, New York, NY</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- === VIEW: SIGN IN === -->
+    <section id="view-signin" class="view-panel hidden min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+        <div class="sm:mx-auto sm:w-full sm:max-w-md">
+            <div class="flex justify-center items-center gap-2 mb-4">
+                <span class="material-symbols-outlined text-primary text-[40px]" style="font-variation-settings: 'FILL' 1;">restaurant_menu</span>
+                <span class="font-headline-lg text-headline-lg font-extrabold text-primary">SwiftBite</span>
+            </div>
+            <h2 class="text-center font-headline-md text-headline-md text-on-surface">Sign in to your account</h2>
+        </div>
+        <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+            <div class="bg-surface-container-lowest py-8 px-4 shadow sm:rounded-xl sm:px-10 border border-outline-variant/20">
+                <form class="space-y-6" id="signin-form" onsubmit="event.preventDefault(); submitSignIn();">
+                    <div>
+                        <label for="signin-email" class="block font-label-md text-label-md text-on-surface">Email Address</label>
+                        <div class="mt-1">
+                            <input id="signin-email" required class="appearance-none block w-full px-4 py-3 border border-outline-variant rounded-lg bg-surface placeholder:text-outline-variant text-body-md" placeholder="name@example.com" type="email" value="khloud@swiftbite.com"/>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="signin-password" class="block font-label-md text-label-md text-on-surface">Password</label>
+                        <div class="mt-1">
+                            <input id="signin-password" required class="appearance-none block w-full px-4 py-3 border border-outline-variant rounded-lg bg-surface placeholder:text-outline-variant text-body-md" placeholder="••••••••" type="password" value="password123"/>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="submit" class="w-full flex justify-center py-4 px-4 bg-primary text-on-primary rounded-xl font-label-md hover:opacity-90 shadow-sm active:scale-[0.98] transition-all">
+                            Sign In
+                        </button>
+                    </div>
+                </form>
+                <div class="mt-6">
+                    <div class="relative">
+                        <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-outline-variant/30"></div></div>
+                        <div class="relative flex justify-center text-sm"><span class="px-2 bg-surface-container-lowest text-outline">Or continue with</span></div>
+                    </div>
+                    <div class="mt-6 grid grid-cols-2 gap-3">
+                        <button onclick="simulateThirdPartyLogin('Google')" class="w-full inline-flex justify-center py-3 px-4 border border-outline-variant rounded-lg bg-surface hover:bg-surface-container transition-colors">
+                            <img alt="Google" class="w-5 h-5 mr-2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdeFygNNRMS1VlwBXFmU2nbSjhS1KbHxzMxk4WYq7RxAiTxvEWwv6xafAz0KTxwRZ4FRAEhb17HaJPXWmvwRjEoTs-cf7yyEA4QJRFW1o0Wamz_Ev8s3FV4F5ywnIGvrGv2xR53tdssqQIAm23mgzGpps-p-XmuKT5R56ESWwUSZ5qSvYq4WXqQpOSFfOwesMjgyTS7MRhgHY0MEdOkYLWLVGa5-w0jJYY7-1ueyDt1z1XWJRhM5bwDUhRJIHGvxNLRSfGZCojz_Fx"/> Google
+                        </button>
+                        <button onclick="simulateThirdPartyLogin('Apple')" class="w-full inline-flex justify-center py-3 px-4 border border-outline-variant rounded-lg bg-surface hover:bg-surface-container transition-colors">
+                            <span class="material-symbols-outlined text-[20px] mr-2">apple</span> Apple
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-6">
+                <p class="text-body-md text-on-surface-variant">Don't have an account? <a href="#/signup" class="text-primary font-bold hover:underline">Create an account</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- === VIEW: SIGN UP === -->
+    <section id="view-signup" class="view-panel hidden min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+        <div class="sm:mx-auto sm:w-full sm:max-w-md">
+            <div class="flex justify-center items-center gap-2 mb-4">
+                <span class="material-symbols-outlined text-primary text-[40px]" style="font-variation-settings: 'FILL' 1;">restaurant_menu</span>
+                <span class="font-headline-lg text-headline-lg font-extrabold text-primary">SwiftBite</span>
+            </div>
+            <h2 class="text-center font-headline-md text-headline-md text-on-surface">Create your account</h2>
+        </div>
+        <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+            <div class="bg-surface-container-lowest py-8 px-4 shadow sm:rounded-xl sm:px-10 border border-outline-variant/20">
+                <form class="space-y-6" id="signup-form" onsubmit="event.preventDefault(); submitSignUp();">
+                    <div>
+                        <label for="signup-name" class="block font-label-md text-label-md text-on-surface">Full Name</label>
+                        <div class="mt-1">
+                            <input id="signup-name" required class="appearance-none block w-full px-4 py-3 border border-outline-variant rounded-lg bg-surface placeholder:text-outline-variant text-body-md" placeholder="John Doe" type="text"/>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="signup-email" class="block font-label-md text-label-md text-on-surface">Email Address</label>
+                        <div class="mt-1">
+                            <input id="signup-email" required class="appearance-none block w-full px-4 py-3 border border-outline-variant rounded-lg bg-surface placeholder:text-outline-variant text-body-md" placeholder="name@example.com" type="email"/>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label for="signup-password" class="block font-label-md text-label-md text-on-surface">Password</label>
+                            <input id="signup-password" required class="mt-1 appearance-none block w-full px-4 py-3 border border-outline-variant rounded-lg bg-surface text-body-md" placeholder="••••••••" type="password"/>
+                        </div>
+                        <div>
+                            <label for="signup-confirm" class="block font-label-md text-label-md text-on-surface">Confirm</label>
+                            <input id="signup-confirm" required class="mt-1 appearance-none block w-full px-4 py-3 border border-outline-variant rounded-lg bg-surface text-body-md" placeholder="••••••••" type="password"/>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <input required id="signup-terms" class="h-5 w-5 text-primary border-outline-variant rounded focus:ring-primary cursor-pointer" type="checkbox"/>
+                        <label for="signup-terms" class="ml-2 block text-label-sm text-on-surface-variant">I agree to the Terms &amp; Conditions</label>
+                    </div>
+                    <div>
+                        <button type="submit" class="w-full flex justify-center py-4 px-4 bg-primary text-on-primary rounded-xl font-label-md hover:opacity-90 shadow-sm active:scale-[0.98] transition-all">
+                            Create Account
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="text-center mt-6">
+                <p class="text-body-md text-on-surface-variant">Already have an account? <a href="#/signin" class="text-primary font-bold hover:underline">Sign In</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- === VIEW: ADMIN SYSTEM OVERVIEW === -->
+    <section id="view-admin" class="view-panel hidden min-h-screen bg-background">
+        <!-- Admin SideBar -->
+        <aside class="h-full w-72 fixed left-0 top-0 bg-surface-container-highest flex flex-col h-screen border-r border-outline-variant z-50">
+            <div class="p-gutter flex items-center gap-stack-sm cursor-pointer" onclick="window.location.hash = '#/'">
+                <div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-on-primary">
+                    <span class="material-symbols-outlined" data-icon="restaurant_menu">restaurant_menu</span>
+                </div>
+                <div>
+                    <h1 class="font-headline-sm text-[20px] font-extrabold text-primary leading-none">SwiftBite Admin</h1>
+                    <p class="font-label-md text-label-md text-on-surface-variant">System Control</p>
+                </div>
+            </div>
+            <nav class="flex-grow mt-stack-md flex flex-col gap-stack-sm">
+                <a class="bg-primary text-on-primary rounded-xl mx-4 shadow-md flex items-center px-4 py-3 transition-all" href="#/admin">
+                    <span class="material-symbols-outlined mr-3" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+                    <span class="font-label-md text-label-md">Dashboard</span>
+                </a>
+                <a class="text-on-surface-variant mx-4 flex items-center px-4 py-3 hover:bg-surface-variant transition-all rounded-xl" href="#/">
+                    <span class="material-symbols-outlined mr-3">shopping_basket</span>
+                    <span class="font-label-md text-label-md">Customer Store</span>
+                </a>
+                <a class="text-on-surface-variant mx-4 flex items-center px-4 py-3 hover:bg-surface-variant transition-all rounded-xl" href="#/partner/orders">
+                    <span class="material-symbols-outlined mr-3">receipt_long</span>
+                    <span class="font-label-md text-label-md">Partner Console</span>
+                </a>
+            </nav>
+            <div class="p-gutter border-t border-outline-variant">
+                <div class="flex items-center gap-3 mb-6">
+                    <img alt="Admin Avatar" class="w-10 h-10 rounded-full border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnXXgBc8RgC0KF7dMBXLIpKXNFcyBhywWqitWGFqqcml6R15e_Zl_0jrtkNTLUD551te9FAJiluVYus6BNbidcAA0S4TMXRf9aqoXe8gYOZr1jykWewBmV8_1WNAOGF-_6KQ2HlY6WRVAE1BmeDzLJVgKctG6wgJZgbw42qizdf4MHPfWdMmQuvXZD08zGjUOxtfLmFjx3_e6TegBa7vR7NOU6OCezBs4_8xcWb3A0g5Z7QgWQnE10XSbbzPgfVltPu90NR6nhLdpq"/>
+                    <div>
+                        <p class="font-label-md text-label-md text-on-surface">Alex Thompson</p>
+                        <p class="text-[12px] text-on-surface-variant">Super Admin</p>
+                    </div>
+                </div>
+                <button onclick="SwiftBiteStore.logout(); window.location.hash = '#/'; window.location.reload();" class="w-full text-left text-on-surface-variant mx-4 flex items-center px-4 py-2 hover:bg-error/5 hover:text-error transition-all rounded-xl">
+                    <span class="material-symbols-outlined mr-3">logout</span>
+                    <span class="font-label-md text-label-md">Logout</span>
+                </button>
+            </div>
+        </aside>
+        
+        <!-- Main Admin Canvas -->
+        <main class="ml-72 p-margin-desktop max-w-[1280px] mx-auto">
+            <header class="flex justify-between items-end mb-stack-lg">
+                <div>
+                    <h2 class="font-headline-lg text-headline-lg text-on-surface">Overview Dashboard</h2>
+                    <p class="font-body-md text-body-md text-on-surface-variant">Real-time performance metrics and system health.</p>
+                </div>
+                <div class="flex gap-stack-sm">
+                    <button class="flex items-center gap-2 bg-surface-container-high px-4 py-2 rounded-lg font-label-md text-label-md hover:bg-secondary-container transition-colors">
+                        <span class="material-symbols-outlined text-[20px]">calendar_today</span> Last 30 Days
+                    </button>
+                    <button onclick="alert('Demo: Export is disabled.')" class="flex items-center gap-2 bg-primary-container text-on-primary px-6 py-2 rounded-lg font-label-md text-label-md shadow-md hover:opacity-90 transition-all">
+                        <span class="material-symbols-outlined text-[20px]">download</span> Export Report
+                    </button>
+                </div>
+            </header>
+
+            <section class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-gutter mb-stack-lg">
+                <div class="bg-surface-container-lowest p-stack-md rounded-xl shadow-sm border border-outline-variant hover:-translate-y-1 transition-transform">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-2 bg-primary-fixed rounded-lg text-primary"><span class="material-symbols-outlined">shopping_bag</span></div>
+                        <span class="text-green-600 bg-green-50 px-2 py-1 rounded text-[12px] font-bold flex items-center"><span class="material-symbols-outlined text-[14px] mr-1">trending_up</span> +1.5%</span>
+                    </div>
+                    <p class="font-label-md text-label-md text-on-surface-variant">Total Orders</p>
+                    <h3 id="admin-total-orders" class="font-headline-md text-headline-md text-on-surface font-extrabold">24,892</h3>
+                </div>
+                <div class="bg-surface-container-lowest p-stack-md rounded-xl shadow-sm border border-outline-variant hover:-translate-y-1 transition-transform">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-2 bg-tertiary-fixed rounded-lg text-tertiary"><span class="material-symbols-outlined">payments</span></div>
+                        <span class="text-green-600 bg-green-50 px-2 py-1 rounded text-[12px] font-bold flex items-center"><span class="material-symbols-outlined text-[14px] mr-1">trending_up</span> +2.1%</span>
+                    </div>
+                    <p class="font-label-md text-label-md text-on-surface-variant">Total Revenue</p>
+                    <h3 id="admin-total-revenue" class="font-headline-md text-headline-md text-on-surface font-extrabold">$542,190</h3>
+                </div>
+                <div class="bg-surface-container-lowest p-stack-md rounded-xl shadow-sm border border-outline-variant hover:-translate-y-1 transition-transform">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-2 bg-surface-variant rounded-lg text-on-surface-variant"><span class="material-symbols-outlined">person</span></div>
+                        <span class="text-on-surface-variant bg-surface-variant px-2 py-1 rounded text-[12px] font-bold">Stable</span>
+                    </div>
+                    <p class="font-label-md text-label-md text-on-surface-variant">Active Orders</p>
+                    <h3 id="admin-active-orders" class="font-headline-md text-headline-md text-on-surface font-extrabold">0</h3>
+                </div>
+                <div class="bg-surface-container-lowest p-stack-md rounded-xl shadow-sm border border-outline-variant hover:-translate-y-1 transition-transform">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-2 bg-secondary-container rounded-lg text-secondary"><span class="material-symbols-outlined">delivery_dining</span></div>
+                        <span class="text-error bg-error-container px-2 py-1 rounded text-[12px] font-bold flex items-center"><span class="material-symbols-outlined text-[14px] mr-1">trending_down</span> 2.1%</span>
+                    </div>
+                    <p class="font-label-md text-label-md text-on-surface-variant">Active Drivers</p>
+                    <h3 class="font-headline-md text-headline-md text-on-surface font-extrabold">3,812</h3>
+                </div>
+            </section>
+
+            <div class="grid grid-cols-1 xl:grid-cols-3 gap-gutter">
+                <section class="xl:col-span-2 bg-surface-container-lowest p-gutter rounded-xl shadow-sm border border-outline-variant">
+                    <div class="flex justify-between items-center mb-stack-lg">
+                        <h4 class="font-headline-sm text-headline-md text-on-surface">Daily Orders &amp; Revenue</h4>
+                        <div class="flex items-center gap-4">
+                            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-primary"></span><span class="font-label-md text-label-md text-on-surface-variant">Orders</span></div>
+                            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-tertiary"></span><span class="font-label-md text-label-md text-on-surface-variant">Revenue</span></div>
+                        </div>
+                    </div>
+                    <div class="relative h-80 w-full bg-surface-container-low rounded-lg overflow-hidden group">
+                        <div class="absolute inset-0 flex flex-col justify-between p-4 opacity-20 pointer-events-none">
+                            <div class="border-b border-outline"></div><div class="border-b border-outline"></div><div class="border-b border-outline"></div><div class="border-b border-outline"></div><div class="border-b border-outline"></div>
+                        </div>
+                        <svg class="absolute inset-0 w-full h-full p-4" viewbox="0 0 800 320">
+                            <path d="M0,280 Q100,240 200,250 T400,180 T600,200 T800,120" fill="none" stroke="#5d5f5f" stroke-linecap="round" stroke-width="3"></path>
+                            <path d="M0,200 Q100,180 200,210 T400,120 T600,150 T800,80" fill="none" stroke="#a04100" stroke-linecap="round" stroke-width="3"></path>
+                        </svg>
+                    </div>
+                </section>
+                <section class="bg-surface-container-lowest p-gutter rounded-xl shadow-sm border border-outline-variant flex flex-col">
+                    <h4 class="font-headline-sm text-headline-md text-on-surface mb-stack-lg">Orders by Cuisine</h4>
+                    <div class="relative flex-grow flex items-center justify-center">
+                        <div class="w-48 h-48 rounded-full border-[20px] border-primary flex items-center justify-center relative">
+                            <div class="absolute inset-0 w-full h-full rounded-full border-[20px] border-tertiary border-t-transparent border-r-transparent border-l-transparent -rotate-45"></div>
+                            <div class="absolute inset-0 w-full h-full rounded-full border-[20px] border-surface-variant border-t-transparent border-b-transparent border-l-transparent rotate-90"></div>
+                            <div class="text-center">
+                                <p class="font-headline-sm text-headline-md" id="admin-donut-orders">24.8k</p>
+                                <p class="text-[10px] text-on-surface-variant uppercase font-bold tracking-wider">Total Orders</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <section class="mt-stack-lg bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant overflow-hidden">
+                <div class="p-gutter border-b border-outline-variant flex justify-between items-center">
+                    <h4 class="font-headline-sm text-headline-md text-on-surface">Recent Transaction Activity</h4>
+                </div>
+                <div class="divide-y divide-outline-variant" id="admin-transactions-list">
+                    <!-- Dynamic transactions -->
+                </div>
+            </section>
+        </main>
+    </section>
+
+    <!-- === VIEW: PARTNER ORDERS (Kanban) === -->
+    <section id="view-partner-orders" class="view-panel hidden min-h-screen bg-background">
+        <!-- Partner SideBar -->
+        <aside class="h-full w-64 fixed left-0 top-0 bg-surface-container-low flex flex-col py-stack-md gap-stack-sm z-50 border-r border-outline-variant/30">
+            <div class="px-6 mb-stack-lg cursor-pointer" onclick="window.location.hash = '#/'">
+                <h1 class="font-headline-sm text-headline-md font-black text-primary">SwiftBite</h1>
+                <p class="font-label-md text-label-md text-on-surface-variant">Partner Dashboard</p>
+            </div>
+            <nav class="flex-1 flex flex-col gap-1">
+                <a class="bg-primary text-on-primary rounded-lg mx-2 flex items-center px-4 py-3 gap-3 transition-transform scale-95" href="#/partner/orders">
+                    <span class="material-symbols-outlined">receipt_long</span><span class="font-label-md text-label-md">Orders</span>
+                </a>
+                <a class="text-on-surface-variant mx-2 flex items-center px-4 py-3 gap-3 hover:bg-secondary-container transition-transform scale-95 rounded-lg" href="#/partner/menu">
+                    <span class="material-symbols-outlined">restaurant_menu</span><span class="font-label-md text-label-md">Menu Manager</span>
+                </a>
+                <a class="text-on-surface-variant mx-2 flex items-center px-4 py-3 gap-3 hover:bg-secondary-container transition-transform scale-95 rounded-lg" href="#/admin">
+                    <span class="material-symbols-outlined">dashboard</span><span class="font-label-md text-label-md">Admin panel</span>
+                </a>
+            </nav>
+            <div class="px-4 mt-auto">
+                <button onclick="SwiftBiteStore.logout(); window.location.hash = '#/';" class="w-full py-3 bg-inverse-surface text-inverse-on-surface rounded-xl font-label-md text-label-md flex items-center justify-center gap-2 hover:opacity-90">
+                    <span class="material-symbols-outlined text-[20px]">logout</span> Sign Out
+                </button>
+            </div>
+        </aside>
+        
+        <!-- Main Partner Console Canvas -->
+        <main class="ml-64 min-h-screen">
+            <header class="h-20 bg-surface flex items-center justify-between px-gutter border-b border-outline-variant sticky top-0 z-40">
+                <div class="flex flex-col">
+                    <h2 class="font-headline-sm text-headline-sm text-on-surface font-extrabold" id="partner-orders-rest">Live Orders</h2>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant" id="partner-orders-count">Tracking 0 active orders</p>
+                </div>
+                <div class="flex items-center gap-6">
+                    <div class="flex items-center gap-3 px-4 py-2 bg-surface-container rounded-full">
+                        <span class="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse"></span>
+                        <span class="font-label-md text-label-md text-on-surface">Accepting Orders</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="p-gutter grid grid-cols-1 md:grid-cols-3 gap-6 max-w-container-max-width mx-auto">
+                <!-- Column: New Orders -->
+                <div class="flex flex-col gap-4">
+                    <div class="flex items-center justify-between px-2">
+                        <div class="flex items-center gap-2"><span class="w-2 h-2 bg-primary rounded-full"></span><h3 class="font-headline-sm text-headline-sm">New Orders</h3></div>
+                        <span id="col-new-count" class="bg-surface-container-highest text-on-surface px-2.5 py-0.5 rounded-full font-label-md">0</span>
+                    </div>
+                    <div class="kanban-column flex flex-col gap-4 bg-surface-container-low p-3 rounded-2xl" id="col-new-container"></div>
+                </div>
+                <!-- Column: Preparing -->
+                <div class="flex flex-col gap-4">
+                    <div class="flex items-center justify-between px-2">
+                        <div class="flex items-center gap-2"><span class="w-2 h-2 bg-primary-container rounded-full"></span><h3 class="font-headline-sm text-headline-sm">Preparing</h3></div>
+                        <span id="col-prep-count" class="bg-surface-container-highest text-on-surface px-2.5 py-0.5 rounded-full font-label-md">0</span>
+                    </div>
+                    <div class="kanban-column flex flex-col gap-4 bg-surface-container-low p-3 rounded-2xl" id="col-prep-container"></div>
+                </div>
+                <!-- Column: Out for Delivery -->
+                <div class="flex flex-col gap-4">
+                    <div class="flex items-center justify-between px-2">
+                        <div class="flex items-center gap-2"><span class="w-2 h-2 bg-green-500 rounded-full"></span><h3 class="font-headline-sm text-headline-sm">Out for Delivery</h3></div>
+                        <span id="col-dispatch-count" class="bg-surface-container-highest text-on-surface px-2.5 py-0.5 rounded-full font-label-md">0</span>
+                    </div>
+                    <div class="kanban-column flex flex-col gap-4 bg-surface-container-low p-3 rounded-2xl" id="col-dispatch-container"></div>
+                </div>
+            </div>
+        </main>
+    </section>
+
+    <!-- === VIEW: PARTNER MENU MANAGER === -->
+    <section id="view-partner-menu" class="view-panel hidden min-h-screen bg-background">
+        <!-- Partner SideBar -->
+        <aside class="h-full w-64 fixed left-0 top-0 bg-surface-container-low flex flex-col py-stack-md gap-stack-sm border-r border-outline-variant/30">
+            <div class="px-6 mb-8 cursor-pointer" onclick="window.location.hash = '#/'">
+                <h1 class="font-headline-sm text-headline-md font-black text-primary">SwiftBite</h1>
+                <p class="font-label-md text-label-md text-on-surface-variant opacity-70">Kitchen Dashboard</p>
+            </div>
+            <nav class="flex-grow space-y-1">
+                <a class="flex items-center px-4 py-3 text-on-surface-variant mx-2 hover:bg-secondary-container font-label-md text-label-md rounded-lg" href="#/partner/orders">
+                    <span class="material-symbols-outlined mr-3">receipt_long</span> Orders
+                </a>
+                <a class="flex items-center px-4 py-3 bg-primary text-on-primary rounded-lg mx-2 font-label-md text-label-md" href="#/partner/menu">
+                    <span class="material-symbols-outlined mr-3">restaurant_menu</span> Menu Manager
+                </a>
+                <a class="flex items-center px-4 py-3 text-on-surface-variant mx-2 hover:bg-secondary-container font-label-md text-label-md rounded-lg" href="#/admin">
+                    <span class="material-symbols-outlined mr-3">dashboard</span> Admin panel
+                </a>
+            </nav>
+            <div class="px-4 mt-auto">
+                <button onclick="SwiftBiteStore.logout(); window.location.hash = '#/';" class="w-full py-3 bg-inverse-surface text-inverse-on-surface rounded-xl font-label-md text-label-md flex items-center justify-center gap-2 hover:opacity-90">
+                    <span class="material-symbols-outlined text-[20px]">logout</span> Sign Out
+                </button>
+            </div>
+        </aside>
+        
+        <!-- Main Canvas -->
+        <main class="ml-64 p-margin-desktop min-h-screen">
+            <header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-stack-lg gap-stack-md">
+                <div>
+                    <h2 id="partner-rest-title" class="font-headline-lg text-headline-lg text-on-surface font-extrabold">Menu Management</h2>
+                    <p class="font-body-md text-body-md text-on-surface-variant">Manage your restaurant offerings and availability.</p>
+                </div>
+                <div class="flex items-center gap-stack-md w-full md:w-auto">
+                    <div class="relative flex-1 md:w-80">
+                        <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+                        <input id="menu-search-input" class="w-full pl-10 pr-4 py-2 bg-surface-container-lowest border border-outline-variant rounded-lg font-body-md text-body-md" placeholder="Search menu items..." type="text"/>
+                    </div>
+                    <button onclick="openAddModal()" class="px-6 py-2.5 bg-primary text-on-primary rounded-lg font-label-md text-label-md flex items-center gap-2 hover:opacity-90 transition-opacity">
+                        <span class="material-symbols-outlined">add</span> Add New Item
+                    </button>
+                </div>
+            </header>
+
+            <div class="flex gap-stack-sm mb-stack-lg overflow-x-auto pb-2" id="category-chips-bar"></div>
+
+            <div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden border border-surface-variant">
+                <table class="w-full text-left border-collapse">
+                    <thead class="bg-surface-container-low border-b border-surface-variant">
+                        <tr>
+                            <th class="px-6 py-4 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Photo</th>
+                            <th class="px-6 py-4 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Name</th>
+                            <th class="px-6 py-4 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Category</th>
+                            <th class="px-6 py-4 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Price</th>
+                            <th class="px-6 py-4 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Status</th>
+                            <th class="px-6 py-4 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-surface-variant" id="partner-menu-tbody"></tbody>
+                </table>
+                <div class="px-6 py-4 bg-surface-container-low flex items-center justify-between border-t border-surface-variant">
+                    <span id="partner-menu-summary" class="font-body-md text-body-md text-on-surface-variant">Showing 0 items</span>
+                </div>
+            </div>
+        </main>
+    </section>
+
+</div>
+
+<!-- --- 3. Global Footer --- -->
+<footer id="main-footer" class="bg-inverse-surface text-inverse-on-surface py-16 mt-24">
+    <div class="max-w-container-max mx-auto px-gutter grid grid-cols-1 md:grid-cols-4 gap-stack-lg">
+        <div>
+            <h4 class="font-headline-sm text-headline-sm text-primary-fixed mb-6">SwiftBite</h4>
+            <p class="text-body-md opacity-60 mb-6">Your premium partner for culinary explorations. Delivering excellence since 2024.</p>
+            <div class="flex gap-4">
+                <span class="material-symbols-outlined cursor-pointer hover:text-primary-fixed" data-icon="facebook">facebook</span>
+                <span class="material-symbols-outlined cursor-pointer hover:text-primary-fixed" data-icon="instagram">photo_camera</span>
+            </div>
+        </div>
+        <div>
+            <h5 class="font-label-md text-label-md mb-6 uppercase tracking-widest opacity-40">Company</h5>
+            <ul class="flex flex-col gap-3 text-body-md opacity-80">
+                <li class="hover:text-primary-fixed cursor-pointer">About Us</li>
+                <li class="hover:text-primary-fixed cursor-pointer">Careers</li>
+                <li class="hover:text-primary-fixed cursor-pointer">Restaurant Partners</li>
+            </ul>
+        </div>
+        <div>
+            <h5 class="font-label-md text-label-md mb-6 uppercase tracking-widest opacity-40">Support</h5>
+            <ul class="flex flex-col gap-3 text-body-md opacity-80">
+                <li class="hover:text-primary-fixed cursor-pointer" onclick="window.location.hash='#/support'">Help Center</li>
+                <li class="hover:text-primary-fixed cursor-pointer" onclick="window.location.hash='#/support'">Contact Us</li>
+            </ul>
+        </div>
+        <div>
+            <h5 class="font-label-md text-label-md mb-6 uppercase tracking-widest opacity-40">Download</h5>
+            <div class="flex flex-col gap-4">
+                <div class="bg-on-surface/10 hover:bg-on-surface/20 p-3 rounded-xl flex items-center gap-3 cursor-pointer">
+                    <span class="material-symbols-outlined text-[32px]">apple</span>
+                    <div>
+                        <p class="text-[10px] uppercase opacity-60">Download on the</p>
+                        <p class="font-bold">App Store</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="max-w-container-max mx-auto px-gutter mt-16 pt-8 border-t border-white/10 text-center text-body-md opacity-40">
+        © 2024 SwiftBite Inc. All rights reserved.
+    </div>
+</footer>
+
+<!-- --- 4. Mobile Bottom Nav Bar (Customer Views Only) --- -->
+<div id="mobile-bottom-nav" class="md:hidden fixed bottom-0 left-0 w-full bg-surface border-t border-outline-variant/20 px-gutter py-2 z-50 flex justify-between items-center">
+    <button onclick="window.location.hash = '#/'" class="flex flex-col items-center gap-1 text-primary">
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">restaurant_menu</span>
+        <span class="text-[10px] font-bold">Browse</span>
+    </button>
+    <button onclick="window.location.hash = '#/offers'" class="flex flex-col items-center gap-1 text-on-surface-variant hover:text-primary transition-colors">
+        <span class="material-symbols-outlined">local_offer</span>
+        <span class="text-[10px]">Offers</span>
+    </button>
+    <div class="relative -top-6">
+        <button onclick="window.location.hash = '#/checkout'" class="bg-primary text-on-primary w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-primary/40 border-4 border-background">
+            <span class="material-symbols-outlined">shopping_cart</span>
+        </button>
+    </div>
+    <button onclick="window.location.hash = '#/support'" class="flex flex-col items-center gap-1 text-on-surface-variant hover:text-primary transition-colors">
+        <span class="material-symbols-outlined">help</span>
+        <span class="text-[10px]">Support</span>
+    </button>
+    <button onclick="window.location.hash = '#/profile'" class="flex flex-col items-center gap-1 text-on-surface-variant hover:text-primary transition-colors">
+        <span class="material-symbols-outlined">person</span>
+        <span class="text-[10px]">Profile</span>
+    </button>
+</div>
+
+<!-- --- 5. Global Modals --- -->
+
+<!-- Receipt Modal -->
+<div id="receipt-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[9999] hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl w-full max-w-md p-6 border border-outline-variant/30 flex flex-col gap-4 max-h-[85vh] overflow-y-auto">
+        <div class="flex justify-between items-center border-b border-outline-variant/20 pb-3">
+            <h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">Receipt Details</h3>
+            <button onclick="toggleReceiptModal()" class="material-symbols-outlined text-on-surface-variant hover:bg-surface-variant rounded-full p-1 transition-colors">close</button>
+        </div>
+        <div class="space-y-3" id="receipt-modal-content"></div>
+        <div class="border-t border-outline-variant/20 pt-4 flex justify-end">
+            <button onclick="toggleReceiptModal()" class="bg-primary text-on-primary px-6 py-2.5 rounded-xl font-label-md hover:opacity-90">Close</button>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Profile Modal -->
+<div id="edit-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[9999] hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl w-full max-w-lg p-6 border border-outline-variant/30 flex flex-col gap-4">
+        <div class="flex justify-between items-center border-b border-outline-variant/20 pb-3">
+            <h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">Edit Profile</h3>
+            <button onclick="closeEditModal()" class="material-symbols-outlined text-on-surface-variant hover:bg-surface-variant rounded-full p-1 transition-colors">close</button>
+        </div>
+        <form id="edit-form" class="space-y-4" onsubmit="event.preventDefault(); submitEditProfile();">
+            <div>
+                <label class="block font-label-md text-label-md mb-1.5">Full Name</label>
+                <input required id="edit-name" class="w-full px-4 py-2.5 bg-surface border border-outline-variant rounded-lg font-body-md" type="text"/>
+            </div>
+            <div>
+                <label class="block font-label-md text-label-md mb-1.5">Email</label>
+                <input required id="edit-email" class="w-full px-4 py-2.5 bg-surface border border-outline-variant rounded-lg font-body-md" type="email"/>
+            </div>
+            <div>
+                <label class="block font-label-md text-label-md mb-1.5">Phone</label>
+                <input id="edit-phone" class="w-full px-4 py-2.5 bg-surface border border-outline-variant rounded-lg font-body-md" type="text"/>
+            </div>
+            <div>
+                <label class="block font-label-md text-label-md mb-1.5">Default Address</label>
+                <input id="edit-address" class="w-full px-4 py-2.5 bg-surface border border-outline-variant rounded-lg font-body-md" type="text"/>
+            </div>
+            <div class="flex justify-end gap-3 pt-2">
+                <button type="button" onclick="closeEditModal()" class="px-6 py-2.5 border border-outline-variant rounded-xl font-label-md hover:bg-surface-container transition-colors">Cancel</button>
+                <button type="submit" class="px-6 py-2.5 bg-primary text-on-primary rounded-xl font-label-md hover:opacity-90">Save Changes</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Partner Add/Edit Menu Item Modal -->
+<div id="item-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[9999] hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl w-full max-w-lg p-6 border border-outline-variant/30 flex flex-col gap-4">
+        <div class="flex justify-between items-center border-b border-outline-variant/20 pb-3">
+            <h3 id="modal-title" class="font-headline-sm text-headline-sm font-bold text-on-surface">Add Menu Item</h3>
+            <button onclick="closeModal()" class="material-symbols-outlined text-on-surface-variant hover:bg-surface-variant rounded-full p-1 transition-colors">close</button>
+        </div>
+        <form id="item-form" class="space-y-4" onsubmit="event.preventDefault(); submitPartnerItemForm();">
+            <input type="hidden" id="edit-item-id" value=""/>
+            <div>
+                <label class="block font-label-md text-label-md mb-1.5">Dish Name</label>
+                <input required id="dish-name" class="w-full px-4 py-2.5 bg-surface border border-outline-variant rounded-lg font-body-md" placeholder="e.g. Garlic Bread" type="text"/>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block font-label-md text-label-md mb-1.5">Category</label>
+                    <select id="dish-category" class="w-full px-4 py-2.5 bg-surface border border-outline-variant rounded-lg font-body-md">
+                        <option value="Popular">Popular</option>
+                        <option value="Main Course">Main Course</option>
+                        <option value="Desserts">Desserts</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block font-label-md text-label-md mb-1.5">Price ($)</label>
+                    <input required id="dish-price" class="w-full px-4 py-2.5 bg-surface border border-outline-variant rounded-lg font-body-md" placeholder="12.50" type="number" step="0.01"/>
+                </div>
+            </div>
+            <div>
+                <label class="block font-label-md text-label-md mb-1.5">Description</label>
+                <textarea required id="dish-desc" class="w-full px-4 py-2 bg-surface border border-outline-variant rounded-lg font-body-md h-20" placeholder="Describe the ingredients..."></textarea>
+            </div>
+            <div>
+                <label class="block font-label-md text-label-md mb-1.5">Image URL</label>
+                <input id="dish-image" class="w-full px-4 py-2.5 bg-surface border border-outline-variant rounded-lg font-body-md" placeholder="Paste image URL (optional)" type="text"/>
+            </div>
+            <div class="flex justify-end gap-3 pt-2">
+                <button type="button" onclick="closeModal()" class="px-6 py-2.5 border border-outline-variant rounded-xl font-label-md hover:bg-surface-container transition-colors">Cancel</button>
+                <button type="submit" class="px-6 py-2.5 bg-primary text-on-primary rounded-xl font-label-md hover:opacity-90">Save Dish</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Global Toasts -->
+<div id="toast" class="fixed bottom-gutter right-gutter z-[9999] pointer-events-none opacity-0 translate-y-4 transition-all duration-300">
+    <div class="bg-inverse-surface text-inverse-on-surface px-6 py-3 rounded-xl shadow-lg flex items-center gap-3">
+        <span class="material-symbols-outlined text-primary-fixed" id="toast-icon">check_circle</span>
+        <span class="font-label-md text-label-md" id="toast-text">Toast Message</span>
+    </div>
+</div>
+
+<!-- --- 6. Embedded Scripts (Database Store, Router & Controllers) --- -->
+<script>
+    // ==========================================
+    // MODULE A: DATABASE STORE LAYER
+    // ==========================================
+    const DEFAULT_RESTAURANTS = [
+        {
+            id: "lombardis",
+            name: "Lombardi's Pizza",
+            rating: 4.8,
+            cuisines: "Italian • Pizza • Gourmet",
+            time: "20-30 min",
+            fee: "$2.99 Fee",
+            image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDNwLO14Oj3IZGGjxEiw8PQO9jurXbHDE6jcANT3BNnsZ8NLFEjVXRMpHJFh8qBrcCMYzWHFY9yQFPDc7egzUVNqc7JGp8tSFanBqfh-U4xRFiTGBdKpUjZqGBai5SBMEpaHTCmDt81gtZVKok64TRMO3FUVL94D14pcEv5fLPY5vVbKU2gEToqQ9G_MUEsPAzIVbN0UQVIU3NUlSTLTfboSPmfSi7aHvhK_aPOxssMulzffagjUBonEbIewgRGP-E5Yp0RXfoZ-BHg",
+            cover: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1200&q=80",
+            logo: "https://lh3.googleusercontent.com/aida-public/AB6AXuB4RmuyhIWTEiUsRwl6jLHPHCFfJw5BwOpmzjMmtXXaCuqivVBH0iSsEktTX3bCznMs_XDu6J6-LEpO1L_5n_YENjIpxjHYlX-XaYXpQJi2ZgAiBG1DbAoWU7p-Yu3CSHN0CV1bmCMLPSOnJLytAFQeBcIRh0NLfuz6S4y8suCzqYHYURwZDZYLf51it8wB_lX1Fww7s0k5SxwWldxDdLSMXFxazUQYUtSL86zkuPP9I25CWtw8e4c9Lj9rCukYu3O3hk9jrgXIkBnG"
+        },
+        {
+            id: "sushikazu",
+            name: "Sushi Kazu",
+            rating: 4.6,
+            cuisines: "Japanese • Sushi • Healthy",
+            time: "30-45 min",
+            fee: "$0.00 Fee",
+            image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCpd0j3E2Sbzqq4QWxw8joWDgRtRGuC9_VWc9I9QWBUwsSsaNhRZ3HFj-7GE3aGWOWUvZ8ZU1PToKwZ9__1pdkiueZZ8bST56cz_37mUUMnXvGPYJ6oQ3XWKqHE9YnjIiQUVbZt28H1AZOVM7m3-MsuFRU9HJXrbTtTd_aa3PuOZeJAoyZinPqIObxQjeTqGzxLh_5VpXc19sn4xwP9_wuXxuuduvBsiovPXJbZjJ85G-G6rBnmRVEVR0VyJvQnzLHmNkWtACjhw7MD",
+            cover: "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=1200&q=80",
+            logo: "https://images.unsplash.com/photo-1611143669185-af224c5e3252?auto=format&fit=crop&w=100&q=80"
+        },
+        {
+            id: "irongrill",
+            name: "Iron Grill Burgers",
+            rating: 4.9,
+            cuisines: "American • Burgers • Fast Food",
+            time: "15-25 min",
+            fee: "$1.49 Fee",
+            image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDss1DhT95H8ix3GxrC4jgbdIFGaD3baVBp2IirbBD36DuAPrsH6jb_UYcJiF6G-HTsy1fR2qwFr-R_Pre6DMgJCyPL7rE7vOjvC7LpSA6fAWInSSTHaHc_YIv59jsoIBqnF4PIiXcPl0DYHomu40EYYM4dm_IGqty8XpLGuGQ_l5_XRf__q7LOWHGfx0wJ63A3p9y_4GSSQRsX9KYKwvwDipTQidNdWv8IbIjDMdbj4TBCx9iKYngTk3vi-4LufMgDDK6hzCON_d5K",
+            cover: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=1200&q=80",
+            logo: "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=100&q=80"
+        },
+        {
+            id: "purelygreen",
+            name: "Purely Green",
+            rating: 4.7,
+            cuisines: "Salads • Bowls • Vegan",
+            time: "20-35 min",
+            fee: "$3.99 Fee",
+            image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDLWkZZk0k_tb1mA6e6zKC51HWpSkpK2ZYKHlQr2HUVgdQTENLoLCEu-DsdUeY6Q8NRLtFASm8aLO-HQPehe3ltxOLo41ee380PEEPRhob91LzJFagpEz5rDS5NC3r9pqZcvLCMVs25GCBoFAB2rn-bgjhEaMjlfdX9YwqG74ap1cKI_IuSOEHaeYpZW3G2jhHjWi92M_D9e7J4UsTeJrtIH7PUbRmeATooDiPuwid2IU090gkYmqPWFsMqbmcS0hytuwLnhzG-cyl0",
+            cover: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=1200&q=80",
+            logo: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=100&q=80"
+        }
+    ];
+
+    const DEFAULT_MENU_ITEMS = {
+        lombardis: [
+            { id: "l1", name: "Truffle Avocado Toast", price: 18.50, description: "Sourdough bread, smashed organic avocado, white truffle oil, chili flakes, and micro-greens.", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBA5_QqJon8J5KVF3GsmKpiWBfmmis0b7WSM8U3eCVdhh8pYIqVs2brx6yy3XtmNE_hD8N5MrtXUmKXuVBR-4XInPckpZot9Er2c7BF7BO_OSXkUrPa1JveZunhD2ec9GKccK3hexUHIivfXpGDKQ1FJhrjq6Vdv_3XtkzUEHOc9oKnSMMDBzQupRKrPSJZIzEYmEDf7aDNxcip18Ooy0Vw7XMqI_1bi88qjtpwat3tvhRjCWDdsVUaIyY24_XOX7qbV80H6iO9RBMv", category: "Popular" },
+            { id: "l2", name: "Artisan Burrata Pizza", price: 22.00, description: "Wood-fired thin crust, fresh burrata, san marzano tomatoes, and basil infused oil.", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCDQGG71Yv0aobmq3SHdqQoMK3ri5Z_MPvA0c7meLdD33w3aoPjb_2Mc-8eRJuQNKlhnGrVQ2O-DOTh2XUv-0jHqsdvK62PIZig0S1g6ekZGE2aEKvJLMKTNkFiymX9J0aRx5hARm0pXnBk3b2xEW7jYuaNirWSABoTkNtbtS3ikmNu6nrFMOjnfkkANux4t5i8rvt2uMv7iACQKYJHh8PhNwzbY4xOp1qjq1HP2Xo_gSoFaxLEAIFz78CNMkzkT1vCRdUuW7u94htH", category: "Popular" },
+            { id: "l3", name: "Classic Margherita Pizza", price: 16.50, description: "San Marzano tomatoes, fresh mozzarella, fresh basil, and extra virgin olive oil.", image: "https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?auto=format&fit=crop&w=400&q=80", category: "Main Course" },
+            { id: "l4", name: "Chocolate Lava Cake", price: 9.00, description: "Rich chocolate cake with a warm, molten chocolate center, served with vanilla bean ice cream.", image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=400&q=80", category: "Desserts" }
+        ],
+        sushikazu: [
+            { id: "s1", name: "Premium Sushi Platter", price: 34.00, description: "Chef's selection of 8 nigiri pieces and one spicy tuna roll.", image: "https://images.unsplash.com/photo-1611143669185-af224c5e3252?auto=format&fit=crop&w=400&q=80", category: "Popular" },
+            { id: "s2", name: "Salmon Sashimi (5pcs)", price: 18.00, description: "Fresh, thinly sliced Atlantic salmon served with wasabi and pickled ginger.", image: "https://images.unsplash.com/photo-1534482421-64566f976cfa?auto=format&fit=crop&w=400&q=80", category: "Main Course" },
+            { id: "s3", name: "Dragon Roll", price: 21.50, description: "Eel and cucumber inside, sliced avocado and unagi sauce on top.", image: "https://images.unsplash.com/photo-1617196034796-73dfa7b1fd56?auto=format&fit=crop&w=400&q=80", category: "Main Course" },
+            { id: "s4", name: "Matcha Mochi Ice Cream", price: 8.50, description: "Traditional sweet pounded rice dough wrapped around rich matcha ice cream.", image: "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?auto=format&fit=crop&w=400&q=80", category: "Desserts" }
+        ],
+        irongrill: [
+            { id: "i1", name: "Iron Grill Burger", price: 19.50, description: "Grass-fed beef patty, cheddar, bacon, caramelized onions, house sauce on brioche bun.", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=400&q=80", category: "Popular" },
+            { id: "i2", name: "Power Protein Bowl", price: 19.00, description: "Quinoa, kale, roasted chickpeas, grilled salmon, and honey-tahini dressing.", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBgxK6gqSl1g_cTq_dX-uPQ2kiJx-IcXkMOQ1TT1iqteyWwFR-YSZEny69ibwDcyn7GcU_osrJtDwSRK-HfaoyrirEKn9KEVHp41BdHWw1KfrxE9RQHqHaTgfuIPgKLfygAMyiJAHpluVo7eozFMOPCLDz2f3xSsRhc_BbLdUVVcJ7Jjs-8Hl0GfsEfMlFvLZsnqgVkki9Yedo0ZMBcu0lv_g_EBsDLnMVg2aAc1m9PqC0ML4e0_kd1LhlH6XsIEgUs8rzV-cidVGZl", category: "Main Course" },
+            { id: "i3", name: "Angus Ribeye Steak", price: 45.00, description: "12oz grass-fed angus, garlic herb butter, and honey-glazed seasonal carrots.", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDGqenZjlrO347_HJQFIh70LK1zayzMIW1NF7mz1voqV06c_XeEaxrxmosl5rMELhANxNdt8THIWfDnYuyvxx9Xz9XotZe4hXuWiX63osmld9v1WHlRI8lMo7Ru-Eqvre5yDCVZOHc7jdmgR2LMa8l2sBvnGaM0X5JlRl35N_Bd-3RrviSAWQDeiNzw0jkbWA_d264OuzxVcSvIyQMoqGeP12W1kjlrQKSVh_j7tivEaqV4vkPduuOXsLwP-exbGAiTGqtILyounN8j", category: "Main Course" }
+        ],
+        purelygreen: [
+            { id: "p1", name: "Wellness Buddha Bowl", price: 15.50, description: "Roasted sweet potatoes, quinoa, sliced avocado, steamed kale, tahini dressing.", image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=400&q=80", category: "Popular" },
+            { id: "p2", name: "Kale & Quinoa Power Salad", price: 14.00, description: "Organic kale, tri-color quinoa, dried cranberries, goat cheese, vinaigrette.", image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=400&q=80", category: "Popular" }
+        ]
+    };
+
+    const DEFAULT_USER = {
+        name: "Khloud Ahmed",
+        email: "khloud@swiftbite.com",
+        phone: "+1 (555) 123-4567",
+        address: "123 Market St, New York, NY"
+    };
+
+    const SwiftBiteStore = {
+        init: function () {
+            if (!localStorage.getItem("sb_initialized")) {
+                localStorage.setItem("sb_restaurants", JSON.stringify(DEFAULT_RESTAURANTS));
+                localStorage.setItem("sb_menu_items", JSON.stringify(DEFAULT_MENU_ITEMS));
+                localStorage.setItem("sb_user", JSON.stringify(DEFAULT_USER));
+                localStorage.setItem("sb_cart", JSON.stringify({ restaurantId: null, items: [] }));
+                localStorage.setItem("sb_orders", JSON.stringify([]));
+                localStorage.setItem("sb_initialized", "true");
+            }
+        },
+        getRestaurants: () => JSON.parse(localStorage.getItem("sb_restaurants") || "[]"),
+        getRestaurant: (id) => SwiftBiteStore.getRestaurants().find(r => r.id === id) || SwiftBiteStore.getRestaurants()[0],
+        getMenuItems: (restaurantId) => {
+            const items = JSON.parse(localStorage.getItem("sb_menu_items") || "{}");
+            return items[restaurantId] || [];
+        },
+        saveMenuItem: (restaurantId, item) => {
+            const allItems = JSON.parse(localStorage.getItem("sb_menu_items") || "{}");
+            if (!allItems[restaurantId]) allItems[restaurantId] = [];
+            if (item.id) {
+                const idx = allItems[restaurantId].findIndex(i => i.id === item.id);
+                if (idx !== -1) allItems[restaurantId][idx] = item;
+            } else {
+                item.id = "custom_" + Date.now();
+                allItems[restaurantId].push(item);
+            }
+            localStorage.setItem("sb_menu_items", JSON.stringify(allItems));
+            window.dispatchEvent(new Event("storage"));
+        },
+        deleteMenuItem: (restaurantId, itemId) => {
+            const allItems = JSON.parse(localStorage.getItem("sb_menu_items") || "{}");
+            if (allItems[restaurantId]) {
+                allItems[restaurantId] = allItems[restaurantId].filter(i => i.id !== itemId);
+                localStorage.setItem("sb_menu_items", JSON.stringify(allItems));
+                window.dispatchEvent(new Event("storage"));
+            }
+        },
+        getUser: () => JSON.parse(localStorage.getItem("sb_user") || "null"),
+        setUser: (user) => {
+            localStorage.setItem("sb_user", JSON.stringify(user));
+            window.dispatchEvent(new Event("storage"));
+        },
+        logout: () => {
+            localStorage.removeItem("sb_user");
+            window.dispatchEvent(new Event("storage"));
+        },
+        getCart: () => JSON.parse(localStorage.getItem("sb_cart") || '{"restaurantId":null,"items":[]}'),
+        addToCart: (restaurantId, dish) => {
+            let cart = SwiftBiteStore.getCart();
+            if (cart.restaurantId !== restaurantId) {
+                cart = { restaurantId: restaurantId, items: [] };
+            }
+            const existing = cart.items.find(i => i.id === dish.id);
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.items.push({ id: dish.id, name: dish.name, price: dish.price, quantity: 1 });
+            }
+            localStorage.setItem("sb_cart", JSON.stringify(cart));
+            window.dispatchEvent(new Event("storage"));
+        },
+        updateCartQuantity: (dishId, delta) => {
+            const cart = SwiftBiteStore.getCart();
+            const item = cart.items.find(i => i.id === dishId);
+            if (item) {
+                item.quantity += delta;
+                if (item.quantity <= 0) {
+                    cart.items = cart.items.filter(i => i.id !== dishId);
+                }
+                if (cart.items.length === 0) {
+                    cart.restaurantId = null;
+                }
+            }
+            localStorage.setItem("sb_cart", JSON.stringify(cart));
+            window.dispatchEvent(new Event("storage"));
+        },
+        removeFromCart: (dishId) => {
+            const cart = SwiftBiteStore.getCart();
+            cart.items = cart.items.filter(i => i.id !== dishId);
+            if (cart.items.length === 0) {
+                cart.restaurantId = null;
+            }
+            localStorage.setItem("sb_cart", JSON.stringify(cart));
+            window.dispatchEvent(new Event("storage"));
+        },
+        clearCart: () => {
+            localStorage.setItem("sb_cart", JSON.stringify({ restaurantId: null, items: [] }));
+            window.dispatchEvent(new Event("storage"));
+        },
+        getOrders: () => JSON.parse(localStorage.getItem("sb_orders") || "[]"),
+        getOrder: (id) => SwiftBiteStore.getOrders().find(o => o.id === id),
+        placeOrder: (address, payment) => {
+            const cart = SwiftBiteStore.getCart();
+            const user = SwiftBiteStore.getUser();
+            const restaurant = SwiftBiteStore.getRestaurant(cart.restaurantId);
+            if (!cart.items || cart.items.length === 0) return null;
+
+            const itemsPrice = cart.items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const deliveryFee = restaurant.id === "sushikazu" ? 0 : 2.99;
+            const tax = itemsPrice * 0.08;
+            const serviceFee = 2.00;
+            const total = itemsPrice + deliveryFee + tax + serviceFee;
+
+            const newOrder = {
+                id: "order_" + Math.floor(Math.random() * 900000 + 100000),
+                restaurantId: restaurant.id,
+                restaurantName: restaurant.name,
+                restaurantLogo: restaurant.logo,
+                items: cart.items,
+                subtotal: itemsPrice,
+                deliveryFee: deliveryFee,
+                tax: tax,
+                serviceFee: serviceFee,
+                total: total,
+                status: "Pending",
+                timestamp: new Date().toISOString(),
+                customer: user || { name: "Guest User" },
+                address: address || user?.address || "123 Market St, New York, NY",
+                payment: payment || "Card Ending in 4242"
+            };
+
+            const orders = SwiftBiteStore.getOrders();
+            orders.unshift(newOrder);
+            localStorage.setItem("sb_orders", JSON.stringify(orders));
+            SwiftBiteStore.clearCart();
+            window.dispatchEvent(new Event("storage"));
+            return newOrder;
+        },
+        updateOrderStatus: (orderId, status) => {
+            const orders = SwiftBiteStore.getOrders();
+            const order = orders.find(o => o.id === orderId);
+            if (order) {
+                order.status = status;
+                localStorage.setItem("sb_orders", JSON.stringify(orders));
+                window.dispatchEvent(new Event("storage"));
+            }
+        },
+        getActiveRestaurantId: () => localStorage.getItem("sb_active_restaurant_id") || "lombardis",
+        setActiveRestaurantId: (id) => localStorage.setItem("sb_active_restaurant_id", id),
+        resetDemo: () => {
+            localStorage.removeItem("sb_initialized");
+            localStorage.removeItem("sb_restaurants");
+            localStorage.removeItem("sb_menu_items");
+            localStorage.removeItem("sb_user");
+            localStorage.removeItem("sb_cart");
+            localStorage.removeItem("sb_orders");
+            localStorage.removeItem("sb_active_restaurant_id");
+            SwiftBiteStore.init();
+            window.location.hash = "#/";
+            window.location.reload();
+        }
+    };
+
+    SwiftBiteStore.init();
+
+    // ==========================================
+    // MODULE B: ROUTER
+    // ==========================================
+    window.addEventListener('hashchange', handleRouting);
+    window.addEventListener('DOMContentLoaded', () => {
+        handleRouting();
+        setupHomepageFilters();
+    });
+
+    function handleRouting() {
+        const hash = window.location.hash || '#/';
+        
+        // Hide all view panels
+        document.querySelectorAll('.view-panel').forEach(el => el.classList.add('hidden'));
+        
+        // Reset scroll position
+        window.scrollTo(0, 0);
+
+        // Determine view and parameters
+        let view = 'browse';
+        let params = {};
+        
+        if (hash === '#/' || hash.startsWith('#/browse')) {
+            view = 'browse';
+        } else if (hash.startsWith('#/menu')) {
+            view = 'menu';
+        } else if (hash.startsWith('#/checkout')) {
+            view = 'checkout';
+        } else if (hash.startsWith('#/track')) {
+            view = 'track';
+            const queryPart = hash.split('?')[1];
+            if (queryPart) {
+                const urlParams = new URLSearchParams(queryPart);
+                params.orderId = urlParams.get('orderId');
+            }
+        } else if (hash.startsWith('#/offers')) {
+            view = 'offers';
+        } else if (hash.startsWith('#/support')) {
+            view = 'support';
+        } else if (hash.startsWith('#/profile')) {
+            view = 'profile';
+        } else if (hash.startsWith('#/signin')) {
+            view = 'signin';
+        } else if (hash.startsWith('#/signup')) {
+            view = 'signup';
+        } else if (hash.startsWith('#/admin')) {
+            view = 'admin';
+        } else if (hash.startsWith('#/partner/orders')) {
+            view = 'partner-orders';
+        } else if (hash.startsWith('#/partner/menu')) {
+            view = 'partner-menu';
+        }
+        
+        // Show/hide headers, footers & bottom navigators based on active panel
+        const isDashboard = ['admin', 'partner-orders', 'partner-menu'].includes(view);
+        const isAuth = ['signin', 'signup'].includes(view);
+        
+        const header = document.getElementById('main-header');
+        const footer = document.getElementById('main-footer');
+        const bottomNav = document.getElementById('mobile-bottom-nav');
+        
+        if (header) {
+            if (isDashboard || isAuth) header.classList.add('hidden');
+            else header.classList.remove('hidden');
+        }
+        if (footer) {
+            if (isDashboard || isAuth) footer.classList.add('hidden');
+            else footer.classList.remove('hidden');
+        }
+        if (bottomNav) {
+            if (isDashboard || isAuth) bottomNav.classList.add('hidden');
+            else bottomNav.classList.remove('hidden');
+        }
+        
+        // Show selected panel
+        const targetView = document.getElementById(`view-${view}`);
+        if (targetView) {
+            targetView.classList.remove('hidden');
+        }
+        
+        // Load view-specific bindings
+        onViewLoaded(view, params);
+    }
+
+    // ==========================================
+    // MODULE C: VIEW CONTROLLER INITIALIZER
+    // ==========================================
+    function onViewLoaded(view, params) {
+        const user = SwiftBiteStore.getUser();
+        
+        updateGlobalHeader();
+        
+        if (view === 'browse') {
+            if (user && user.address) {
+                document.getElementById("user-location-text").textContent = user.address.split(',')[0];
+            } else {
+                document.getElementById("user-location-text").textContent = "New York, NY";
+            }
+            renderRestaurantsList();
+        } 
+        
+        else if (view === 'menu') {
+            const activeId = SwiftBiteStore.getActiveRestaurantId();
+            const rest = SwiftBiteStore.getRestaurant(activeId);
+            
+            document.getElementById("rest-name").textContent = rest.name;
+            document.getElementById("rest-cover").src = rest.cover;
+            document.getElementById("rest-logo").src = rest.logo;
+            document.getElementById("rest-rating").textContent = rest.rating + " (500+ ratings)";
+            document.getElementById("rest-time").textContent = rest.time;
+            document.getElementById("rest-cuisines").textContent = rest.cuisines;
+            
+            const deliveryFeeVal = activeId === "sushikazu" ? 0 : 2.99;
+            const feeBadge = document.getElementById("rest-fee-badge");
+            if (deliveryFeeVal === 0) {
+                feeBadge.textContent = "Free Delivery";
+                feeBadge.className = "bg-primary text-on-primary px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider";
+            } else {
+                feeBadge.textContent = `$${deliveryFeeVal} Delivery`;
+                feeBadge.className = "bg-surface-container-high text-on-surface-variant px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider";
+            }
+
+            renderMenuPage(activeId);
+            renderCartPanel(activeId);
+        }
+        
+        else if (view === 'checkout') {
+            const cart = SwiftBiteStore.getCart();
+            if (!user) {
+                window.location.hash = "#/signin";
+                return;
+            }
+            if (!cart.items || cart.items.length === 0) {
+                showToast("Your cart is empty!", "error");
+                window.location.hash = "#/";
+                return;
+            }
+            document.getElementById("address-street").value = user.address.split(',')[0] || '';
+            document.getElementById("address-city").value = user.address.split(',')[1]?.trim() || 'New York';
+            document.getElementById("pay-name").value = user.name || '';
+            
+            window.checkoutDiscountPct = 0;
+            document.getElementById("discount-row").style.display = "none";
+            document.getElementById("promo-input").value = "";
+            renderCheckoutSummary();
+        }
+        
+        else if (view === 'track') {
+            let orderId = params.orderId;
+            if (!orderId) {
+                orderId = localStorage.getItem("sb_active_tracking_order_id");
+            } else {
+                localStorage.setItem("sb_active_tracking_order_id", orderId);
+            }
+            
+            const trackingCard = document.getElementById("tracking-card");
+            const courierPin = document.getElementById("courier-pin");
+            const order = SwiftBiteStore.getOrder(orderId);
+            
+            if (!order) {
+                trackingCard.innerHTML = `
+                    <div class="text-center py-8">
+                        <span class="material-symbols-outlined text-outline text-[64px] mb-4">local_shipping</span>
+                        <h2 class="font-headline-md text-headline-md mb-2">No Active Order</h2>
+                        <p class="text-on-surface-variant text-body-md mb-6">You don't have any order in progress at the moment.</p>
+                        <button onclick="window.location.hash = '#/'" class="bg-primary text-on-primary px-6 py-3 rounded-xl font-label-md w-full">Go Browse Food</button>
+                    </div>
+                `;
+                if (courierPin) courierPin.style.display = "none";
+                return;
+            }
+            
+            if (courierPin) courierPin.style.display = "block";
+            document.getElementById("track-rest-name").textContent = order.restaurantName;
+            document.getElementById("track-order-id").textContent = `Order #${order.id}`;
+            const totalItems = order.items.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById("track-order-stats").textContent = `${totalItems} Item${totalItems > 1 ? 's' : ''} • $${order.total.toFixed(2)}`;
+            
+            const receiptContent = document.getElementById("receipt-modal-content");
+            receiptContent.innerHTML = `
+                <div class="space-y-1">
+                    <p class="font-label-md text-label-md uppercase tracking-wider text-outline">Merchant</p>
+                    <p class="font-headline-sm text-headline-sm font-bold text-on-surface">${order.restaurantName}</p>
+                </div>
+                <hr class="border-outline-variant/10">
+                <div class="space-y-2">
+                    <p class="font-label-md text-label-md uppercase tracking-wider text-outline">Items</p>
+                    ${order.items.map(item => `
+                        <div class="flex justify-between font-body-md text-body-md text-on-surface-variant">
+                            <span>${item.name} x${item.quantity}</span>
+                            <span>$${(item.price * item.quantity).toFixed(2)}</span>
+                        </div>
+                    `).join("")}
+                </div>
+                <hr class="border-outline-variant/10">
+                <div class="space-y-1 text-body-sm text-on-surface-variant">
+                    <div class="flex justify-between"><span>Subtotal</span><span>$${order.subtotal.toFixed(2)}</span></div>
+                    <div class="flex justify-between"><span>Delivery Fee</span><span>${order.deliveryFee === 0 ? 'FREE' : '$' + order.deliveryFee.toFixed(2)}</span></div>
+                    <div class="flex justify-between"><span>Service Fee</span><span>$${order.serviceFee.toFixed(2)}</span></div>
+                    <div class="flex justify-between"><span>Tax</span><span>$${order.tax.toFixed(2)}</span></div>
+                    <div class="flex justify-between font-label-md text-label-md text-primary font-bold pt-2 border-t border-dashed border-outline-variant/20">
+                        <span>Total Paid</span><span>$${order.total.toFixed(2)}</span>
+                    </div>
+                </div>
+                <hr class="border-outline-variant/10">
+                <div class="space-y-2 text-body-sm text-on-surface-variant">
+                    <div><span class="font-bold text-on-surface block mb-0.5">Delivery Address:</span><span>${order.address}</span></div>
+                    <div><span class="font-bold text-on-surface block mb-0.5">Payment Method:</span><span>${order.payment}</span></div>
+                </div>
+            `;
+            
+            updateTrackingState(order);
+        }
+        
+        else if (view === 'offers') {
+            renderOffersView();
+        }
+        
+        else if (view === 'profile') {
+            renderProfileView();
+        }
+        
+        else if (view === 'admin') {
+            renderAdminView();
+        }
+        
+        else if (view === 'partner-orders') {
+            renderPartnerOrdersView();
+        }
+        
+        else if (view === 'partner-menu') {
+            renderPartnerMenuView();
+        }
+    }
+
+    // ==========================================
+    // MODULE D: SHARED UI INTERACTIONS & SYNC
+    // ==========================================
+    window.addEventListener("storage", () => {
+        updateGlobalHeader();
+        const hash = window.location.hash || '#/';
+        if (hash.startsWith('#/menu')) {
+            const activeId = SwiftBiteStore.getActiveRestaurantId();
+            renderCartPanel(activeId);
+        } else if (hash.startsWith('#/checkout')) {
+            renderCheckoutSummary();
+        } else if (hash.startsWith('#/track')) {
+            const orderId = localStorage.getItem("sb_active_tracking_order_id");
+            const order = SwiftBiteStore.getOrder(orderId);
+            if (order) updateTrackingState(order);
+        } else if (hash.startsWith('#/admin')) {
+            renderAdminView();
+        } else if (hash.startsWith('#/partner/orders')) {
+            renderPartnerOrdersView();
+        }
+    });
+
+    function updateGlobalHeader() {
+        const user = SwiftBiteStore.getUser();
+        const cart = SwiftBiteStore.getCart();
+        const cartCount = cart.items.reduce((sum, item) => sum + item.quantity, 0);
+        
+        document.querySelectorAll(".cart-count").forEach(el => {
+            el.textContent = cartCount;
+            if (cartCount === 0) {
+                el.classList.add('hidden');
+            } else {
+                el.classList.remove('hidden');
+            }
+        });
+        
+        const container = document.getElementById("auth-header-container");
+        if (!container) return;
+
+        if (user) {
+            container.innerHTML = `
+                <div id="user-profile-pill" onclick="toggleProfileDropdown(event)" class="flex items-center gap-2 px-4 py-2 bg-surface-container-high rounded-full font-label-md text-label-md cursor-pointer hover:bg-surface-variant relative select-none">
+                    <span class="material-symbols-outlined text-[20px] text-primary">account_circle</span>
+                    <span>${user.name}</span>
+                    <div id="profile-dropdown-menu" class="absolute right-0 top-full mt-2 w-48 bg-white border border-outline-variant/30 rounded-xl shadow-lg hidden z-50 text-left py-2">
+                        <a href="#/profile" class="block px-4 py-2 text-body-md hover:bg-surface-container text-on-surface">My Profile</a>
+                        <a href="#/admin" class="block px-4 py-2 text-body-md hover:bg-surface-container text-on-surface">Admin Dashboard</a>
+                        <a href="#/partner/orders" class="block px-4 py-2 text-body-md hover:bg-surface-container text-on-surface">Partner Dashboard</a>
+                        <hr class="my-1 border-outline-variant/20">
+                        <button onclick="SwiftBiteStore.logout(); window.location.hash = '#/'; window.location.reload();" class="w-full text-left px-4 py-2 text-body-md text-error hover:bg-error/5">Sign Out</button>
+                    </div>
+                </div>
+            `;
+        } else {
+            container.innerHTML = `
+                <button onclick="window.location.hash = '#/signin'" class="hidden md:flex items-center gap-2 px-4 py-2 bg-primary text-on-primary rounded-full font-label-md text-label-md hover:opacity-90 transition-all">
+                    <span class="material-symbols-outlined text-[20px]" data-icon="account_circle">account_circle</span>
+                    Sign In
+                </button>
+            `;
+        }
+    }
+
+    window.toggleProfileDropdown = function(event) {
+        event.stopPropagation();
+        const menu = document.getElementById("profile-dropdown-menu");
+        if (menu) {
+            menu.classList.toggle("hidden");
+        }
+    };
+
+    document.addEventListener("click", (e) => {
+        const menu = document.getElementById("profile-dropdown-menu");
+        if (menu && !menu.classList.contains("hidden")) {
+            const pill = document.getElementById("user-profile-pill");
+            if (pill && !pill.contains(e.target)) {
+                menu.classList.add("hidden");
+            }
+        }
+    });
+
+    function showToast(message, iconName = "check_circle") {
+        const toast = document.getElementById("toast");
+        const text = document.getElementById("toast-text");
+        const icon = document.getElementById("toast-icon");
+        
+        text.textContent = message;
+        icon.textContent = iconName;
+        
+        toast.style.opacity = 1;
+        toast.style.transform = "translateY(0)";
+        
+        setTimeout(() => {
+            toast.style.opacity = 0;
+            toast.style.transform = "translateY(16px)";
+        }, 3000);
+    }
+
+    // ==========================================
+    // MODULE E: BROWSE CONTROLLERS
+    // ==========================================
+    function setupHomepageFilters() {
+        const categoryButtons = document.querySelectorAll(".category-filter-btn");
+        const ratingFilterBtn = document.getElementById("rating-filter");
+        const searchInput = document.getElementById("restaurant-search");
+
+        let activeCategory = "all";
+        let activeRatingFilter = false;
+        let searchQuery = "";
+
+        function filterRestaurants() {
+            const cards = document.querySelectorAll(".restaurant-card");
+            cards.forEach(card => {
+                const title = card.querySelector("h3").textContent.toLowerCase();
+                const desc = card.querySelector("p").textContent.toLowerCase();
+                const rating = parseFloat(card.getAttribute("data-rating"));
+                const categories = card.getAttribute("data-categories").split(",");
+
+                const matchesSearch = title.includes(searchQuery) || desc.includes(searchQuery);
+                const matchesCategory = activeCategory === "all" || categories.includes(activeCategory);
+                const matchesRating = !activeRatingFilter || rating >= 4.7;
+
+                if (matchesSearch && matchesCategory && matchesRating) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+
+        categoryButtons.forEach(btn => {
+            btn.addEventListener("click", () => {
+                categoryButtons.forEach(b => {
+                    b.className = "category-filter-btn flex items-center gap-2 px-5 py-2.5 bg-surface-container-lowest text-on-surface-variant border border-outline-variant rounded-full font-label-md text-label-md whitespace-nowrap hover:bg-surface-variant transition-colors";
+                });
+                btn.className = "category-filter-btn flex items-center gap-2 px-5 py-2.5 bg-primary text-on-primary rounded-full font-label-md text-label-md whitespace-nowrap shadow-md";
+                activeCategory = btn.getAttribute("data-cat");
+                filterRestaurants();
+            });
+        });
+
+        if (ratingFilterBtn) {
+            ratingFilterBtn.addEventListener("click", () => {
+                activeRatingFilter = !activeRatingFilter;
+                if (activeRatingFilter) {
+                    ratingFilterBtn.className = "px-3 py-1 rounded-lg bg-primary text-on-primary font-semibold hover:opacity-90 transition-colors";
+                } else {
+                    ratingFilterBtn.className = "px-3 py-1 rounded-lg bg-surface-container-low border border-outline-variant/60 text-body-md font-semibold hover:bg-surface-variant transition-colors";
+                }
+                filterRestaurants();
+            });
+        }
+
+        if (searchInput) {
+            searchInput.addEventListener("input", (e) => {
+                searchQuery = e.target.value.toLowerCase();
+                filterRestaurants();
+            });
+        }
+    }
+
+    function renderRestaurantsList() {
+        const container = document.getElementById("restaurants-list");
+        if (!container) return;
+        const list = SwiftBiteStore.getRestaurants();
+        
+        container.innerHTML = list.map(rest => {
+            const hasPromo = rest.id === "lombardis" || rest.id === "irongrill";
+            const promoHtml = hasPromo 
+                ? `<div class="absolute bottom-3 right-3 bg-primary/90 backdrop-blur-md text-on-primary px-3 py-1 rounded-full font-label-md text-[12px] uppercase tracking-wider">${rest.id === 'lombardis' ? 'Free Delivery' : 'Promoted'}</div>`
+                : '';
+            
+            return `
+                <div data-id="${rest.id}" data-categories="${rest.id === 'lombardis' ? 'pizza,italian' : rest.id === 'sushikazu' ? 'sushi,japanese,healthy' : rest.id === 'irongrill' ? 'burgers,american' : 'healthy,desserts'}" data-rating="${rest.rating}" class="restaurant-card group bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-outline-variant/10 cursor-pointer" onclick="SwiftBiteStore.setActiveRestaurantId('${rest.id}'); window.location.hash='#/menu';">
+                    <div class="relative aspect-[16/9] overflow-hidden">
+                        <img alt="${rest.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="${rest.image}"/>
+                        <div class="absolute top-3 left-3 bg-surface-container-lowest/90 backdrop-blur-md px-2 py-1 rounded-lg flex items-center gap-1 shadow-sm">
+                            <span class="material-symbols-outlined text-yellow-500 filled-icon text-[16px]">star</span>
+                            <span class="font-label-md text-label-md font-bold">${rest.rating}</span>
+                        </div>
+                        ${promoHtml}
+                    </div>
+                    <div class="p-stack-md">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-headline-sm text-headline-sm group-hover:text-primary transition-colors">${rest.name}</h3>
+                        </div>
+                        <p class="text-on-surface-variant text-body-md mb-4">${rest.cuisines}</p>
+                        <div class="flex items-center gap-4 text-on-surface-variant border-t border-outline-variant/20 pt-4">
+                            <div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[18px] text-outline">schedule</span><span class="text-body-md">${rest.time}</span></div>
+                            <div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[18px] text-outline">payments</span><span class="text-body-md">${rest.fee}</span></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join("");
+    }
+
+    // ==========================================
+    // MODULE F: SINGLE RESTAURANT MENU CONTROLLERS
+    // ==========================================
+    function renderMenuPage(restaurantId) {
+        const items = SwiftBiteStore.getMenuItems(restaurantId);
+        
+        const categories = {};
+        items.forEach(item => {
+            if (!categories[item.category]) categories[item.category] = [];
+            categories[item.category].push(item);
+        });
+
+        const sidebar = document.getElementById("categories-sidebar");
+        sidebar.innerHTML = "";
+        let index = 0;
+        for (const cat in categories) {
+            const catId = cat.toLowerCase().replace(/\s+/g, "-");
+            const isFirst = index === 0;
+            sidebar.innerHTML += `
+                <a class="flex items-center justify-between px-4 py-3 ${isFirst ? 'bg-primary text-on-primary' : 'hover:bg-surface-container text-on-surface-variant'} rounded-lg font-label-md transition-all font-semibold" href="#/menu#menu-sec-${catId}">
+                    <span>${cat}</span>
+                    <span class="material-symbols-outlined text-[18px]">${cat === 'Popular' ? 'local_fire_department' : cat === 'Desserts' ? 'icecream' : 'restaurant'}</span>
+                </a>
+            `;
+            index++;
+        }
+
+        const menuContainer = document.getElementById("menu-sections");
+        menuContainer.innerHTML = "";
+        
+        for (const cat in categories) {
+            const catId = cat.toLowerCase().replace(/\s+/g, "-");
+            let sectionContent = "";
+
+            if (cat === "Popular") {
+                sectionContent = `
+                    <div id="menu-sec-${catId}" class="scroll-mt-24">
+                        <h2 class="font-headline-md text-headline-md mb-stack-md flex items-center gap-2">
+                            ${cat} Near You <span class="bg-primary/10 text-primary text-[12px] px-2 py-0.5 rounded-full font-bold">Recommended</span>
+                        </h2>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-stack-md">
+                            ${categories[cat].map(item => `
+                                <div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all hover:-translate-y-1 group border border-outline-variant/30 flex flex-col justify-between">
+                                    <div class="aspect-[16/9] relative bg-neutral-200">
+                                        <img class="w-full h-full object-cover" src="${item.image}"/>
+                                    </div>
+                                    <div class="p-stack-md flex-grow flex flex-col justify-between">
+                                        <div>
+                                            <div class="flex justify-between items-start mb-1 gap-2">
+                                                <h4 class="font-headline-sm text-headline-sm">${item.name}</h4>
+                                                <span class="font-bold text-primary">$${item.price.toFixed(2)}</span>
+                                            </div>
+                                            <p class="text-on-surface-variant font-body-sm line-clamp-2 mb-4">${item.description}</p>
+                                        </div>
+                                        <button onclick="SwiftBiteStore.addToCart('${restaurantId}', ${JSON.stringify(item).replace(/"/g, '&quot;')}); showToast('Added ${item.name} to cart');" class="w-full flex items-center justify-center gap-2 py-2.5 bg-surface-container hover:bg-primary hover:text-on-primary transition-all rounded-lg font-label-md">
+                                            <span class="material-symbols-outlined text-[20px]">add</span> Add to Cart
+                                        </button>
+                                    </div>
+                                </div>
+                            `).join("")}
+                        </div>
+                    </div>
+                `;
+            } else {
+                sectionContent = `
+                    <div id="menu-sec-${catId}" class="scroll-mt-24 mt-8">
+                        <h2 class="font-headline-md text-headline-md mb-stack-md">${cat}</h2>
+                        <div class="flex flex-col gap-stack-md">
+                            ${categories[cat].map(item => `
+                                <div class="bg-surface-container-lowest rounded-xl p-4 flex gap-6 border border-outline-variant/20 hover:shadow-sm transition-all group items-center justify-between">
+                                    <div class="flex gap-6 items-center">
+                                        <div class="w-24 h-24 flex-shrink-0 bg-neutral-200">
+                                            <img class="w-full h-full object-cover rounded-lg" src="${item.image}"/>
+                                        </div>
+                                        <div class="flex-grow flex flex-col justify-center">
+                                            <div class="flex items-center mb-1 gap-4">
+                                                <h4 class="font-headline-sm text-headline-sm">${item.name}</h4>
+                                                <span class="font-bold text-primary">$${item.price.toFixed(2)}</span>
+                                            </div>
+                                            <p class="text-on-surface-variant font-body-sm mb-3">${item.description}</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <button onclick="SwiftBiteStore.addToCart('${restaurantId}', ${JSON.stringify(item).replace(/"/g, '&quot;')}); showToast('Added ${item.name} to cart');" class="p-3 bg-primary text-on-primary rounded-full hover:scale-105 transition-all shadow-md flex items-center justify-center">
+                                            <span class="material-symbols-outlined">add</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            `).join("")}
+                        </div>
+                    </div>
+                `;
+            }
+            menuContainer.innerHTML += sectionContent;
+        }
+    }
+
+    function renderCartPanel(restaurantId) {
+        const cart = SwiftBiteStore.getCart();
+        const container = document.getElementById("cart-items-container");
+        const checkoutBtn = document.getElementById("checkout-btn");
+
+        if (!cart.items || cart.items.length === 0) {
+            container.innerHTML = `<p class="text-on-surface-variant text-body-md text-center py-8 font-semibold">Your cart is empty.</p>`;
+            document.getElementById("cart-subtotal").textContent = "$0.00";
+            document.getElementById("cart-delivery-fee").textContent = "$0.00";
+            document.getElementById("cart-service-fee").textContent = "$0.00";
+            document.getElementById("cart-total").textContent = "$0.00";
+            checkoutBtn.disabled = true;
+            checkoutBtn.style.opacity = 0.5;
+            checkoutBtn.style.cursor = "not-allowed";
+            return;
+        }
+
+        checkoutBtn.disabled = false;
+        checkoutBtn.style.opacity = 1;
+        checkoutBtn.style.cursor = "pointer";
+
+        container.innerHTML = cart.items.map(item => `
+            <div class="flex justify-between items-center group">
+                <div class="flex flex-col">
+                    <span class="font-label-md text-on-surface font-semibold text-sm">${item.name}</span>
+                    <div class="flex items-center gap-2 mt-1">
+                        <button onclick="SwiftBiteStore.updateCartQuantity('${item.id}', -1)" class="w-5 h-5 flex items-center justify-center rounded bg-surface-container hover:bg-surface-variant text-body-sm font-bold">-</button>
+                        <span class="text-body-sm text-on-surface-variant font-bold">${item.quantity}</span>
+                        <button onclick="SwiftBiteStore.updateCartQuantity('${item.id}', 1)" class="w-5 h-5 flex items-center justify-center rounded bg-surface-container hover:bg-surface-variant text-body-sm font-bold">+</button>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="font-bold text-on-surface">$${(item.price * item.quantity).toFixed(2)}</span>
+                    <button onclick="SwiftBiteStore.removeFromCart('${item.id}')" class="material-symbols-outlined text-error text-[18px] opacity-60 hover:opacity-100 transition-all">delete</button>
+                </div>
+            </div>
+        `).join("");
+
+        const subtotal = cart.items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        const deliveryFee = restaurantId === "sushikazu" ? 0 : 2.99;
+        const serviceFee = 2.00;
+        const total = subtotal + deliveryFee + serviceFee;
+
+        document.getElementById("cart-subtotal").textContent = `$${subtotal.toFixed(2)}`;
+        document.getElementById("cart-delivery-fee").textContent = deliveryFee === 0 ? "FREE" : `$${deliveryFee.toFixed(2)}`;
+        document.getElementById("cart-service-fee").textContent = `$${serviceFee.toFixed(2)}`;
+        document.getElementById("cart-total").textContent = `$${total.toFixed(2)}`;
+    }
+
+    // Checkout Button redirect
+    document.getElementById("checkout-btn")?.addEventListener("click", () => {
+        const user = SwiftBiteStore.getUser();
+        if (!user) {
+            window.location.hash = "#/signin";
+        } else {
+            window.location.hash = "#/checkout";
+        }
+    });
+
+    // ==========================================
+    // MODULE G: SECURE CHECKOUT CONTROLLERS
+    // ==========================================
+    function renderCheckoutSummary() {
+        const cart = SwiftBiteStore.getCart();
+        const container = document.getElementById("summary-items");
+        if (!container) return;
+        
+        const activeRestId = cart.restaurantId;
+        const deliveryFee = activeRestId === "sushikazu" ? 0 : 2.99;
+        const serviceFee = 2.00;
+
+        const subtotal = cart.items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        const discountPct = window.checkoutDiscountPct || 0;
+        const discountVal = subtotal * discountPct;
+        const tax = (subtotal - discountVal) * 0.08;
+        const total = subtotal - discountVal + deliveryFee + serviceFee + tax;
+
+        container.innerHTML = cart.items.map(item => `
+            <div class="flex justify-between items-start">
+                <div class="flex gap-stack-sm">
+                    <div class="w-12 h-12 rounded-lg bg-surface-container overflow-hidden flex-shrink-0 flex items-center justify-center text-outline">
+                        <span class="material-symbols-outlined">restaurant</span>
+                    </div>
+                    <div>
+                        <p class="font-label-md text-label-md font-semibold">${item.name}</p>
+                        <p class="font-body-sm text-body-sm text-on-surface-variant">x${item.quantity}</p>
+                    </div>
+                </div>
+                <span class="font-label-md text-label-md font-bold">$${(item.price * item.quantity).toFixed(2)}</span>
+            </div>
+        `).join("");
+
+        document.getElementById("summary-subtotal").textContent = `$${subtotal.toFixed(2)}`;
+        document.getElementById("summary-delivery").textContent = deliveryFee === 0 ? "Free" : `$${deliveryFee.toFixed(2)}`;
+        document.getElementById("summary-tax").textContent = `$${tax.toFixed(2)}`;
+        document.getElementById("summary-total").textContent = `$${total.toFixed(2)}`;
+
+        if (discountPct > 0) {
+            document.getElementById("discount-row").style.display = "flex";
+            document.getElementById("summary-discount").textContent = `-$${discountVal.toFixed(2)}`;
+        } else {
+            document.getElementById("discount-row").style.display = "none";
+        }
+    }
+
+    // ==========================================
+    // MODULE I: EXCLUSIVE OFFERS CONTROLLERS
+    // ==========================================
+    function renderOffersView() {
+        const container = document.getElementById("featured-deals-container");
+        if (!container) return;
+        const restaurants = SwiftBiteStore.getRestaurants();
+
+        const deals = [
+            { restIdx: 0, discount: "30% OFF", desc: "On all pizzas this weekend", badge: "Weekend Special" },
+            { restIdx: 1, discount: "Free Miso Soup", desc: "With any sushi platter order", badge: "Chef's Pick" },
+            { restIdx: 2, discount: "Buy 1 Get 1", desc: "On Iron Grill signature burgers", badge: "Best Seller" },
+            { restIdx: 3, discount: "Free Delivery", desc: "On all Purely Green orders", badge: "Healthy Living" }
+        ];
+
+        container.innerHTML = deals.map(deal => {
+            const rest = restaurants[deal.restIdx];
+            if (!rest) return '';
+            return `
+                <div class="offer-card bg-surface-container-lowest rounded-2xl border border-outline-variant/30 overflow-hidden flex cursor-pointer" onclick="SwiftBiteStore.setActiveRestaurantId('${rest.id}'); window.location.hash='#/menu'">
+                    <img class="w-36 h-full object-cover" src="${rest.image}" alt="${rest.name}"/>
+                    <div class="p-5 flex flex-col justify-between flex-1">
+                        <div>
+                            <span class="inline-block text-[10px] font-bold uppercase tracking-wider bg-primary-fixed text-primary px-2 py-0.5 rounded-full mb-2">${deal.badge}</span>
+                            <h4 class="font-label-md text-label-md text-on-surface font-bold text-sm">${rest.name}</h4>
+                            <p class="font-headline-sm text-headline-sm font-extrabold text-primary mt-1">${deal.discount}</p>
+                            <p class="text-label-sm text-on-surface-variant mt-1 text-xs">${deal.desc}</p>
+                        </div>
+                        <div class="mt-3">
+                            <span class="text-primary font-label-md text-label-md flex items-center gap-1 hover:gap-2 transition-all">
+                                Order Now <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join("");
+    }
+
+    // ==========================================
+    // MODULE K: PROFILE VIEW & EDIT CONTROLLERS
+    // ==========================================
+    function renderProfileView() {
+        const user = SwiftBiteStore.getUser();
+        const orders = SwiftBiteStore.getOrders();
+        
+        if (user) {
+            document.getElementById('profile-name').textContent = user.name;
+            document.getElementById('profile-email').textContent = user.email;
+            document.getElementById('info-name').textContent = user.name;
+            document.getElementById('info-email').textContent = user.email;
+            document.getElementById('info-phone').textContent = user.phone || '—';
+            document.getElementById('info-address').textContent = user.address || '—';
+            document.getElementById('saved-address-home').textContent = user.address || '123 Market St, New York, NY';
+        }
+
+        document.getElementById('profile-order-count').textContent = orders.length;
+        
+        const historyContainer = document.getElementById('order-history-list');
+        const noOrdersMsg = document.getElementById('no-orders-msg');
+        historyContainer.innerHTML = "";
+
+        if (orders.length === 0) {
+            noOrdersMsg.classList.remove('hidden');
+        } else {
+            noOrdersMsg.classList.add('hidden');
+            orders.forEach(order => {
+                const statusColors = {
+                    Pending: 'bg-yellow-100 text-yellow-800',
+                    Preparing: 'bg-blue-100 text-blue-800',
+                    Dispatched: 'bg-purple-100 text-purple-800',
+                    Delivered: 'bg-green-100 text-green-800'
+                };
+                const timeAgo = Math.floor((Date.now() - new Date(order.timestamp)) / 60000);
+                const timeStr = timeAgo < 1 ? 'Just now' : timeAgo < 60 ? `${timeAgo}m ago` : `${Math.floor(timeAgo/60)}h ago`;
+
+                historyContainer.innerHTML += `
+                    <div class="flex items-center gap-4 px-6 py-4 hover:bg-surface-container/50 transition-colors cursor-pointer border-b border-outline-variant/10" onclick="window.location.hash='#/track?orderId=${order.id}'">
+                        <img class="w-12 h-12 rounded-xl object-cover bg-surface-container" src="${order.restaurantLogo}"/>
+                        <div class="flex-1 min-w-0">
+                            <p class="font-label-md text-label-md text-on-surface truncate font-semibold text-sm">${order.restaurantName}</p>
+                            <p class="text-label-sm text-on-surface-variant text-xs">${order.items.length} item${order.items.length > 1 ? 's' : ''} • $${order.total.toFixed(2)}</p>
+                        </div>
+                        <div class="text-right flex flex-col items-end gap-1">
+                            <span class="px-2 py-0.5 rounded-full text-[11px] font-bold ${statusColors[order.status] || 'bg-gray-100 text-gray-700'}">${order.status}</span>
+                            <span class="text-label-sm text-on-surface-variant text-xs">${timeStr}</span>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+    }
+
+    // ==========================================
+    // MODULE M: ADMIN SYSTEM OVERVIEW CONTROLLERS
+    // ==========================================
+    function renderAdminView() {
+        const orders = SwiftBiteStore.getOrders();
+        
+        const seedOrdersCount = 24892;
+        const seedRevenue = 542190.00;
+        const newOrdersCount = orders.length;
+        const newRevenue = orders.reduce((sum, o) => sum + o.total, 0);
+        const activeOrders = orders.filter(o => o.status !== "Delivered").length;
+
+        document.getElementById("admin-total-orders").textContent = (seedOrdersCount + newOrdersCount).toLocaleString();
+        document.getElementById("admin-total-revenue").textContent = "$" + (seedRevenue + newRevenue).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+        document.getElementById("admin-donut-orders").textContent = ((seedOrdersCount + newOrdersCount) / 1000).toFixed(1) + "k";
+        document.getElementById("admin-active-orders").textContent = activeOrders.toString();
+
+        const listContainer = document.getElementById("admin-transactions-list");
+        listContainer.innerHTML = "";
+
+        orders.forEach(order => {
+            let statusLabel = "";
+            if (order.status === "Delivered") {
+                statusLabel = `<span class="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded uppercase tracking-tighter">Delivered</span>`;
+            } else if (order.status === "Dispatched") {
+                statusLabel = `<span class="text-[10px] font-bold text-purple-600 bg-purple-50 px-2 py-0.5 rounded uppercase tracking-tighter">Dispatched</span>`;
+            } else if (order.status === "Preparing") {
+                statusLabel = `<span class="text-[10px] font-bold text-primary bg-primary-container/10 px-2 py-0.5 rounded uppercase tracking-tighter">Preparing</span>`;
+            } else {
+                statusLabel = `<span class="text-[10px] font-bold text-on-surface-variant bg-surface-variant px-2 py-0.5 rounded uppercase tracking-tighter">Pending</span>`;
+            }
+
+            const timeDiff = Date.now() - new Date(order.timestamp);
+            let timeAgoStr = "Just now";
+            const mins = Math.floor(timeDiff / 60000);
+            if (mins > 0) timeAgoStr = mins === 1 ? "1 min ago" : `${mins} mins ago`;
+
+            listContainer.innerHTML += `
+                <div class="p-4 flex items-center hover:bg-surface-container-low transition-colors border-b border-outline-variant/10">
+                    <div class="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 bg-primary/10 flex items-center justify-center text-primary">
+                        <span class="material-symbols-outlined">restaurant</span>
+                    </div>
+                    <div class="ml-4 flex-grow">
+                        <p class="font-label-md text-label-md text-on-surface font-semibold text-sm">Order #${order.id} from '${order.restaurantName}'</p>
+                        <p class="text-xs text-on-surface-variant text-xs">Customer: ${order.customer.name} • ${timeAgoStr}</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="font-bold text-on-surface text-sm">$${order.total.toFixed(2)}</p>
+                        ${statusLabel}
+                    </div>
+                </div>
+            `;
+        });
+
+        listContainer.innerHTML += `
+            <div class="p-4 flex items-center hover:bg-surface-container-low transition-colors">
+                <div class="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 bg-surface-variant flex items-center justify-center text-outline">
+                    <span class="material-symbols-outlined">restaurant</span>
+                </div>
+                <div class="ml-4 flex-grow">
+                    <p class="font-label-md text-label-md text-on-surface font-semibold text-sm">Order #SB-9921 from 'Lombardi's Pizza'</p>
+                    <p class="text-xs text-on-surface-variant text-xs">Customer: Sarah Jenkins • 2 hours ago</p>
+                </div>
+                <div class="text-right">
+                    <p class="font-bold text-on-surface text-sm">$42.50</p>
+                    <span class="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded uppercase tracking-tighter">Delivered</span>
+                </div>
+            </div>
+        `;
+    }
+
+    // ==========================================
+    // MODULE N: PARTNER ORDERS KANBAN CONTROLLERS
+    // ==========================================
+    function renderPartnerOrdersView() {
+        const activeRestId = SwiftBiteStore.getActiveRestaurantId();
+        const restaurant = SwiftBiteStore.getRestaurant(activeRestId);
+        document.getElementById("partner-orders-rest").textContent = `Live Orders - ${restaurant.name}`;
+
+        const orders = SwiftBiteStore.getOrders();
+        const activeOrders = orders.filter(o => o.restaurantId === activeRestId);
+        
+        const pendingOrders = activeOrders.filter(o => o.status === "Pending");
+        const preparingOrders = activeOrders.filter(o => o.status === "Preparing");
+        const dispatchOrders = activeOrders.filter(o => o.status === "Dispatched");
+
+        document.getElementById("partner-orders-count").textContent = `Tracking ${activeOrders.filter(o => o.status !== "Delivered").length} active orders`;
+        document.getElementById("col-new-count").textContent = pendingOrders.length;
+        document.getElementById("col-prep-count").textContent = preparingOrders.length;
+        document.getElementById("col-dispatch-count").textContent = dispatchOrders.length;
+
+        renderKanbanColumn("col-new-container", pendingOrders, "Pending");
+        renderKanbanColumn("col-prep-container", preparingOrders, "Preparing");
+        renderKanbanColumn("col-dispatch-container", dispatchOrders, "Dispatched");
+    }
+
+    function renderKanbanColumn(containerId, list, status) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+
+        if (list.length === 0) {
+            container.innerHTML = `
+                <div class="border-2 border-dashed border-outline-variant/30 rounded-xl p-8 flex flex-col items-center justify-center text-on-surface-variant opacity-40">
+                    <span class="material-symbols-outlined text-4xl mb-2">move_to_inbox</span>
+                    <p class="font-label-md">No orders here</p>
+                </div>
+            `;
+            return;
+        }
+
+        container.innerHTML = list.map(order => {
+            let actionHtml = "";
+            if (status === "Pending") {
+                actionHtml = `
+                    <div class="flex gap-2">
+                        <button onclick="updateOrderStatusFromDashboard('${order.id}', 'Preparing')" class="flex-1 py-2 bg-primary text-on-primary font-label-md text-label-md rounded-lg hover:opacity-90 transition-opacity">Accept</button>
+                        <button onclick="updateOrderStatusFromDashboard('${order.id}', 'Rejected')" class="px-3 py-2 border border-outline-variant text-error font-label-md text-label-md rounded-lg hover:bg-error-container transition-colors">Reject</button>
+                    </div>
+                `;
+            } else if (status === "Preparing") {
+                actionHtml = `
+                    <button onclick="updateOrderStatusFromDashboard('${order.id}', 'Dispatched')" class="w-full py-2 bg-primary text-on-primary font-label-md text-label-md rounded-lg hover:opacity-90 transition-opacity">Mark as Dispatched</button>
+                `;
+            } else if (status === "Dispatched") {
+                actionHtml = `
+                    <button onclick="updateOrderStatusFromDashboard('${order.id}', 'Delivered')" class="w-full py-2 bg-green-600 text-white font-label-md text-label-md rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined text-[18px]">handshake</span> Handover / Complete
+                    </button>
+                `;
+            }
+
+            const timeDiff = Date.now() - new Date(order.timestamp);
+            const mins = Math.floor(timeDiff / 60000);
+            const timeAgoStr = mins <= 0 ? "Just now" : `${mins}m ago`;
+
+            return `
+                <div class="order-card bg-surface-container-lowest p-stack-md rounded-xl shadow-sm border border-outline-variant/30 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="font-label-md text-primary font-bold">#${order.id}</span>
+                            <div class="flex items-center gap-1 text-on-surface-variant">
+                                <span class="material-symbols-outlined text-[18px]">schedule</span>
+                                <span class="text-body-sm font-bold">${timeAgoStr}</span>
+                            </div>
+                        </div>
+                        <h4 class="font-headline-sm text-[16px] mb-1 font-semibold">${order.customer.name}</h4>
+                        <div class="space-y-1 mb-4 border-t border-b border-outline-variant/10 py-2 my-2">
+                            ${order.items.map(item => `
+                                <div class="flex justify-between text-body-sm text-on-surface-variant">
+                                    <span>${item.name} x${item.quantity}</span>
+                                    <span>$${(item.price * item.quantity).toFixed(2)}</span>
+                                </div>
+                            `).join("")}
+                            <div class="flex justify-between text-body-sm font-bold text-on-surface pt-1">
+                                <span>Total:</span><span>$${order.total.toFixed(2)}</span>
+                            </div>
+                        </div>
+                    </div>
+                    ${actionHtml}
+                </div>
+            `;
+        }).join("");
+    }
+
+    function updateOrderStatusFromDashboard(orderId, nextStatus) {
+        SwiftBiteStore.updateOrderStatus(orderId, nextStatus);
+        renderPartnerOrdersView();
+        showToast(`Order status updated to: ${nextStatus}`);
+    }
+
+    // ==========================================
+    // MODULE O: PARTNER MENU LIST CONTROLLERS
+    // ==========================================
+    window.partnerCategoryFilter = "all";
+    window.partnerSearchQuery = "";
+
+    function renderPartnerMenuView() {
+        const activeRestId = SwiftBiteStore.getActiveRestaurantId();
+        const restaurant = SwiftBiteStore.getRestaurant(activeRestId);
+        document.getElementById("partner-rest-title").textContent = `Menu Management - ${restaurant.name}`;
+        
+        renderPartnerMenuTable();
+    }
+
+    function renderPartnerMenuTable() {
+        const activeRestId = SwiftBiteStore.getActiveRestaurantId();
+        const items = SwiftBiteStore.getMenuItems(activeRestId);
+        const tbody = document.getElementById("partner-menu-tbody");
+        if (!tbody) return;
+        tbody.innerHTML = "";
+
+        const filteredItems = items.filter(item => {
+            const matchesSearch = item.name.toLowerCase().includes(window.partnerSearchQuery) || item.description.toLowerCase().includes(window.partnerSearchQuery);
+            const matchesCat = window.partnerCategoryFilter === "all" || item.category === window.partnerCategoryFilter;
+            return matchesSearch && matchesCat;
+        });
+
+        filteredItems.forEach(item => {
+            const itemStr = encodeURIComponent(JSON.stringify(item));
+            tbody.innerHTML += `
+                <tr class="hover:bg-surface-container transition-colors">
+                    <td class="px-6 py-4">
+                        <img class="w-12 h-12 rounded-lg object-cover bg-neutral-200" src="${item.image}"/>
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="font-label-md text-label-md text-on-surface font-semibold">${item.name}</div>
+                        <div class="font-label-sm text-label-sm text-outline truncate max-w-xs">${item.description}</div>
+                    </td>
+                    <td class="px-6 py-4">
+                        <span class="px-3 py-1 bg-surface-container-high text-on-surface-variant rounded-full text-[12px] font-bold uppercase tracking-tight">${item.category}</span>
+                    </td>
+                    <td class="px-6 py-4 font-body-md text-body-md font-bold text-on-surface">$${item.price.toFixed(2)}</td>
+                    <td class="px-6 py-4">
+                        <div class="flex items-center gap-3">
+                            <span class="font-body-md text-body-md text-on-surface">Available</span>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 text-right">
+                        <div class="flex justify-end gap-2">
+                            <button onclick="openEditItemModal('${itemStr}')" class="p-2 text-outline hover:text-primary hover:bg-primary/10 rounded-lg transition-all">
+                                <span class="material-symbols-outlined text-[20px]">edit</span>
+                            </button>
+                            <button onclick="deletePartnerMenuItem('${item.id}')" class="p-2 text-outline hover:text-error hover:bg-error-container rounded-lg transition-all">
+                                <span class="material-symbols-outlined text-[20px]">delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `;
+        });
+
+        document.getElementById("partner-menu-summary").textContent = `Showing ${filteredItems.length} of ${items.length} items`;
+        renderPartnerCategoryChips(items);
+    }
+
+    function renderPartnerCategoryChips(items) {
+        const container = document.getElementById("category-chips-bar");
+        if (!container) return;
+        const categories = new Set();
+        items.forEach(i => categories.add(i.category));
+
+        let html = `
+            <button onclick="setPartnerCategoryFilter('all')" class="px-4 py-1.5 ${window.partnerCategoryFilter === 'all' ? 'bg-primary text-on-primary' : 'bg-surface-container border border-outline-variant text-on-surface-variant'} rounded-full font-label-md text-label-md">All Items</button>
+        `;
+
+        categories.forEach(cat => {
+            const isActive = window.partnerCategoryFilter === cat;
+            html += `
+                <button onclick="setPartnerCategoryFilter('${cat}')" class="px-4 py-1.5 ${isActive ? 'bg-primary text-on-primary' : 'bg-surface-container border border-outline-variant text-on-surface-variant'} rounded-full font-label-md text-label-md whitespace-nowrap">${cat}</button>
+            `;
+        });
+        container.innerHTML = html;
+    }
+
+    function setPartnerCategoryFilter(cat) {
+        window.partnerCategoryFilter = cat;
+        renderPartnerMenuTable();
+    }
+
+    // Search bar dynamic filtering
+    document.getElementById("menu-search-input")?.addEventListener("input", (e) => {
+        window.partnerSearchQuery = e.target.value.toLowerCase();
+        renderPartnerMenuTable();
+    });
+
+    // Modal controllers
+    function openAddModal() {
+        document.getElementById("modal-title").textContent = "Add Menu Item";
+        document.getElementById("edit-item-id").value = "";
+        document.getElementById("item-form").reset();
+        document.getElementById("item-modal").classList.remove("hidden");
+    }
+
+    function closeModal() {
+        document.getElementById("item-modal").classList.add("hidden");
+    }
+
+    function openEditItemModal(itemJsonStr) {
+        const item = JSON.parse(decodeURIComponent(itemJsonStr));
+        document.getElementById("modal-title").textContent = "Edit Menu Item";
+        document.getElementById("edit-item-id").value = item.id;
+        document.getElementById("dish-name").value = item.name;
+        document.getElementById("dish-category").value = item.category;
+        document.getElementById("dish-price").value = item.price;
+        document.getElementById("dish-desc").value = item.description;
+        document.getElementById("dish-image").value = item.image || '';
+        document.getElementById("item-modal").classList.remove("hidden");
+    }
+
+    function submitPartnerItemForm() {
+        const activeRestId = SwiftBiteStore.getActiveRestaurantId();
+        const id = document.getElementById("edit-item-id").value;
+        const name = document.getElementById("dish-name").value;
+        const category = document.getElementById("dish-category").value;
+        const price = parseFloat(document.getElementById("dish-price").value);
+        const description = document.getElementById("dish-desc").value;
+        let image = document.getElementById("dish-image").value;
+
+        if (!image) {
+            image = "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=400&q=80";
+        }
+
+        const item = { name, category, price, description, image };
+        if (id) item.id = id;
+
+        SwiftBiteStore.saveMenuItem(activeRestId, item);
+        closeModal();
+        renderPartnerMenuTable();
+        showToast("Dish saved successfully!");
+    }
+
+    function deletePartnerMenuItem(id) {
+        const activeRestId = SwiftBiteStore.getActiveRestaurantId();
+        if (confirm("Are you sure you want to delete this menu item?")) {
+            SwiftBiteStore.deleteMenuItem(activeRestId, id);
+            renderPartnerMenuTable();
+            showToast("Menu item deleted.");
+        }
+    }
+
+    // ==========================================
+    // MODULE P: FLOATING DEMO HUB NAVIGATOR PANEL
+    // ==========================================
+    (function injectConsolidatedDemoHub() {
+        if (document.getElementById("demo-hub")) return;
+
+        const div = document.createElement("div");
+        div.id = "demo-hub";
+        div.className = "fixed bottom-4 right-4 z-[9999] font-sans";
+        div.innerHTML = `
+            <style>
+                #demo-hub-btn {
+                    width: 56px;
+                    height: 56px;
+                    background: #FF6B00;
+                    color: white;
+                    border-radius: 28px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    box-shadow: 0 4px 20px rgba(255,107,0,0.4);
+                    cursor: pointer;
+                    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                    user-select: none;
+                }
+                #demo-hub-btn:hover {
+                    transform: scale(1.08) rotate(15deg);
+                }
+                #demo-hub-menu {
+                    position: absolute;
+                    bottom: 70px;
+                    right: 0;
+                    width: 320px;
+                    background: rgba(255, 255, 255, 0.95);
+                    backdrop-filter: blur(16px);
+                    border: 1px solid rgba(0, 0, 0, 0.08);
+                    border-radius: 20px;
+                    box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+                    padding: 20px;
+                    display: none;
+                    flex-direction: column;
+                    gap: 16px;
+                    animation: slideUp 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+                }
+                #demo-hub.open #demo-hub-menu {
+                    display: flex;
+                }
+                @keyframes slideUp {
+                    from { opacity: 0; transform: translateY(15px) scale(0.95); }
+                    to { opacity: 1; transform: translateY(0) scale(1); }
+                }
+                .demo-section-title {
+                    font-size: 11px;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    letter-spacing: 0.1em;
+                    color: #8c8c8c;
+                    border-bottom: 1px solid rgba(0,0,0,0.06);
+                    padding-bottom: 6px;
+                }
+                .demo-link-grid {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 8px;
+                }
+                .demo-btn {
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                    padding: 8px 12px;
+                    background: white;
+                    border: 1px solid rgba(0, 0, 0, 0.05);
+                    border-radius: 10px;
+                    font-size: 13px;
+                    font-weight: 600;
+                    color: #333;
+                    text-decoration: none;
+                    transition: all 0.2s;
+                }
+                .demo-btn:hover {
+                    background: #FF6B00;
+                    color: white;
+                    border-color: #FF6B00;
+                }
+                .demo-action-btn {
+                    width: 100%;
+                    padding: 10px;
+                    background: rgba(0, 0, 0, 0.05);
+                    border: none;
+                    border-radius: 10px;
+                    font-size: 13px;
+                    font-weight: 700;
+                    cursor: pointer;
+                    transition: all 0.2s;
+                }
+                .demo-action-btn:hover {
+                    background: #ba1a1a;
+                    color: white;
+                }
+            </style>
+            <div id="demo-hub-menu">
+                <div class="flex items-center justify-between">
+                    <div style="font-weight: 800; font-size: 16px; color: #1a1a1a;">SwiftBite Demo Hub</div>
+                    <span style="font-size: 11px; font-weight: 700; background: #e2f0d9; color: #385723; padding: 2px 8px; border-radius: 99px;">SPA Consolidated</span>
+                </div>
+                <div>
+                    <div class="demo-section-title">1. Customer Experience</div>
+                    <div class="demo-link-grid" style="margin-top:8px;">
+                        <a href="#/" class="demo-btn"><span class="material-symbols-outlined" style="font-size:16px;">explore</span> Discover</a>
+                        <a href="#/menu" class="demo-btn"><span class="material-symbols-outlined" style="font-size:16px;">restaurant</span> Menu</a>
+                        <a href="#/checkout" class="demo-btn"><span class="material-symbols-outlined" style="font-size:16px;">shopping_cart</span> Checkout</a>
+                        <a href="#/track" class="demo-btn"><span class="material-symbols-outlined" style="font-size:16px;">local_shipping</span> Tracker</a>
+                        <a href="#/offers" class="demo-btn"><span class="material-symbols-outlined" style="font-size:16px;">local_offer</span> Offers</a>
+                        <a href="#/profile" class="demo-btn"><span class="material-symbols-outlined" style="font-size:16px;">person</span> Profile</a>
+                    </div>
+                </div>
+                <div>
+                    <div class="demo-section-title">2. Restaurant Dashboard</div>
+                    <div class="demo-link-grid" style="margin-top:8px;">
+                        <a href="#/partner/orders" class="demo-btn"><span class="material-symbols-outlined" style="font-size:16px;">receipt_long</span> Orders</a>
+                        <a href="#/partner/menu" class="demo-btn"><span class="material-symbols-outlined" style="font-size:16px;">menu_book</span> Menu Editor</a>
+                    </div>
+                </div>
+                <div>
+                    <div class="demo-section-title">3. Admin Overview</div>
+                    <div style="margin-top:8px;">
+                        <a href="#/admin" class="demo-btn" style="display:flex; justify-content:center;">
+                            <span class="material-symbols-outlined" style="font-size:16px; margin-right:6px;">dashboard</span> System Overview
+                        </a>
+                    </div>
+                </div>
+                <button onclick="SwiftBiteStore.resetDemo()" class="demo-action-btn">Reset Demo Data</button>
+            </div>
+            <div id="demo-hub-btn">
+                <span class="material-symbols-outlined" style="font-size:28px;">layers</span>
+            </div>
+        `;
+
+        document.body.appendChild(div);
+
+        const btn = document.getElementById("demo-hub-btn");
+        btn.addEventListener("click", () => {
+            div.classList.toggle("open");
+        });
+
+        document.addEventListener("click", (e) => {
+            if (!div.contains(e.target)) {
+                div.classList.remove("open");
+            }
+        });
+    })();
+</script>
+</body>
+</html>

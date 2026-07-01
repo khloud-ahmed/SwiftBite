@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Checkout | SwiftBite</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#e9e8e7",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a",
+                        "outline": "#8e7164",
+                        "on-background": "#1b1c1c",
+                        "inverse-on-surface": "#f2f0f0",
+                        "surface-bright": "#fbf9f8",
+                        "on-secondary-fixed-variant": "#474746",
+                        "on-surface-variant": "#5a4136",
+                        "on-surface": "#1b1c1c",
+                        "secondary-fixed": "#e5e2e1",
+                        "background": "#fbf9f8",
+                        "secondary": "#5f5e5e",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#989999",
+                        "surface-container-highest": "#e4e2e2",
+                        "tertiary": "#5d5f5f",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "primary-fixed-dim": "#ffb693",
+                        "surface-variant": "#e4e2e2",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "secondary-container": "#e2dfde",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-container": "#2f3132",
+                        "surface-container-low": "#f5f3f3",
+                        "primary": "#a04100",
+                        "surface-dim": "#dbdad9",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "on-primary-container": "#572000",
+                        "outline-variant": "#e2bfb0",
+                        "inverse-surface": "#303031",
+                        "primary-fixed": "#ffdbcc",
+                        "surface-tint": "#a04100",
+                        "error": "#ba1a1a",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-primary": "#ffb693",
+                        "primary-container": "#ff6b00",
+                        "on-primary-fixed": "#351000",
+                        "on-secondary-container": "#636262",
+                        "surface-container": "#efeded",
+                        "on-primary-fixed-variant": "#7a3000",
+                        "tertiary-fixed": "#e2e2e2",
+                        "surface": "#fbf9f8",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "stack-lg": "32px",
+                        "gutter": "24px",
+                        "margin-desktop": "40px",
+                        "margin-mobile": "16px",
+                        "unit": "8px",
+                        "container-max": "1280px",
+                        "stack-md": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Work Sans"],
+                        "label-md": ["Work Sans"],
+                        "headline-md": ["Work Sans"],
+                        "body-md": ["Work Sans"],
+                        "display-lg": ["Work Sans"],
+                        "body-lg": ["Work Sans"],
+                        "headline-lg": ["Work Sans"],
+                        "label-sm": ["Work Sans"],
+                        "headline-sm": ["Work Sans"],
+                        "body-sm": ["Work Sans"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        input:focus {
+            outline: none;
+            border-color: #a04100 !important;
+            box-shadow: 0 0 0 2px rgba(160, 65, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen">
+<!-- Header -->
+<header class="bg-surface-container-lowest shadow-sm fixed top-0 w-full z-50">
+<div class="flex justify-between items-center h-16 px-gutter max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md font-bold text-primary">
+                SwiftBite
+            </div>
+<div class="flex items-center gap-stack-md">
+<span class="material-symbols-outlined text-outline">lock</span>
+<span class="font-label-md text-label-md text-outline uppercase tracking-wider">Secure Checkout</span>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-stack-lg px-gutter max-w-container-max mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Column: Forms -->
+<div class="lg:col-span-8 flex flex-col gap-stack-lg">
+<!-- Page Title -->
+<section>
+<h1 class="font-headline-lg text-headline-lg mb-stack-sm">Checkout</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Review your details and complete your order.</p>
+</section>
+<!-- Delivery Address Form -->
+<div class="bg-surface-container-lowest p-stack-lg rounded-xl shadow-sm border border-outline-variant/30">
+<div class="flex items-center gap-stack-sm mb-stack-md">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">location_on</span>
+<h2 class="font-headline-sm text-headline-sm">Delivery Address</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+<div class="md:col-span-2">
+<label class="block font-label-md text-label-md mb-2">Street Address</label>
+<input class="w-full px-4 py-3 bg-surface border border-outline-variant rounded-lg transition-all text-body-md" placeholder="123 Market St" type="text"/>
+</div>
+<div>
+<label class="block font-label-md text-label-md mb-2">Apartment / Suite</label>
+<input class="w-full px-4 py-3 bg-surface border border-outline-variant rounded-lg transition-all text-body-md" placeholder="Apt 4B" type="text"/>
+</div>
+<div>
+<label class="block font-label-md text-label-md mb-2">City</label>
+<input class="w-full px-4 py-3 bg-surface border border-outline-variant rounded-lg transition-all text-body-md" placeholder="San Francisco" type="text"/>
+</div>
+</div>
+<div class="mt-stack-md rounded-lg overflow-hidden h-40 relative group">
+<img class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 transition-all duration-500" data-alt="A high-angle minimalist digital map of a modern city grid in San Francisco. The map uses a sophisticated color palette of light grays and deep blues to maintain a professional and trustworthy aesthetic. Subtle glow effects highlight the delivery route, conveying a sense of efficiency and reliability. The lighting is clean and even, consistent with a modern light-mode user interface." data-location="San Francisco" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8QKQ8tqXIPqINWWqqBVqwojfrQuRzC3Zz9acchxC8HDpD28bgtLBWtGqXKGwsgCWIKwm84J4EEUvcI_4t17hOHNgl4LVBVM5LGpKkzdOXLw2DhfU7xJXua_N36d5YuLoNZKez7qdIn2cjrjuhmSTGHdiMH8oBd_Czn1VwVjzqDIQy0LMhlEI2xU1z96eqVBpJz1BDrp7HtmTHm4vgSum7o8MhlsQuYCK5CZX7XkUoSr8G-OO0lCRbk1Jl6u7N52kJyAiTaHM7jpwx"/>
+<div class="absolute inset-0 bg-primary/5 flex items-center justify-center pointer-events-none">
+<div class="bg-surface-container-lowest px-4 py-2 rounded-full shadow-md flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]" style="font-variation-settings: 'FILL' 1;">my_location</span>
+<span class="font-label-md text-label-md">Pin location for courier</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Payment Method Selector -->
+<div class="bg-surface-container-lowest p-stack-lg rounded-xl shadow-sm border border-outline-variant/30">
+<div class="flex items-center gap-stack-sm mb-stack-md">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">payments</span>
+<h2 class="font-headline-sm text-headline-sm">Payment Method</h2>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-stack-sm">
+<!-- Credit Card Option -->
+<button class="flex flex-col items-center gap-stack-sm p-stack-md border-2 border-primary bg-primary-container/5 rounded-xl transition-all">
+<span class="material-symbols-outlined text-primary text-3xl">credit_card</span>
+<span class="font-label-md text-label-md text-primary">Credit Card</span>
+</button>
+<!-- PayPal Option -->
+<button class="flex flex-col items-center gap-stack-sm p-stack-md border border-outline-variant bg-surface rounded-xl hover:border-primary/50 transition-all">
+<span class="material-symbols-outlined text-on-surface-variant text-3xl">account_balance_wallet</span>
+<span class="font-label-md text-label-md text-on-surface-variant">PayPal</span>
+</button>
+<!-- Apple Pay Option -->
+<button class="flex flex-col items-center gap-stack-sm p-stack-md border border-outline-variant bg-surface rounded-xl hover:border-primary/50 transition-all">
+<span class="material-symbols-outlined text-on-surface-variant text-3xl">contactless</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Apple Pay</span>
+</button>
+</div>
+<div class="mt-stack-md space-y-stack-sm">
+<div>
+<label class="block font-label-md text-label-md mb-2">Cardholder Name</label>
+<input class="w-full px-4 py-3 bg-surface border border-outline-variant rounded-lg transition-all text-body-md" placeholder="John Doe" type="text"/>
+</div>
+<div class="grid grid-cols-2 gap-stack-md">
+<div class="col-span-2 sm:col-span-1">
+<label class="block font-label-md text-label-md mb-2">Card Number</label>
+<div class="relative">
+<input class="w-full px-4 py-3 bg-surface border border-outline-variant rounded-lg transition-all text-body-md pl-12" placeholder="**** **** **** 4421" type="text"/>
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">credit_card</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-stack-sm">
+<div>
+<label class="block font-label-md text-label-md mb-2">Expiry</label>
+<input class="w-full px-4 py-3 bg-surface border border-outline-variant rounded-lg transition-all text-body-md text-center" placeholder="MM/YY" type="text"/>
+</div>
+<div>
+<label class="block font-label-md text-label-md mb-2">CVV</label>
+<input class="w-full px-4 py-3 bg-surface border border-outline-variant rounded-lg transition-all text-body-md text-center" placeholder="***" type="text"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Promo Code -->
+<div class="bg-surface-container-lowest p-stack-lg rounded-xl shadow-sm border border-outline-variant/30">
+<div class="flex items-center gap-stack-sm mb-stack-md">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">confirmation_number</span>
+<h2 class="font-headline-sm text-headline-sm">Promo Code</h2>
+</div>
+<div class="flex gap-stack-sm">
+<input class="flex-grow px-4 py-3 bg-surface border border-outline-variant rounded-lg transition-all text-body-md uppercase font-bold tracking-widest" placeholder="Enter code" type="text"/>
+<button class="bg-secondary text-on-secondary px-stack-lg py-3 rounded-lg font-label-md text-label-md hover:bg-on-secondary-container transition-colors">Apply</button>
+</div>
+</div>
+</div>
+<!-- Right Column: Order Summary -->
+<div class="lg:col-span-4">
+<div class="sticky top-24 flex flex-col gap-stack-md">
+<div class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/30 overflow-hidden">
+<div class="bg-primary-container px-stack-lg py-stack-md text-on-primary">
+<h2 class="font-headline-sm text-headline-sm">Order Summary</h2>
+</div>
+<div class="p-stack-lg space-y-stack-md">
+<!-- Items List -->
+<div class="space-y-stack-sm pb-stack-md border-b border-outline-variant/20">
+<div class="flex justify-between items-start">
+<div class="flex gap-stack-sm">
+<div class="w-12 h-12 rounded-lg bg-surface-container overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A macro close-up of a premium, gourmet artisan burger with melting cheese, fresh greens, and a toasted sesame bun. The lighting is warm and directional, emphasizing the rich textures of the food. The background is a clean, dark slate grey, providing a professional culinary aesthetic that highlights the high-quality ingredients." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWIt39Fh4RNZr7Oe44ud5C1mTaHCMp67jO5nDrRSZ5cvvAvPrsp4VpLJIku38Ar6-jiv8qGdHnxOXe15vs7GBEHn2sWPMyvqkN8mgJhE34tozUaSebj1zD5-c9BJsEWu9PWAiNvNmtNatxiDTrZG7DK3m7qg9GYn02C9eOIBTVyp1GrEr7oWW7nnfbQ9AmAUXPEeAvLizyeQ6Fc2ROE6rQMefyf9bWoMz7sVtE1zUTN8fKbJN6ndh_4_bFkjstaGK1v1S0bP1Q0CMh"/>
+</div>
+<div>
+<p class="font-label-md text-label-md">Prime Beef Burger</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">x1 • Regular</p>
+</div>
+</div>
+<span class="font-label-md text-label-md">$14.99</span>
+</div>
+<div class="flex justify-between items-start">
+<div class="flex gap-stack-sm">
+<div class="w-12 h-12 rounded-lg bg-surface-container overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A top-down view of a fresh, crisp Caesar salad in a white ceramic bowl, featuring golden croutons and shaved parmesan cheese. The scene is bathed in bright, natural daylight, creating a clean and healthy visual tone. The composition is minimalist and organized, aligning with a premium, trustworthy food delivery service's brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1yf9ahMF3h7Tc4u8TqCCWMjDOfwMwucpegSJWTdUkDFHvLmOfhHSe3XjmdUPESfQ47ALxyVxf4g_w_1bB5fDlnVMRCqCNY9NzX86ZwS0qmLepptSfhDZZuQ5javQjJPZbZQ01o-LLBPHA2N6mpf5wfch-E2icc5rYvYEAG2HGMi3OL9t6jzS4On5grCOtZzLNi4Hzm2MnFrqUUoJVMPTW5ICwg3NNKzk9n5Tcljc9GF3kykLFFM7Y3oXQlSrH5umDuR70jyrRQABl"/>
+</div>
+<div>
+<p class="font-label-md text-label-md">Truffle Parmesan Fries</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">x1 • Large</p>
+</div>
+</div>
+<span class="font-label-md text-label-md">$6.50</span>
+</div>
+</div>
+<!-- Calculations -->
+<div class="space-y-stack-sm py-stack-sm">
+<div class="flex justify-between text-body-md">
+<span class="text-on-surface-variant">Subtotal</span>
+<span>$21.49</span>
+</div>
+<div class="flex justify-between text-body-md">
+<span class="text-on-surface-variant">Delivery Fee</span>
+<span class="text-primary font-semibold">Free</span>
+</div>
+<div class="flex justify-between text-body-md">
+<span class="text-on-surface-variant">Taxes &amp; Fees</span>
+<span>$2.85</span>
+</div>
+</div>
+<!-- Total -->
+<div class="pt-stack-md border-t border-outline-variant/40">
+<div class="flex justify-between items-center mb-stack-md">
+<span class="font-headline-sm text-headline-sm">Total</span>
+<span class="font-headline-sm text-headline-sm text-primary">$24.34</span>
+</div>
+<button class="w-full bg-primary-container text-on-primary py-4 rounded-xl font-headline-sm text-headline-sm hover:bg-primary active:scale-[0.98] transition-all shadow-md flex items-center justify-center gap-stack-sm">
+                                    Place Order
+                                    <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<p class="mt-stack-md text-center text-body-sm text-outline flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">security</span>
+                                    SSL Encrypted Payment
+                                </p>
+</div>
+</div>
+</div>
+<!-- Trust Indicators -->
+<div class="grid grid-cols-2 gap-stack-sm">
+<div class="bg-surface-container-low p-stack-sm rounded-lg flex items-center gap-2 border border-outline-variant/10">
+<span class="material-symbols-outlined text-primary">schedule</span>
+<span class="font-label-md text-label-md text-on-surface-variant">25-35 min</span>
+</div>
+<div class="bg-surface-container-low p-stack-sm rounded-lg flex items-center gap-2 border border-outline-variant/10">
+<span class="material-symbols-outlined text-primary">verified</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Buyer Guard</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Success Toast Placeholder -->
+<div class="fixed bottom-gutter right-gutter z-50 pointer-events-none">
+<div class="bg-inverse-surface text-inverse-on-surface px-stack-lg py-stack-md rounded-xl shadow-lg flex items-center gap-stack-md opacity-0 translate-y-4">
+<span class="material-symbols-outlined text-primary-fixed">check_circle</span>
+<span class="font-label-md text-label-md">Payment method updated</span>
+</div>
+</div>
+</body></html>

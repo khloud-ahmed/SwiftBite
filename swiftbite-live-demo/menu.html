@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>SwiftBite - Restaurant Menu</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600;700;800;900&amp;family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script src="./demo-store.js"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#e9e8e7",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a",
+                        "outline": "#8e7164",
+                        "on-background": "#1b1c1c",
+                        "inverse-on-surface": "#f2f0f0",
+                        "surface-bright": "#fbf9f8",
+                        "on-secondary-fixed-variant": "#474746",
+                        "on-surface-variant": "#5a4136",
+                        "on-surface": "#1b1c1c",
+                        "secondary-fixed": "#e5e2e1",
+                        "background": "#fbf9f8",
+                        "secondary": "#5f5e5e",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#989999",
+                        "surface-container-highest": "#e4e2e2",
+                        "tertiary": "#5d5f5f",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "primary-fixed-dim": "#ffb693",
+                        "surface-variant": "#e4e2e2",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "secondary-container": "#e2dfde",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-container": "#2f3132",
+                        "surface-container-low": "#f5f3f3",
+                        "primary": "#a04100",
+                        "surface-dim": "#dbdad9",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "on-primary-container": "#572000",
+                        "outline-variant": "#e2bfb0",
+                        "inverse-surface": "#303031",
+                        "primary-fixed": "#ffdbcc",
+                        "surface-tint": "#a04100",
+                        "error": "#ba1a1a",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-primary": "#ffb693",
+                        "primary-container": "#ff6b00",
+                        "on-primary-fixed": "#351000",
+                        "on-secondary-container": "#636262",
+                        "surface-container": "#efeded",
+                        "on-primary-fixed-variant": "#7a3000",
+                        "tertiary-fixed": "#e2e2e2",
+                        "surface": "#fbf9f8",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "stack-lg": "32px",
+                        "gutter": "24px",
+                        "margin-desktop": "40px",
+                        "margin-mobile": "16px",
+                        "unit": "8px",
+                        "container-max": "1280px",
+                        "stack-md": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Work Sans"],
+                        "label-md": ["Work Sans"],
+                        "headline-md": ["Work Sans"],
+                        "headline-sm": ["Work Sans"],
+                        "body-md": ["Work Sans"],
+                        "body-sm": ["Work Sans"],
+                        "display-lg": ["Work Sans"],
+                        "body-lg": ["Work Sans"],
+                        "headline-lg": ["Work Sans"],
+                        "label-sm": ["Work Sans"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary-container selection:text-on-primary-container">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full bg-surface shadow-sm z-50 border-b border-surface-container">
+    <div class="flex justify-between items-center h-16 px-gutter max-w-container-max mx-auto">
+        <div class="flex items-center gap-8">
+            <span class="font-headline-md text-headline-md font-bold text-primary cursor-pointer" onclick="window.location.href='./index.html'">SwiftBite</span>
+            <div class="hidden md:flex gap-6">
+                <a class="text-primary font-bold border-b-2 border-primary font-body-md text-body-md" href="./index.html">Browse</a>
+                <a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Offers</a>
+                <a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Support</a>
+            </div>
+        </div>
+        <div class="flex items-center gap-4">
+            <button class="material-symbols-outlined text-on-surface-variant p-2 hover:bg-surface-variant rounded-full transition-all">location_on</button>
+            <button onclick="window.location.href='./checkout.html'" class="bg-primary text-on-primary px-6 py-2 rounded-full font-label-md hover:opacity-90 transition-all shadow-sm">Cart (<span class="cart-count">0</span>)</button>
+            <button onclick="window.location.href='./signin.html'" class="material-symbols-outlined text-on-surface-variant p-2 hover:bg-surface-variant rounded-full transition-all">account_circle</button>
+        </div>
+    </div>
+</nav>
+<main class="pt-16 pb-24">
+    <!-- Restaurant Header -->
+    <header class="relative w-full h-[320px] bg-surface-variant overflow-hidden">
+        <img id="rest-cover" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1200&q=80"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 w-full px-gutter pb-8 max-w-container-max mx-auto right-0 flex items-end gap-6">
+            <div class="w-24 h-24 bg-white rounded-xl shadow-lg p-2 mb-2 hidden md:block">
+                <img id="rest-logo" class="w-full h-full object-cover rounded-lg" src=""/>
+            </div>
+            <div class="text-white">
+                <h1 id="rest-name" class="font-headline-lg text-headline-lg mb-1">Restaurant Name</h1>
+                <div class="flex items-center gap-4 text-body-sm">
+                    <span class="flex items-center gap-1"><span class="material-symbols-outlined text-primary-container text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span> <span id="rest-rating">4.8</span></span>
+                    <span>•</span>
+                    <span id="rest-time">25-35 min</span>
+                    <span>•</span>
+                    <span id="rest-fee-badge" class="bg-primary text-on-primary px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider">Free Delivery</span>
+                </div>
+                <p id="rest-cuisines" class="text-white/80 mt-2 font-body-sm">Cuisines details go here</p>
+            </div>
+        </div>
+    </header>
+    <div class="max-w-container-max mx-auto px-gutter mt-12 grid grid-cols-1 md:grid-cols-[240px_1fr_320px] gap-gutter items-start">
+        <!-- Left Sidebar: Categories -->
+        <aside class="sticky top-24 hidden md:flex flex-col gap-stack-sm h-fit">
+            <h3 class="font-label-md text-on-surface-variant uppercase tracking-widest px-4 mb-2">Categories</h3>
+            <nav class="flex flex-col gap-1" id="categories-sidebar">
+                <a class="flex items-center justify-between px-4 py-3 bg-primary-container text-on-primary-container rounded-lg font-label-md transition-all" href="#popular">
+                    <span>Popular</span>
+                    <span class="material-symbols-outlined text-[18px]">local_fire_department</span>
+                </a>
+                <a class="flex items-center justify-between px-4 py-3 hover:bg-surface-container rounded-lg text-on-surface-variant font-label-md transition-all group" href="#main">
+                    <span>Main Course</span>
+                    <span class="material-symbols-outlined text-[18px] group-hover:text-primary">restaurant</span>
+                </a>
+                <a class="flex items-center justify-between px-4 py-3 hover:bg-surface-container rounded-lg text-on-surface-variant font-label-md transition-all group" href="#desserts">
+                    <span>Desserts</span>
+                    <span class="material-symbols-outlined text-[18px] group-hover:text-primary">icecream</span>
+                </a>
+            </nav>
+        </aside>
+        
+        <!-- Main Content Area -->
+        <section class="flex flex-col gap-stack-lg" id="menu-sections">
+            <!-- Dynamic sections will be injected here -->
+        </section>
+        
+        <!-- Right Sidebar: Cart -->
+        <aside class="sticky top-24 flex flex-col h-fit bg-surface-container-low rounded-2xl p-6 border border-outline-variant/30">
+            <div class="flex items-center gap-2 mb-6">
+                <span class="material-symbols-outlined text-primary">shopping_bag</span>
+                <h3 class="font-headline-sm text-headline-sm">Your Cart</h3>
+            </div>
+            
+            <div class="flex flex-col gap-4 mb-8" id="cart-items-container">
+                <!-- Cart items injected here -->
+                <p class="text-on-surface-variant text-body-md text-center py-4">Your cart is empty.</p>
+            </div>
+            
+            <div class="space-y-3 pt-6 border-t border-outline-variant/50">
+                <div class="flex justify-between text-body-sm text-on-surface-variant">
+                    <span>Subtotal</span>
+                    <span id="cart-subtotal">$0.00</span>
+                </div>
+                <div class="flex justify-between text-body-sm text-on-surface-variant">
+                    <span>Delivery Fee</span>
+                    <span id="cart-delivery-fee">$0.00</span>
+                </div>
+                <div class="flex justify-between text-body-sm text-on-surface-variant">
+                    <span>Service Fee</span>
+                    <span id="cart-service-fee">$0.00</span>
+                </div>
+                <div class="flex justify-between font-headline-sm text-headline-sm pt-4">
+                    <span>Total</span>
+                    <span id="cart-total" class="text-primary font-bold">$0.00</span>
+                </div>
+            </div>
+            
+            <button id="checkout-btn" class="w-full mt-8 bg-primary text-on-primary py-4 rounded-xl font-label-md flex items-center justify-center gap-2 hover:opacity-95 active:scale-[0.98] transition-all shadow-lg shadow-primary/20">
+                Go to Checkout
+                <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+            </button>
+            <p class="mt-6 text-[11px] text-center text-on-surface-variant/70 leading-relaxed uppercase tracking-tighter">
+                Delivery time is estimated based on current traffic and kitchen load.
+            </p>
+        </aside>
+    </div>
+</main>
+
+<!-- Mobile Navigation Tab Bar (Simulating Shared BottomNavBar) -->
+<div class="md:hidden fixed bottom-0 left-0 w-full bg-surface border-t border-outline-variant/20 px-gutter py-2 z-50 flex justify-between items-center">
+    <button onclick="window.location.href='./index.html'" class="flex flex-col items-center gap-1 text-primary">
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">restaurant_menu</span>
+        <span class="text-[10px] font-bold">Menu</span>
+    </button>
+    <button class="flex flex-col items-center gap-1 text-on-surface-variant">
+        <span class="material-symbols-outlined">local_offer</span>
+        <span class="text-[10px]">Offers</span>
+    </button>
+    <div class="relative -top-6">
+        <button onclick="window.location.href='./checkout.html'" class="bg-primary text-on-primary w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-primary/40 border-4 border-background">
+            <span class="material-symbols-outlined">shopping_cart</span>
+        </button>
+    </div>
+    <button onclick="window.location.href='./partner-orders.html'" class="flex flex-col items-center gap-1 text-on-surface-variant">
+        <span class="material-symbols-outlined">history</span>
+        <span class="text-[10px]">Orders</span>
+    </button>
+    <button onclick="window.location.href='./signin.html'" class="flex flex-col items-center gap-1 text-on-surface-variant">
+        <span class="material-symbols-outlined">person</span>
+        <span class="text-[10px]">Profile</span>
+    </button>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const store = window.SwiftBiteStore;
+        if (!store) return;
+
+        const activeRestId = store.getActiveRestaurantId();
+        const restaurant = store.getRestaurant(activeRestId);
+        
+        // Update header details
+        document.getElementById("rest-name").textContent = restaurant.name;
+        document.getElementById("rest-cover").src = restaurant.cover;
+        document.getElementById("rest-logo").src = restaurant.logo;
+        document.getElementById("rest-rating").textContent = restaurant.rating + " (500+ ratings)";
+        document.getElementById("rest-time").textContent = restaurant.time;
+        document.getElementById("rest-cuisines").textContent = restaurant.cuisines;
+
+        const deliveryFeeVal = activeRestId === "sushikazu" ? 0 : 2.99;
+        const feeBadge = document.getElementById("rest-fee-badge");
+        if (deliveryFeeVal === 0) {
+            feeBadge.textContent = "Free Delivery";
+            feeBadge.className = "bg-primary text-on-primary px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider";
+        } else {
+            feeBadge.textContent = `$${deliveryFeeVal} Delivery`;
+            feeBadge.className = "bg-surface-container-high text-on-surface-variant px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider";
+        }
+
+        // Render Menu Items
+        const menuItems = store.getMenuItems(activeRestId);
+        renderMenu(menuItems);
+
+        // Render Cart
+        renderCart();
+
+        // Listen for storage events to update cart
+        window.addEventListener("storage", () => {
+            renderCart();
+        });
+
+        function renderMenu(items) {
+            const menuSections = document.getElementById("menu-sections");
+            menuSections.innerHTML = "";
+
+            // Group by category
+            const categories = {};
+            items.forEach(item => {
+                if (!categories[item.category]) categories[item.category] = [];
+                categories[item.category].push(item);
+            });
+
+            // Update Categories Sidebar
+            const sidebar = document.getElementById("categories-sidebar");
+            sidebar.innerHTML = "";
+
+            let index = 0;
+            for (const cat in categories) {
+                const catId = cat.toLowerCase().replace(/\s+/g, "-");
+                
+                // Add sidebar link
+                const isFirst = index === 0;
+                sidebar.innerHTML += `
+                    <a class="flex items-center justify-between px-4 py-3 ${isFirst ? 'bg-primary text-on-primary' : 'hover:bg-surface-container text-on-surface-variant'} rounded-lg font-label-md transition-all" href="#${catId}">
+                        <span>${cat}</span>
+                        <span class="material-symbols-outlined text-[18px]">${cat === 'Popular' ? 'local_fire_department' : cat === 'Desserts' ? 'icecream' : 'restaurant'}</span>
+                    </a>
+                `;
+
+                // Add Menu Section
+                let sectionContent = "";
+                
+                if (cat === "Popular") {
+                    // Render Grid for Popular
+                    sectionContent = `
+                        <div id="${catId}" class="scroll-mt-24">
+                            <h2 class="font-headline-md text-headline-md mb-stack-md flex items-center gap-2">
+                                ${cat} Near You
+                                <span class="bg-primary/10 text-primary text-[12px] px-2 py-0.5 rounded-full font-bold">Recommended</span>
+                            </h2>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-stack-md">
+                                ${categories[cat].map(item => `
+                                    <div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all hover:-translate-y-1 group border border-outline-variant/30 flex flex-col justify-between">
+                                        <div class="aspect-[16/9] relative bg-neutral-200">
+                                            <img class="w-full h-full object-cover" src="${item.image}"/>
+                                        </div>
+                                        <div class="p-stack-md flex-grow flex flex-col justify-between">
+                                            <div>
+                                                <div class="flex justify-between items-start mb-1 gap-2">
+                                                    <h4 class="font-headline-sm text-headline-sm">${item.name}</h4>
+                                                    <span class="font-bold text-primary">$${item.price.toFixed(2)}</span>
+                                                </div>
+                                                <p class="text-on-surface-variant font-body-sm line-clamp-2 mb-4">${item.description}</p>
+                                            </div>
+                                            <button onclick="SwiftBiteStore.addToCart('${activeRestId}', ${JSON.stringify(item).replace(/"/g, '&quot;')})" class="w-full flex items-center justify-center gap-2 py-2.5 bg-surface-container hover:bg-primary hover:text-on-primary transition-all rounded-lg font-label-md">
+                                                <span class="material-symbols-outlined text-[20px]">add</span>
+                                                Add to Cart
+                                            </button>
+                                        </div>
+                                    </div>
+                                `).join("")}
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    // Render List for other categories
+                    sectionContent = `
+                        <div id="${catId}" class="scroll-mt-24 mt-8">
+                            <h2 class="font-headline-md text-headline-md mb-stack-md">${cat}</h2>
+                            <div class="flex flex-col gap-stack-md">
+                                ${categories[cat].map(item => `
+                                    <div class="bg-surface-container-lowest rounded-xl p-4 flex gap-6 border border-outline-variant/20 hover:shadow-sm transition-all group items-center justify-between">
+                                        <div class="flex gap-6 items-center">
+                                            <div class="w-24 h-24 flex-shrink-0 bg-neutral-200">
+                                                <img class="w-full h-full object-cover rounded-lg" src="${item.image}"/>
+                                            </div>
+                                            <div class="flex-grow flex flex-col justify-center">
+                                                <div class="flex items-center mb-1 gap-4">
+                                                    <h4 class="font-headline-sm text-headline-sm">${item.name}</h4>
+                                                    <span class="font-bold text-primary">$${item.price.toFixed(2)}</span>
+                                                </div>
+                                                <p class="text-on-surface-variant font-body-sm mb-3">${item.description}</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <button onclick="SwiftBiteStore.addToCart('${activeRestId}', ${JSON.stringify(item).replace(/"/g, '&quot;')})" class="p-3 bg-primary text-on-primary rounded-full hover:scale-105 transition-all shadow-md flex items-center justify-center">
+                                                <span class="material-symbols-outlined">add</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                `).join("")}
+                            </div>
+                        </div>
+                    `;
+                }
+                menuSections.innerHTML += sectionContent;
+                index++;
+            }
+        }
+
+        function renderCart() {
+            const cart = store.getCart();
+            const container = document.getElementById("cart-items-container");
+            const checkoutBtn = document.getElementById("checkout-btn");
+
+            if (!cart.items || cart.items.length === 0) {
+                container.innerHTML = `<p class="text-on-surface-variant text-body-md text-center py-8">Your cart is empty.</p>`;
+                document.getElementById("cart-subtotal").textContent = "$0.00";
+                document.getElementById("cart-delivery-fee").textContent = "$0.00";
+                document.getElementById("cart-service-fee").textContent = "$0.00";
+                document.getElementById("cart-total").textContent = "$0.00";
+                checkoutBtn.disabled = true;
+                checkoutBtn.style.opacity = 0.5;
+                checkoutBtn.style.cursor = "not-allowed";
+                return;
+            }
+
+            checkoutBtn.disabled = false;
+            checkoutBtn.style.opacity = 1;
+            checkoutBtn.style.cursor = "pointer";
+
+            container.innerHTML = cart.items.map(item => `
+                <div class="flex justify-between items-center group">
+                    <div class="flex flex-col">
+                        <span class="font-label-md text-on-surface font-semibold">${item.name}</span>
+                        <div class="flex items-center gap-2 mt-1">
+                            <button onclick="SwiftBiteStore.updateCartQuantity('${item.id}', -1)" class="w-5 h-5 flex items-center justify-center rounded bg-surface-container hover:bg-surface-variant text-body-sm font-bold">-</button>
+                            <span class="text-body-sm text-on-surface-variant font-bold">${item.quantity}</span>
+                            <button onclick="SwiftBiteStore.updateCartQuantity('${item.id}', 1)" class="w-5 h-5 flex items-center justify-center rounded bg-surface-container hover:bg-surface-variant text-body-sm font-bold">+</button>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="font-bold text-on-surface">$${(item.price * item.quantity).toFixed(2)}</span>
+                        <button onclick="SwiftBiteStore.removeFromCart('${item.id}')" class="material-symbols-outlined text-error text-[18px] opacity-60 hover:opacity-100 transition-all">delete</button>
+                    </div>
+                </div>
+            `).join("");
+
+            // Calculate fees
+            const subtotal = cart.items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const deliveryFee = activeRestId === "sushikazu" ? 0 : 2.99;
+            const serviceFee = 2.00;
+            const total = subtotal + deliveryFee + serviceFee;
+
+            document.getElementById("cart-subtotal").textContent = `$${subtotal.toFixed(2)}`;
+            document.getElementById("cart-delivery-fee").textContent = deliveryFee === 0 ? "FREE" : `$${deliveryFee.toFixed(2)}`;
+            document.getElementById("cart-service-fee").textContent = `$${serviceFee.toFixed(2)}`;
+            document.getElementById("cart-total").textContent = `$${total.toFixed(2)}`;
+        }
+
+        // Checkout Button redirect
+        document.getElementById("checkout-btn").addEventListener("click", () => {
+            const user = store.getUser();
+            if (!user) {
+                // If not signed in, redirect to login
+                window.location.href = "./signin.html";
+            } else {
+                window.location.href = "./checkout.html";
+            }
+        });
+    });
+</script>
+</body>
+</html>

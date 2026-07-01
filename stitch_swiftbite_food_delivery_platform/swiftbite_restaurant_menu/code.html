@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SwiftBite - Restaurant Menu</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600;700;800;900&amp;family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#e9e8e7",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a",
+                        "outline": "#8e7164",
+                        "on-background": "#1b1c1c",
+                        "inverse-on-surface": "#f2f0f0",
+                        "surface-bright": "#fbf9f8",
+                        "on-secondary-fixed-variant": "#474746",
+                        "on-surface-variant": "#5a4136",
+                        "on-surface": "#1b1c1c",
+                        "secondary-fixed": "#e5e2e1",
+                        "background": "#fbf9f8",
+                        "secondary": "#5f5e5e",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#989999",
+                        "surface-container-highest": "#e4e2e2",
+                        "tertiary": "#5d5f5f",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "primary-fixed-dim": "#ffb693",
+                        "surface-variant": "#e4e2e2",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "secondary-container": "#e2dfde",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-container": "#2f3132",
+                        "surface-container-low": "#f5f3f3",
+                        "primary": "#a04100",
+                        "surface-dim": "#dbdad9",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "on-primary-container": "#572000",
+                        "outline-variant": "#e2bfb0",
+                        "inverse-surface": "#303031",
+                        "primary-fixed": "#ffdbcc",
+                        "surface-tint": "#a04100",
+                        "error": "#ba1a1a",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-primary": "#ffb693",
+                        "primary-container": "#ff6b00",
+                        "on-primary-fixed": "#351000",
+                        "on-secondary-container": "#636262",
+                        "surface-container": "#efeded",
+                        "on-primary-fixed-variant": "#7a3000",
+                        "tertiary-fixed": "#e2e2e2",
+                        "surface": "#fbf9f8",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "stack-lg": "32px",
+                        "gutter": "24px",
+                        "margin-desktop": "40px",
+                        "margin-mobile": "16px",
+                        "unit": "8px",
+                        "container-max": "1280px",
+                        "stack-md": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Work Sans"],
+                        "label-md": ["Work Sans"],
+                        "headline-md": ["Work Sans"],
+                        "headline-sm": ["Work Sans"],
+                        "body-md": ["Work Sans"],
+                        "body-sm": ["Work Sans"],
+                        "display-lg": ["Work Sans"],
+                        "body-lg": ["Work Sans"],
+                        "headline-lg": ["Work Sans"],
+                        "label-sm": ["Work Sans"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary-container selection:text-on-primary-container">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full bg-surface shadow-sm z-50 border-b border-surface-container">
+<div class="flex justify-between items-center h-16 px-gutter max-w-container-max mx-auto">
+<div class="flex items-center gap-8">
+<span class="font-headline-md text-headline-md font-bold text-primary">SwiftBite</span>
+<div class="hidden md:flex gap-6">
+<a class="text-primary font-bold border-b-2 border-primary font-body-md text-body-md" href="#">Browse</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Offers</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Support</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-on-surface-variant p-2 hover:bg-surface-variant rounded-full transition-all">location_on</button>
+<button class="bg-primary-container text-on-primary-container px-6 py-2 rounded-full font-label-md hover:opacity-90 transition-all shadow-sm">Cart</button>
+<button class="material-symbols-outlined text-on-surface-variant p-2 hover:bg-surface-variant rounded-full transition-all">account_circle</button>
+</div>
+</div>
+</nav>
+<main class="pt-16 pb-24">
+<!-- Restaurant Header -->
+<header class="relative w-full h-[320px] bg-surface-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A high-end, modern restaurant interior with sleek architectural lines and ambient, warm lighting reflecting off polished surfaces. The scene is captured in a professional architectural photography style, showcasing a sophisticated atmosphere with muted tones and elegant furniture. Sunlight filters softly through large windows, creating a bright and welcoming corporate-modern aesthetic for a premium dining experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCb4x28ZScx7Gb86gJ-glpXo8H4Mwl-LHp7ICCsSAJ2w8YT2pQJ2_CCETfobswBMKQ_aCulLCc4o6q5NBvgf_FX8O-CK0KVd8VQCPY6-0RWAZyj4IdpB39EIGqysVs_VS04Xp4rFX5g7ymUI6y-GxMjEpWkxJtXZzjUKm8W_Wd_1qZDgLg38AlGX8fwPep2NR1dD7SJskoxCFH4-cGN2yW22Q7NvSoy5lXw5DX3ThDAMWn-Zi6yoR0AG1kJRWeplTCPqz-NBvplH7Yq"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+<div class="absolute bottom-0 left-0 w-full px-gutter pb-8 max-w-container-max mx-auto right-0 flex items-end gap-6">
+<div class="w-24 h-24 bg-white rounded-xl shadow-lg p-2 mb-2 hidden md:block">
+<img class="w-full h-full object-cover rounded-lg" data-alt="A minimalist and premium restaurant logo featuring clean geometric typography and a simple iconic food symbol. The graphic design is presented on a crisp white background with high contrast, reflecting a modern and efficient brand identity. The style is professional and corporate, emphasizing reliability and high-quality culinary service in a bright, light-mode environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4RmuyhIWTEiUsRwl6jLHPHCFfJw5BwOpmzjMmtXXaCuqivVBH0iSsEktTX3bCznMs_XDu6J6-LEpO1L_5n_YENjIpxjHYlX-XaYXpQJi2ZgAiBG1DbAoWU7p-Yu3CSHN0CV1bmCMLPSOnJLytAFQeBcIRh0NLfuz6S4y8suCzqYHYURwZDZYLf51it8wB_lX1Fww7s0k5SxwWldxDdLSMXFxazUQYUtSL86zkuPP9I25CWtw8e4c9Lj9rCukYu3O3hk9jrgXIkBnG"/>
+</div>
+<div class="text-white">
+<h1 class="font-headline-lg text-headline-lg mb-1">The Urban Grill &amp; Co.</h1>
+<div class="flex items-center gap-4 text-body-sm">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-primary-container text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span> 4.8 (500+ ratings)</span>
+<span>•</span>
+<span>25-35 min</span>
+<span>•</span>
+<span class="bg-primary-container text-on-primary-container px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider">Free Delivery</span>
+</div>
+<p class="text-white/80 mt-2 font-body-sm">1248 Efficiency Way, Financial District, New York, NY</p>
+</div>
+</div>
+</header>
+<div class="max-w-container-max mx-auto px-gutter mt-12 grid grid-cols-1 md:grid-cols-[240px_1fr_320px] gap-gutter items-start">
+<!-- Left Sidebar: Categories -->
+<aside class="sticky top-24 hidden md:flex flex-col gap-stack-sm h-fit">
+<h3 class="font-label-md text-on-surface-variant uppercase tracking-widest px-4 mb-2">Categories</h3>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center justify-between px-4 py-3 bg-primary-container text-on-primary-container rounded-lg font-label-md transition-all" href="#popular">
+<span>Popular</span>
+<span class="material-symbols-outlined text-[18px]">local_fire_department</span>
+</a>
+<a class="flex items-center justify-between px-4 py-3 hover:bg-surface-container rounded-lg text-on-surface-variant font-label-md transition-all group" href="#main">
+<span>Main Course</span>
+<span class="material-symbols-outlined text-[18px] group-hover:text-primary">restaurant</span>
+</a>
+<a class="flex items-center justify-between px-4 py-3 hover:bg-surface-container rounded-lg text-on-surface-variant font-label-md transition-all group" href="#desserts">
+<span>Desserts</span>
+<span class="material-symbols-outlined text-[18px] group-hover:text-primary">icecream</span>
+</a>
+<a class="flex items-center justify-between px-4 py-3 hover:bg-surface-container rounded-lg text-on-surface-variant font-label-md transition-all group" href="#drinks">
+<span>Drinks</span>
+<span class="material-symbols-outlined text-[18px] group-hover:text-primary">local_bar</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content Area -->
+<section class="flex flex-col gap-stack-lg">
+<div id="popular">
+<h2 class="font-headline-md text-headline-md mb-stack-md flex items-center gap-2">
+                        Popular Near You
+                        <span class="bg-primary/10 text-primary text-[12px] px-2 py-0.5 rounded-full font-bold">Recommended</span>
+</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-stack-md">
+<!-- Food Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all hover:-translate-y-1 group border border-outline-variant/30">
+<div class="aspect-[16/9] relative">
+<img class="w-full h-full object-cover" data-alt="A top-down professional food photograph of a gourmet breakfast bowl featuring vibrant colors, perfectly poached eggs, avocado slices, and fresh greens." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBA5_QqJon8J5KVF3GsmKpiWBfmmis0b7WSM8U3eCVdhh8pYIqVs2brx6yy3XtmNE_hD8N5MrtXUmKXuVBR-4XInPckpZot9Er2c7BF7BO_OSXkUrPa1JveZunhD2ec9GKccK3hexUHIivfXpGDKQ1FJhrjq6Vdv_3XtkzUEHOc9oKnSMMDBzQupRKrPSJZIzEYmEDf7aDNxcip18Ooy0Vw7XMqI_1bi88qjtpwat3tvhRjCWDdsVUaIyY24_XOX7qbV80H6iO9RBMv"/>
+</div>
+<div class="p-stack-md">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-headline-sm text-headline-sm">Truffle Avocado Toast</h4>
+<span class="font-bold text-primary">$18.50</span>
+</div>
+<p class="text-on-surface-variant font-body-sm line-clamp-2 mb-4">Sourdough bread, smashed organic avocado, white truffle oil, chili flakes, and micro-greens.</p>
+<button class="w-full flex items-center justify-center gap-2 py-2.5 bg-surface-container hover:bg-primary-container hover:text-on-primary-container transition-all rounded-lg font-label-md">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                                    Add to Cart
+                                </button>
+</div>
+</div>
+<!-- Food Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all hover:-translate-y-1 group border border-outline-variant/30">
+<div class="aspect-[16/9] relative">
+<img class="w-full h-full object-cover" data-alt="A close-up of a premium artisan pizza with bubbling mozzarella, fresh basil leaves, and high-quality tomato sauce." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDQGG71Yv0aobmq3SHdqQoMK3ri5Z_MPvA0c7meLdD33w3aoPjb_2Mc-8eRJuQNKlhnGrVQ2O-DOTh2XUv-0jHqsdvK62PIZig0S1g6ekZGE2aEKvJLMKTNkFiymX9J0aRx5hARm0pXnBk3b2xEW7jYuaNirWSABoTkNtbtS3ikmNu6nrFMOjnfkkANux4t5i8rvt2uMv7iACQKYJHh8PhNwzbY4xOp1qjq1HP2Xo_gSoFaxLEAIFz78CNMkzkT1vCRdUuW7u94htH"/>
+</div>
+<div class="p-stack-md">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-headline-sm text-headline-sm">Artisan Burrata Pizza</h4>
+<span class="font-bold text-primary">$22.00</span>
+</div>
+<p class="text-on-surface-variant font-body-sm line-clamp-2 mb-4">Wood-fired thin crust, fresh burrata, san marzano tomatoes, and basil infused oil.</p>
+<button class="w-full flex items-center justify-center gap-2 py-2.5 bg-surface-container hover:bg-primary-container hover:text-on-primary-container transition-all rounded-lg font-label-md">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                                    Add to Cart
+                                </button>
+</div>
+</div>
+</div>
+</div>
+<div id="main">
+<h2 class="font-headline-md text-headline-md mb-stack-md">Main Course</h2>
+<div class="flex flex-col gap-stack-md">
+<!-- Horizontal Item Card -->
+<div class="bg-surface-container-lowest rounded-xl p-4 flex gap-6 border border-outline-variant/20 hover:shadow-sm transition-all group">
+<div class="w-32 h-32 flex-shrink-0">
+<img class="w-full h-full object-cover rounded-lg" data-alt="A vibrant salad bowl filled with diverse, fresh vegetables, grilled protein, and a glossy drizzle of dressing." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgxK6gqSl1g_cTq_dX-uPQ2kiJx-IcXkMOQ1TT1iqteyWwFR-YSZEny69ibwDcyn7GcU_osrJtDwSRK-HfaoyrirEKn9KEVHp41BdHWw1KfrxE9RQHqHaTgfuIPgKLfygAMyiJAHpluVo7eozFMOPCLDz2f3xSsRhc_BbLdUVVcJ7Jjs-8Hl0GfsEfMlFvLZsnqgVkki9Yedo0ZMBcu0lv_g_EBsDLnMVg2aAc1m9PqC0ML4e0_kd1LhlH6XsIEgUs8rzV-cidVGZl"/>
+</div>
+<div class="flex-grow flex flex-col justify-center">
+<div class="flex justify-between items-center mb-1">
+<h4 class="font-headline-sm text-headline-sm">Power Protein Bowl</h4>
+<span class="font-bold text-primary">$19.00</span>
+</div>
+<p class="text-on-surface-variant font-body-sm mb-3">Quinoa, kale, roasted chickpeas, grilled salmon, and honey-tahini dressing.</p>
+<div class="flex items-center gap-2">
+<span class="bg-surface-variant text-on-surface-variant text-[10px] px-2 py-0.5 rounded font-bold">HEALTHY</span>
+<span class="bg-surface-variant text-on-surface-variant text-[10px] px-2 py-0.5 rounded font-bold">BESTSELLER</span>
+</div>
+</div>
+<div class="flex items-center">
+<button class="p-3 bg-primary-container text-on-primary-container rounded-full hover:scale-105 transition-all shadow-md">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+<!-- Horizontal Item Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 flex gap-6 border border-outline-variant/20 hover:shadow-sm transition-all group">
+<div class="w-32 h-32 flex-shrink-0">
+<img class="w-full h-full object-cover rounded-lg" data-alt="A perfectly seared steak presented on a dark ceramic plate with a side of roasted vegetables and a rich reduction sauce." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGqenZjlrO347_HJQFIh70LK1zayzMIW1NF7mz1voqV06c_XeEaxrxmosl5rMELhANxNdt8THIWfDnYuyvxx9Xz9XotZe4hXuWiX63osmld9v1WHlRI8lMo7Ru-Eqvre5yDCVZOHc7jdmgR2LMa8l2sBvnGaM0X5JlRl35N_Bd-3RrviSAWQDeiNzw0jkbWA_d264OuzxVcSvIyQMoqGeP12W1kjlrQKSVh_j7tivEaqV4vkPduuOXsLwP-exbGAiTGqtILyounN8j"/>
+</div>
+<div class="flex-grow flex flex-col justify-center">
+<div class="flex justify-between items-center mb-1">
+<h4 class="font-headline-sm text-headline-sm">Angus Ribeye Steak</h4>
+<span class="font-bold text-primary">$45.00</span>
+</div>
+<p class="text-on-surface-variant font-body-sm mb-3">12oz grass-fed angus, garlic herb butter, and honey-glazed seasonal carrots.</p>
+<div class="flex items-center gap-2">
+<span class="bg-surface-variant text-on-surface-variant text-[10px] px-2 py-0.5 rounded font-bold">SIGNATURE</span>
+</div>
+</div>
+<div class="flex items-center">
+<button class="p-3 bg-primary-container text-on-primary-container rounded-full hover:scale-105 transition-all shadow-md">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Right Sidebar: Cart -->
+<aside class="sticky top-24 flex flex-col h-fit bg-surface-container-low rounded-2xl p-6 border border-outline-variant/30">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary">shopping_bag</span>
+<h3 class="font-headline-sm text-headline-sm">Your Cart</h3>
+</div>
+<div class="flex flex-col gap-4 mb-8">
+<!-- Cart Item -->
+<div class="flex justify-between items-center group">
+<div class="flex flex-col">
+<span class="font-label-md">Truffle Avocado Toast</span>
+<span class="text-body-sm text-on-surface-variant">Qty: 1</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="font-bold text-on-surface">$18.50</span>
+<button class="material-symbols-outlined text-error text-[18px] opacity-0 group-hover:opacity-100 transition-all">delete</button>
+</div>
+</div>
+<!-- Cart Item -->
+<div class="flex justify-between items-center group">
+<div class="flex flex-col">
+<span class="font-label-md">Artisan Burrata Pizza</span>
+<span class="text-body-sm text-on-surface-variant">Qty: 1</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="font-bold text-on-surface">$22.00</span>
+<button class="material-symbols-outlined text-error text-[18px] opacity-0 group-hover:opacity-100 transition-all">delete</button>
+</div>
+</div>
+</div>
+<div class="space-y-3 pt-6 border-t border-outline-variant/50">
+<div class="flex justify-between text-body-sm text-on-surface-variant">
+<span>Subtotal</span>
+<span>$40.50</span>
+</div>
+<div class="flex justify-between text-body-sm text-on-surface-variant">
+<span>Delivery Fee</span>
+<span class="text-primary font-bold">FREE</span>
+</div>
+<div class="flex justify-between text-body-sm text-on-surface-variant">
+<span>Service Fee</span>
+<span>$2.00</span>
+</div>
+<div class="flex justify-between font-headline-sm text-headline-sm pt-4">
+<span>Total</span>
+<span class="text-primary">$42.50</span>
+</div>
+</div>
+<button class="w-full mt-8 bg-primary-container text-on-primary-container py-4 rounded-xl font-label-md flex items-center justify-center gap-2 hover:opacity-95 active:scale-[0.98] transition-all shadow-lg shadow-primary/20">
+                    Go to Checkout
+                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+<p class="mt-6 text-[11px] text-center text-on-surface-variant/70 leading-relaxed uppercase tracking-tighter">
+                    Delivery time is estimated based on current traffic and kitchen load.
+                </p>
+</aside>
+</div>
+</main>
+<!-- Mobile Navigation Tab Bar (Simulating Shared BottomNavBar) -->
+<div class="md:hidden fixed bottom-0 left-0 w-full bg-surface border-t border-outline-variant/20 px-gutter py-2 z-50 flex justify-between items-center">
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">restaurant_menu</span>
+<span class="text-[10px] font-bold">Menu</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined">local_offer</span>
+<span class="text-[10px]">Offers</span>
+</button>
+<div class="relative -top-6">
+<button class="bg-primary-container text-on-primary-container w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-primary/40 border-4 border-background">
+<span class="material-symbols-outlined">shopping_cart</span>
+</button>
+</div>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined">history</span>
+<span class="text-[10px]">Orders</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px]">Profile</span>
+</button>
+</div>
+</body></html>

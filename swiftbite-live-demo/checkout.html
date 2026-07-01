@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Checkout | SwiftBite</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script src="./demo-store.js"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#e9e8e7",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a",
+                        "outline": "#8e7164",
+                        "on-background": "#1b1c1c",
+                        "inverse-on-surface": "#f2f0f0",
+                        "surface-bright": "#fbf9f8",
+                        "on-secondary-fixed-variant": "#474746",
+                        "on-surface-variant": "#5a4136",
+                        "on-surface": "#1b1c1c",
+                        "secondary-fixed": "#e5e2e1",
+                        "background": "#fbf9f8",
+                        "secondary": "#5f5e5e",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#989999",
+                        "surface-container-highest": "#e4e2e2",
+                        "tertiary": "#5d5f5f",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "primary-fixed-dim": "#ffb693",
+                        "surface-variant": "#e4e2e2",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "secondary-container": "#e2dfde",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-container": "#2f3132",
+                        "surface-container-low": "#f5f3f3",
+                        "primary": "#a04100",
+                        "surface-dim": "#dbdad9",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "on-primary-container": "#572000",
+                        "outline-variant": "#e2bfb0",
+                        "inverse-surface": "#303031",
+                        "primary-fixed": "#ffdbcc",
+                        "surface-tint": "#a04100",
+                        "error": "#ba1a1a",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-primary": "#ffb693",
+                        "primary-container": "#ff6b00",
+                        "on-primary-fixed": "#351000",
+                        "on-secondary-container": "#636262",
+                        "surface-container": "#efeded",
+                        "on-primary-fixed-variant": "#7a3000",
+                        "tertiary-fixed": "#e2e2e2",
+                        "surface": "#fbf9f8",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "stack-lg": "32px",
+                        "gutter": "24px",
+                        "margin-desktop": "40px",
+                        "margin-mobile": "16px",
+                        "unit": "8px",
+                        "container-max": "1280px",
+                        "stack-md": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Work Sans"],
+                        "label-md": ["Work Sans"],
+                        "headline-md": ["Work Sans"],
+                        "body-md": ["Work Sans"],
+                        "display-lg": ["Work Sans"],
+                        "body-lg": ["Work Sans"],
+                        "headline-lg": ["Work Sans"],
+                        "label-sm": ["Work Sans"],
+                        "headline-sm": ["Work Sans"],
+                        "body-sm": ["Work Sans"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        input:focus {
+            outline: none;
+            border-color: #a04100 !important;
+            box-shadow: 0 0 0 2px rgba(160, 65, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen">
+<!-- Header -->
+<header class="bg-surface-container-lowest shadow-sm fixed top-0 w-full z-50">
+    <div class="flex justify-between items-center h-16 px-gutter max-w-container-max mx-auto">
+        <div class="font-headline-md text-headline-md font-bold text-primary cursor-pointer" onclick="window.location.href='./index.html'">
+            SwiftBite
+        </div>
+        <div class="flex items-center gap-stack-md">
+            <span class="material-symbols-outlined text-outline">lock</span>
+            <span class="font-label-md text-label-md text-outline uppercase tracking-wider">Secure Checkout</span>
+        </div>
+    </div>
+</header>
+<main class="pt-24 pb-stack-lg px-gutter max-w-container-max mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+        <!-- Left Column: Forms -->
+        <div class="lg:col-span-8 flex flex-col gap-stack-lg">
+            <!-- Page Title -->
+            <section>
+                <h1 class="font-headline-lg text-headline-lg mb-stack-sm">Checkout</h1>
+                <p class="font-body-md text-body-md text-on-surface-variant">Review your details and complete your order.</p>
+            </section>
+            <!-- Delivery Address Form -->
+            <form id="checkout-form" class="flex flex-col gap-stack-lg">
+                <div class="bg-surface-container-lowest p-stack-lg rounded-xl shadow-sm border border-outline-variant/30">
+                    <div class="flex items-center gap-stack-sm mb-stack-md">
+                        <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">location_on</span>
+                        <h2 class="font-headline-sm text-headline-sm">Delivery Address</h2>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+                        <div class="md:col-span-2">
+                            <label class="block font-label-md text-label-md mb-2">Street Address</label>
+                            <input required id="address-street" class="w-full px-4 py-3 bg-surface border border-outline-variant rounded-lg transition-all text-body-md" placeholder="123 Market St" type="text"/>
+                        </div>
+                        <div>
+                            <label class="block font-label-md text-label-md mb-2">Apartment / Suite</label>
+                            <input id="address-apt" class="w-full px-4 py-3 bg-surface border border-outline-variant rounded-lg transition-all text-body-md" placeholder="Apt 4B" type="text"/>
+                        </div>
+                        <div>
+                            <label class="block font-label-md text-label-md mb-2">City</label>
+                            <input required id="address-city" class="w-full px-4 py-3 bg-surface border border-outline-variant rounded-lg transition-all text-body-md" placeholder="New York" type="text"/>
+                        </div>
+                    </div>
+                    <div class="mt-stack-md rounded-lg overflow-hidden h-40 relative group">
+                        <img class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8QKQ8tqXIPqINWWqqBVqwojfrQuRzC3Zz9acchxC8HDpD28bgtLBWtGqXKGwsgCWIKwm84J4EEUvcI_4t17hOHNgl4LVBVM5LGpKkzdOXLw2DhfU7xJXua_N36d5YuLoNZKez7qdIn2cjrjuhmSTGHdiMH8oBd_Czn1VwVjzqDIQy0LMhlEI2xU1z96eqVBpJz1BDrp7HtmTHm4vgSum7o8MhlsQuYCK5CZX7XkUoSr8G-OO0lCRbk1Jl6u7N52kJyAiTaHM7jpwx"/>
+                        <div class="absolute inset-0 bg-primary/5 flex items-center justify-center pointer-events-none">
+                            <div class="bg-surface-container-lowest px-4 py-2 rounded-full shadow-md flex items-center gap-2">
+                                <span class="material-symbols-outlined text-primary text-[18px]" style="font-variation-settings: 'FILL' 1;">my_location</span>
+                                <span class="font-label-md text-label-md">Pin location for courier</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Payment Method Selector -->
+                <div class="bg-surface-container-lowest p-stack-lg rounded-xl shadow-sm border border-outline-variant/30">
+                    <div class="flex items-center gap-stack-sm mb-stack-md">
+                        <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">payments</span>
+                        <h2 class="font-headline-sm text-headline-sm">Payment Method</h2>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-stack-sm mb-6">
+                        <!-- Credit Card Option -->
+                        <button type="button" id="pay-card-btn" class="payment-method-btn flex flex-col items-center gap-stack-sm p-stack-md border-2 border-primary bg-primary-container/5 rounded-xl transition-all">
+                            <span class="material-symbols-outlined text-primary text-3xl">credit_card</span>
+                            <span class="font-label-md text-label-md text-primary">Credit Card</span>
+                        </button>
+                        <!-- PayPal Option -->
+                        <button type="button" id="pay-paypal-btn" class="payment-method-btn flex flex-col items-center gap-stack-sm p-stack-md border border-outline-variant bg-surface rounded-xl hover:border-primary/50 transition-all">
+                            <span class="material-symbols-outlined text-on-surface-variant text-3xl">account_balance_wallet</span>
+                            <span class="font-label-md text-label-md text-on-surface-variant">PayPal</span>
+                        </button>
+                        <!-- Apple Pay Option -->
+                        <button type="button" id="pay-apple-btn" class="payment-method-btn flex flex-col items-center gap-stack-sm p-stack-md border border-outline-variant bg-surface rounded-xl hover:border-primary/50 transition-all">
+                            <span class="material-symbols-outlined text-on-surface-variant text-3xl">contactless</span>
+                            <span class="font-label-md text-label-md text-on-surface-variant">Apple Pay</span>
+                        </button>
+                    </div>
+                    <div class="space-y-stack-sm" id="card-inputs-container">
+                        <div>
+                            <label class="block font-label-md text-label-md mb-2">Cardholder Name</label>
+                            <input id="pay-name" class="w-full px-4 py-3 bg-surface border border-outline-variant rounded-lg transition-all text-body-md" placeholder="John Doe" type="text"/>
+                        </div>
+                        <div class="grid grid-cols-2 gap-stack-md">
+                            <div class="col-span-2 sm:col-span-1">
+                                <label class="block font-label-md text-label-md mb-2">Card Number</label>
+                                <div class="relative">
+                                    <input id="pay-number" class="w-full px-4 py-3 bg-surface border border-outline-variant rounded-lg transition-all text-body-md pl-12" placeholder="4111 2222 3333 4421" type="text"/>
+                                    <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">credit_card</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-stack-sm">
+                                <div>
+                                    <label class="block font-label-md text-label-md mb-2">Expiry</label>
+                                    <input id="pay-expiry" class="w-full px-4 py-3 bg-surface border border-outline-variant rounded-lg transition-all text-body-md text-center" placeholder="12/28" type="text"/>
+                                </div>
+                                <div>
+                                    <label class="block font-label-md text-label-md mb-2">CVV</label>
+                                    <input id="pay-cvv" class="w-full px-4 py-3 bg-surface border border-outline-variant rounded-lg transition-all text-body-md text-center" placeholder="***" type="password"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Promo Code -->
+                <div class="bg-surface-container-lowest p-stack-lg rounded-xl shadow-sm border border-outline-variant/30">
+                    <div class="flex items-center gap-stack-sm mb-stack-md">
+                        <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">confirmation_number</span>
+                        <h2 class="font-headline-sm text-headline-sm">Promo Code</h2>
+                    </div>
+                    <div class="flex gap-stack-sm">
+                        <input id="promo-input" class="flex-grow px-4 py-3 bg-surface border border-outline-variant rounded-lg transition-all text-body-md uppercase font-bold tracking-widest" placeholder="Enter code (try SWIFTBITE50)" type="text"/>
+                        <button type="button" id="apply-promo-btn" class="bg-secondary text-on-secondary px-stack-lg py-3 rounded-lg font-label-md text-label-md hover:opacity-90 transition-colors">Apply</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- Right Column: Order Summary -->
+        <div class="lg:col-span-4">
+            <div class="sticky top-24 flex flex-col gap-stack-md">
+                <div class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/30 overflow-hidden">
+                    <div class="bg-primary px-stack-lg py-stack-md text-on-primary">
+                        <h2 class="font-headline-sm text-headline-sm">Order Summary</h2>
+                    </div>
+                    <div class="p-stack-lg space-y-stack-md">
+                        <!-- Items List -->
+                        <div class="space-y-stack-sm pb-stack-md border-b border-outline-variant/20" id="summary-items">
+                            <!-- Items injected dynamically -->
+                        </div>
+                        <!-- Calculations -->
+                        <div class="space-y-stack-sm py-stack-sm">
+                            <div class="flex justify-between text-body-md text-on-surface-variant">
+                                <span>Subtotal</span>
+                                <span id="summary-subtotal">$0.00</span>
+                            </div>
+                            <div class="flex justify-between text-body-md text-on-surface-variant">
+                                <span>Delivery Fee</span>
+                                <span id="summary-delivery">$0.00</span>
+                            </div>
+                            <div class="flex justify-between text-body-md text-on-surface-variant">
+                                <span>Service Fee</span>
+                                <span>$2.00</span>
+                            </div>
+                            <div class="flex justify-between text-body-md text-on-surface-variant" id="discount-row" style="display:none;">
+                                <span>Discount (50% Off)</span>
+                                <span class="text-green-600 font-bold" id="summary-discount">-$0.00</span>
+                            </div>
+                            <div class="flex justify-between text-body-md text-on-surface-variant">
+                                <span>Taxes (8%)</span>
+                                <span id="summary-tax">$0.00</span>
+                            </div>
+                        </div>
+                        <!-- Total -->
+                        <div class="pt-stack-md border-t border-outline-variant/40">
+                            <div class="flex justify-between items-center mb-stack-md">
+                                <span class="font-headline-sm text-headline-sm">Total</span>
+                                <span class="font-headline-sm text-headline-sm text-primary font-bold animate-pulse" id="summary-total">$0.00</span>
+                            </div>
+                            <button form="checkout-form" type="submit" id="place-order-btn" class="w-full bg-primary text-on-primary py-4 rounded-xl font-headline-sm text-headline-sm hover:opacity-95 active:scale-[0.98] transition-all shadow-md flex items-center justify-center gap-stack-sm">
+                                Place Order
+                                <span class="material-symbols-outlined">arrow_forward</span>
+                            </button>
+                            <p class="mt-stack-md text-center text-body-sm text-outline flex items-center justify-center gap-1">
+                                <span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">security</span>
+                                SSL Encrypted Payment
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Trust Indicators -->
+                <div class="grid grid-cols-2 gap-stack-sm">
+                    <div class="bg-surface-container-low p-stack-sm rounded-lg flex items-center gap-2 border border-outline-variant/10">
+                        <span class="material-symbols-outlined text-primary">schedule</span>
+                        <span class="font-label-md text-label-md text-on-surface-variant">25-35 min</span>
+                    </div>
+                    <div class="bg-surface-container-low p-stack-sm rounded-lg flex items-center gap-2 border border-outline-variant/10">
+                        <span class="material-symbols-outlined text-primary">verified</span>
+                        <span class="font-label-md text-label-md text-on-surface-variant">Buyer Guard</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- Success Toast Placeholder -->
+<div id="toast" class="fixed bottom-gutter right-gutter z-50 pointer-events-none opacity-0 translate-y-4 transition-all duration-300">
+    <div class="bg-inverse-surface text-inverse-on-surface px-stack-lg py-stack-md rounded-xl shadow-lg flex items-center gap-stack-md">
+        <span class="material-symbols-outlined text-primary-fixed" id="toast-icon">check_circle</span>
+        <span class="font-label-md text-label-md" id="toast-text">Payment method updated</span>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const store = window.SwiftBiteStore;
+        if (!store) return;
+
+        const cart = store.getCart();
+        const user = store.getUser();
+
+        // 1. Check user login and redirect if guest
+        if (!user) {
+            window.location.href = "./signin.html";
+            return;
+        }
+
+        // 2. Redirect if cart empty
+        if (!cart.items || cart.items.length === 0) {
+            alert("Your cart is empty! Redirecting to home page.");
+            window.location.href = "./index.html";
+            return;
+        }
+
+        // 3. Pre-fill address and payment fields
+        document.getElementById("address-street").value = user.address.split(',')[0] || '';
+        document.getElementById("address-city").value = user.address.split(',')[1]?.trim() || 'New York';
+        document.getElementById("pay-name").value = user.name || '';
+        
+        let discountPct = 0;
+        let selectedMethod = "Credit Card";
+
+        // 4. Render Summary Items
+        function renderSummary() {
+            const container = document.getElementById("summary-items");
+            
+            // Get active restaurant delivery fee
+            const activeRestId = cart.restaurantId;
+            const deliveryFee = activeRestId === "sushikazu" ? 0 : 2.99;
+            const serviceFee = 2.00;
+
+            const subtotal = cart.items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const discountVal = subtotal * discountPct;
+            const tax = (subtotal - discountVal) * 0.08;
+            const total = subtotal - discountVal + deliveryFee + serviceFee + tax;
+
+            container.innerHTML = cart.items.map(item => `
+                <div class="flex justify-between items-start">
+                    <div class="flex gap-stack-sm">
+                        <div class="w-12 h-12 rounded-lg bg-surface-container overflow-hidden flex-shrink-0 flex items-center justify-center text-outline">
+                            <span class="material-symbols-outlined">restaurant</span>
+                        </div>
+                        <div>
+                            <p class="font-label-md text-label-md font-semibold">${item.name}</p>
+                            <p class="font-body-sm text-body-sm text-on-surface-variant">x${item.quantity}</p>
+                        </div>
+                    </div>
+                    <span class="font-label-md text-label-md font-bold">$${(item.price * item.quantity).toFixed(2)}</span>
+                </div>
+            `).join("");
+
+            document.getElementById("summary-subtotal").textContent = `$${subtotal.toFixed(2)}`;
+            document.getElementById("summary-delivery").textContent = deliveryFee === 0 ? "Free" : `$${deliveryFee.toFixed(2)}`;
+            document.getElementById("summary-tax").textContent = `$${tax.toFixed(2)}`;
+            document.getElementById("summary-total").textContent = `$${total.toFixed(2)}`;
+
+            if (discountPct > 0) {
+                document.getElementById("discount-row").style.display = "flex";
+                document.getElementById("summary-discount").textContent = `-$${discountVal.toFixed(2)}`;
+            } else {
+                document.getElementById("discount-row").style.display = "none";
+            }
+        }
+
+        renderSummary();
+
+        // 5. Handle Payment Method Selection
+        const methodButtons = document.querySelectorAll(".payment-method-btn");
+        methodButtons.forEach(btn => {
+            btn.addEventListener("click", () => {
+                methodButtons.forEach(b => {
+                    b.className = "payment-method-btn flex flex-col items-center gap-stack-sm p-stack-md border border-outline-variant bg-surface rounded-xl hover:border-primary/50 transition-all";
+                    b.querySelector("span:first-child").className = "material-symbols-outlined text-on-surface-variant text-3xl";
+                    b.querySelector("span:last-child").className = "font-label-md text-label-md text-on-surface-variant";
+                });
+
+                btn.className = "payment-method-btn flex flex-col items-center gap-stack-sm p-stack-md border-2 border-primary bg-primary-container/5 rounded-xl transition-all";
+                btn.querySelector("span:first-child").className = "material-symbols-outlined text-primary text-3xl";
+                btn.querySelector("span:last-child").className = "font-label-md text-label-md text-primary";
+
+                selectedMethod = btn.querySelector("span:last-child").textContent;
+                
+                const cardInputs = document.getElementById("card-inputs-container");
+                if (selectedMethod !== "Credit Card") {
+                    cardInputs.style.opacity = 0.5;
+                    cardInputs.querySelectorAll("input").forEach(i => i.disabled = true);
+                } else {
+                    cardInputs.style.opacity = 1;
+                    cardInputs.querySelectorAll("input").forEach(i => i.disabled = false);
+                }
+                
+                showToast("Payment method selected: " + selectedMethod);
+            });
+        });
+
+        // 6. Handle Promo Codes
+        document.getElementById("apply-promo-btn").addEventListener("click", () => {
+            const promo = document.getElementById("promo-input").value.trim().toUpperCase();
+            if (promo === "SWIFTBITE50") {
+                discountPct = 0.5;
+                renderSummary();
+                showToast("Promo Code Applied: 50% Off First Order!", "check_circle");
+            } else {
+                showToast("Invalid Promo Code", "error");
+            }
+        });
+
+        // 7. Handle Order Submission
+        document.getElementById("checkout-form").addEventListener("submit", (e) => {
+            e.preventDefault();
+            
+            const street = document.getElementById("address-street").value;
+            const apt = document.getElementById("address-apt").value;
+            const city = document.getElementById("address-city").value;
+            const fullAddress = `${street}${apt ? ', ' + apt : ''}, ${city}`;
+
+            const cardNum = document.getElementById("pay-number").value || "4111222233334242";
+            const paymentDetails = selectedMethod === "Credit Card" 
+                ? `Card Ending in ${cardNum.replace(/\s+/g, '').slice(-4)}`
+                : selectedMethod;
+
+            // Place Order
+            const newOrder = store.placeOrder(fullAddress, paymentDetails);
+            if (newOrder) {
+                // Save this order as the active tracking order
+                localStorage.setItem("sb_active_tracking_order_id", newOrder.id);
+                showToast("Order placed successfully! Redirecting...", "check_circle");
+                
+                setTimeout(() => {
+                    window.location.href = `./track.html?orderId=${newOrder.id}`;
+                }, 1500);
+            } else {
+                showToast("Failed to place order.", "error");
+            }
+        });
+
+        // Toast Helper
+        function showToast(message, iconName = "info") {
+            const toast = document.getElementById("toast");
+            document.getElementById("toast-text").textContent = message;
+            document.getElementById("toast-icon").textContent = iconName;
+            
+            toast.style.opacity = 1;
+            toast.style.transform = "translateY(0)";
+            
+            setTimeout(() => {
+                toast.style.opacity = 0;
+                toast.style.transform = "translateY(16px)";
+            }, 3000);
+        }
+    });
+</script>
+</body>
+</html>

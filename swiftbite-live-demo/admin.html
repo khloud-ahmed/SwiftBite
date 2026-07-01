@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>SwiftBite Admin - System Control</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script src="./demo-store.js"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#e9e8e7",
+                    "error-container": "#ffdad6",
+                    "on-error-container": "#93000a",
+                    "outline": "#8e7164",
+                    "on-background": "#1b1c1c",
+                    "inverse-on-surface": "#f2f0f0",
+                    "surface-bright": "#fbf9f8",
+                    "on-secondary-fixed-variant": "#474746",
+                    "on-surface-variant": "#5a4136",
+                    "on-surface": "#1b1c1c",
+                    "secondary-fixed": "#e5e2e1",
+                    "background": "#fbf9f8",
+                    "secondary": "#5f5e5e",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-container": "#989999",
+                    "surface-container-highest": "#e4e2e2",
+                    "text-primary": "#a04100",
+                    "tertiary": "#5d5f5f",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "primary-fixed-dim": "#ffb693",
+                    "surface-variant": "#e4e2e2",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "secondary-container": "#e2dfde",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-container": "#2f3132",
+                    "surface-container-low": "#f5f3f3",
+                    "primary": "#a04100",
+                    "surface-dim": "#dbdad9",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "on-primary-container": "#572000",
+                    "outline-variant": "#e2bfb0",
+                    "inverse-surface": "#303031",
+                    "primary-fixed": "#ffdbcc",
+                    "surface-tint": "#a04100",
+                    "error": "#ba1a1a",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-primary": "#ffb693",
+                    "primary-container": "#ff6b00",
+                    "on-primary-fixed": "#351000",
+                    "on-secondary-container": "#636262",
+                    "surface-container": "#efeded",
+                    "on-primary-fixed-variant": "#7a3000",
+                    "tertiary-fixed": "#e2e2e2",
+                    "surface": "#fbf9f8",
+                    "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-sm": "8px",
+                    "stack-lg": "32px",
+                    "gutter": "24px",
+                    "margin-desktop": "40px",
+                    "margin-mobile": "16px",
+                    "unit": "8px",
+                    "container-max-width": "1280px",
+                    "stack-md": "16px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": [
+                            "Work Sans"
+                    ],
+                    "label-md": [
+                            "Work Sans"
+                    ],
+                    "headline-md": [
+                            "Work Sans"
+                    ],
+                    "body-md": [
+                            "Work Sans"
+                    ],
+                    "display-lg": [
+                            "Work Sans"
+                    ],
+                    "body-lg": [
+                            "Work Sans"
+                    ],
+                    "headline-lg": [
+                            "Work Sans"
+                    ],
+                    "label-sm": [
+                            "Work Sans"
+                    ]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": [
+                            "28px",
+                            {
+                                    "lineHeight": "36px",
+                                    "fontWeight": "700"
+                              }
+                    ],
+                    "label-md": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "letterSpacing": "0.01em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-md": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "display-lg": [
+                            "48px",
+                            {
+                                    "lineHeight": "56px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "body-lg": [
+                            "18px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "headline-lg": [
+                            "32px",
+                            {
+                                    "lineHeight": "40px",
+                                    "letterSpacing": "-0.01em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "label-sm": [
+                            "12px",
+                            {
+                                    "lineHeight": "16px",
+                                    "fontWeight": "500"
+                            }
+                    ]
+            }
+          },
+        },
+      }
+    </script>
+    <style>
+        body { font-family: 'Work Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- Admin SideNavBar -->
+<aside class="h-full w-72 fixed left-0 top-0 bg-surface-container-highest flex flex-col h-screen border-r border-outline-variant z-50">
+    <!-- Header Section -->
+    <div class="p-gutter flex items-center gap-stack-sm cursor-pointer" onclick="window.location.href='./index.html'">
+        <div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-on-primary">
+            <span class="material-symbols-outlined" data-icon="restaurant_menu">restaurant_menu</span>
+        </div>
+        <div>
+            <h1 class="font-headline-sm text-[20px] font-extrabold text-primary leading-none">SwiftBite Admin</h1>
+            <p class="font-label-md text-label-md text-on-surface-variant">System Control</p>
+        </div>
+    </div>
+    <!-- Navigation Tabs -->
+    <nav class="flex-grow mt-stack-md flex flex-col gap-stack-sm">
+        <a class="bg-primary text-on-primary rounded-xl mx-4 shadow-md flex items-center px-4 py-3 transition-all" href="#">
+            <span class="material-symbols-outlined mr-3" data-icon="dashboard" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+            <span class="font-label-md text-label-md">Dashboard</span>
+        </a>
+        <a class="text-on-surface-variant mx-4 flex items-center px-4 py-3 hover:bg-surface-variant transition-all rounded-xl" href="./index.html">
+            <span class="material-symbols-outlined mr-3" data-icon="shopping_basket">shopping_basket</span>
+            <span class="font-label-md text-label-md">Customer Store</span>
+        </a>
+        <a class="text-on-surface-variant mx-4 flex items-center px-4 py-3 hover:bg-surface-variant transition-all rounded-xl" href="./partner-orders.html">
+            <span class="material-symbols-outlined mr-3" data-icon="receipt_long">receipt_long</span>
+            <span class="font-label-md text-label-md">Partner Console</span>
+        </a>
+    </nav>
+    <!-- Profile / Admin Meta -->
+    <div class="p-gutter border-t border-outline-variant">
+        <div class="flex items-center gap-3 mb-6">
+            <img alt="Admin Avatar" class="w-10 h-10 rounded-full border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnXXgBc8RgC0KF7dMBXLIpKXNFcyBhywWqitWGFqqcml6R15e_Zl_0jrtkNTLUD551te9FAJiluVYus6BNbidcAA0S4TMXRf9aqoXe8gYOZr1jykWewBmV8_1WNAOGF-_6KQ2HlY6WRVAE1BmeDzLJVgKctG6wgJZgbw42qizdf4MHPfWdMmQuvXZD08zGjUOxtfLmFjx3_e6TegBa7vR7NOU6OCezBs4_8xcWb3A0g5Z7QgWQnE10XSbbzPgfVltPu90NR6nhLdpq"/>
+            <div>
+                <p class="font-label-md text-label-md text-on-surface">Alex Thompson</p>
+                <p class="text-[12px] text-on-surface-variant">Super Admin</p>
+            </div>
+        </div>
+        <button onclick="SwiftBiteStore.logout(); window.location.href='./index.html';" class="w-full text-left text-on-surface-variant mx-4 flex items-center px-4 py-2 hover:bg-error/5 hover:text-error transition-all rounded-xl">
+            <span class="material-symbols-outlined mr-3" data-icon="logout">logout</span>
+            <span class="font-label-md text-label-md">Logout</span>
+        </button>
+    </div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-72 p-margin-desktop max-w-[1280px] mx-auto">
+    <!-- Header -->
+    <header class="flex justify-between items-end mb-stack-lg">
+        <div>
+            <h2 class="font-headline-lg text-headline-lg text-on-surface">Overview Dashboard</h2>
+            <p class="font-body-md text-body-md text-on-surface-variant">Real-time performance metrics and system health.</p>
+        </div>
+        <div class="flex gap-stack-sm">
+            <button class="flex items-center gap-2 bg-surface-container-high px-4 py-2 rounded-lg font-label-md text-label-md hover:bg-secondary-container transition-colors">
+                <span class="material-symbols-outlined text-[20px]" data-icon="calendar_today">calendar_today</span>
+                Last 30 Days
+            </button>
+            <button onclick="alert('Demo: Exporting is disabled.')" class="flex items-center gap-2 bg-primary-container text-on-primary px-6 py-2 rounded-lg font-label-md text-label-md shadow-md hover:opacity-90 transition-all active:scale-95">
+                <span class="material-symbols-outlined text-[20px]" data-icon="download">download</span>
+                Export Report
+            </button>
+        </div>
+    </header>
+    <!-- KPI Cards Grid -->
+    <section class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-gutter mb-stack-lg">
+        <!-- Card 1: Total Orders -->
+        <div class="bg-surface-container-lowest p-stack-md rounded-xl shadow-sm border border-outline-variant hover:-translate-y-1 transition-transform">
+            <div class="flex justify-between items-start mb-4">
+                <div class="p-2 bg-primary-fixed rounded-lg text-primary">
+                    <span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+                </div>
+                <span class="text-green-600 bg-green-50 px-2 py-1 rounded text-[12px] font-bold flex items-center">
+                    <span class="material-symbols-outlined text-[14px] mr-1" data-icon="trending_up">trending_up</span>
+                    +1.5%
+                </span>
+            </div>
+            <p class="font-label-md text-label-md text-on-surface-variant">Total Orders</p>
+            <h3 id="admin-total-orders" class="font-headline-md text-headline-md text-on-surface font-extrabold">24,892</h3>
+        </div>
+        <!-- Card 2: Total Revenue -->
+        <div class="bg-surface-container-lowest p-stack-md rounded-xl shadow-sm border border-outline-variant hover:-translate-y-1 transition-transform">
+            <div class="flex justify-between items-start mb-4">
+                <div class="p-2 bg-tertiary-fixed rounded-lg text-tertiary">
+                    <span class="material-symbols-outlined" data-icon="payments">payments</span>
+                </div>
+                <span class="text-green-600 bg-green-50 px-2 py-1 rounded text-[12px] font-bold flex items-center">
+                    <span class="material-symbols-outlined text-[14px] mr-1" data-icon="trending_up">trending_up</span>
+                    +2.1%
+                </span>
+            </div>
+            <p class="font-label-md text-label-md text-on-surface-variant">Total Revenue</p>
+            <h3 id="admin-total-revenue" class="font-headline-md text-headline-md text-on-surface font-extrabold">$542,190</h3>
+        </div>
+        <!-- Card 3: Active Users -->
+        <div class="bg-surface-container-lowest p-stack-md rounded-xl shadow-sm border border-outline-variant hover:-translate-y-1 transition-transform">
+            <div class="flex justify-between items-start mb-4">
+                <div class="p-2 bg-surface-variant rounded-lg text-on-surface-variant">
+                    <span class="material-symbols-outlined" data-icon="person">person</span>
+                </div>
+                <span class="text-on-surface-variant bg-surface-variant px-2 py-1 rounded text-[12px] font-bold">Stable</span>
+            </div>
+            <p class="font-label-md text-label-md text-on-surface-variant">Active Orders</p>
+            <h3 id="admin-active-orders" class="font-headline-md text-headline-md text-on-surface font-extrabold">0</h3>
+        </div>
+        <!-- Card 4: Active Drivers -->
+        <div class="bg-surface-container-lowest p-stack-md rounded-xl shadow-sm border border-outline-variant hover:-translate-y-1 transition-transform">
+            <div class="flex justify-between items-start mb-4">
+                <div class="p-2 bg-secondary-container rounded-lg text-secondary">
+                    <span class="material-symbols-outlined" data-icon="delivery_dining">delivery_dining</span>
+                </div>
+                <span class="text-error bg-error-container px-2 py-1 rounded text-[12px] font-bold flex items-center">
+                    <span class="material-symbols-outlined text-[14px] mr-1" data-icon="trending_down">trending_down</span>
+                    2.1%
+                </span>
+            </div>
+            <p class="font-label-md text-label-md text-on-surface-variant">Active Drivers</p>
+            <h3 class="font-headline-md text-headline-md text-on-surface font-extrabold">3,812</h3>
+        </div>
+    </section>
+    <!-- Chart Section & Secondary Insights -->
+    <div class="grid grid-cols-1 xl:grid-cols-3 gap-gutter">
+        <!-- Main Chart: Daily Orders & Revenue -->
+        <section class="xl:col-span-2 bg-surface-container-lowest p-gutter rounded-xl shadow-sm border border-outline-variant">
+            <div class="flex justify-between items-center mb-stack-lg">
+                <h4 class="font-headline-sm text-headline-md text-on-surface">Daily Orders &amp; Revenue</h4>
+                <div class="flex items-center gap-4">
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-primary"></span>
+                        <span class="font-label-md text-label-md text-on-surface-variant">Orders</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-tertiary"></span>
+                        <span class="font-label-md text-label-md text-on-surface-variant">Revenue</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Chart Visualization (Representative) -->
+            <div class="relative h-80 w-full bg-surface-container-low rounded-lg overflow-hidden group">
+                <!-- Grid Lines -->
+                <div class="absolute inset-0 flex flex-col justify-between p-4 opacity-20 pointer-events-none">
+                    <div class="border-b border-outline"></div>
+                    <div class="border-b border-outline"></div>
+                    <div class="border-b border-outline"></div>
+                    <div class="border-b border-outline"></div>
+                    <div class="border-b border-outline"></div>
+                </div>
+                <!-- Illustrative Vector for Line Chart -->
+                <svg class="absolute inset-0 w-full h-full p-4" viewbox="0 0 800 320">
+                    <!-- Revenue Line -->
+                    <path d="M0,280 Q100,240 200,250 T400,180 T600,200 T800,120" fill="none" stroke="#5d5f5f" stroke-linecap="round" stroke-width="3"></path>
+                    <!-- Orders Line -->
+                    <path d="M0,200 Q100,180 200,210 T400,120 T600,150 T800,80" fill="none" stroke="#a04100" stroke-linecap="round" stroke-width="3"></path>
+                </svg>
+                <!-- Tooltip Hover Simulation -->
+                <div class="absolute left-1/2 top-1/4 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface px-3 py-2 rounded-lg text-xs shadow-xl opacity-0 group-hover:opacity-100 transition-opacity">
+                    <p class="font-bold">Oct 24</p>
+                    <p>Orders: 1,240</p>
+                    <p>Revenue: $28.4k</p>
+                </div>
+            </div>
+            <div class="flex justify-between mt-4 px-4 font-label-md text-label-md text-on-surface-variant">
+                <span>Oct 01</span>
+                <span>Oct 08</span>
+                <span>Oct 15</span>
+                <span>Oct 22</span>
+                <span>Oct 30</span>
+            </div>
+        </section>
+        <!-- Secondary Insight: Orders by Cuisine -->
+        <section class="bg-surface-container-lowest p-gutter rounded-xl shadow-sm border border-outline-variant flex flex-col">
+            <h4 class="font-headline-sm text-headline-md text-on-surface mb-stack-lg">Orders by Cuisine</h4>
+            <div class="relative flex-grow flex items-center justify-center">
+                <!-- Donut Chart Representation -->
+                <div class="w-48 h-48 rounded-full border-[20px] border-primary flex items-center justify-center relative">
+                    <div class="absolute inset-0 w-full h-full rounded-full border-[20px] border-tertiary border-t-transparent border-r-transparent border-l-transparent -rotate-45"></div>
+                    <div class="absolute inset-0 w-full h-full rounded-full border-[20px] border-surface-variant border-t-transparent border-b-transparent border-l-transparent rotate-90"></div>
+                    <div class="text-center">
+                        <p class="font-headline-sm text-headline-md" id="admin-donut-orders">24.8k</p>
+                        <p class="text-[10px] text-on-surface-variant uppercase font-bold tracking-wider">Total Orders</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-stack-lg space-y-stack-sm">
+                <div class="flex justify-between items-center p-2 rounded-lg hover:bg-surface-container transition-colors">
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-sm bg-primary"></span>
+                        <span class="font-label-md text-label-md">Italian</span>
+                    </div>
+                    <span class="font-bold">42%</span>
+                </div>
+                <div class="flex justify-between items-center p-2 rounded-lg hover:bg-surface-container transition-colors">
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-sm bg-tertiary"></span>
+                        <span class="font-label-md text-label-md">Japanese</span>
+                    </div>
+                    <span class="font-bold">28%</span>
+                </div>
+                <div class="flex justify-between items-center p-2 rounded-lg hover:bg-surface-container transition-colors">
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-sm bg-surface-variant"></span>
+                        <span class="font-label-md text-label-md">Mexican</span>
+                    </div>
+                    <span class="font-bold">18%</span>
+                </div>
+                <div class="flex justify-between items-center p-2 rounded-lg hover:bg-surface-container transition-colors">
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-sm bg-outline-variant"></span>
+                        <span class="font-label-md text-label-md">Other</span>
+                    </div>
+                    <span class="font-bold">12%</span>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- Recent Activity Table -->
+    <section class="mt-stack-lg bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant overflow-hidden">
+        <div class="p-gutter border-b border-outline-variant flex justify-between items-center">
+            <h4 class="font-headline-sm text-headline-md text-on-surface">Recent Transaction Activity</h4>
+            <button class="text-primary font-label-md text-label-md hover:underline">View All Activity</button>
+        </div>
+        <div class="divide-y divide-outline-variant" id="admin-transactions-list">
+            <!-- Dynamic transactions will be prepended here -->
+            
+            <!-- Static Activity Item 1 -->
+            <div class="p-4 flex items-center hover:bg-surface-container-low transition-colors">
+                <div class="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 bg-surface-variant flex items-center justify-center">
+                    <span class="material-symbols-outlined text-outline">restaurant</span>
+                </div>
+                <div class="ml-4 flex-grow">
+                    <p class="font-label-md text-label-md text-on-surface font-semibold">Order #SB-9921 from 'Lombardi's Pizza'</p>
+                    <p class="text-xs text-on-surface-variant">Customer: Sarah Jenkins • 2 hours ago</p>
+                </div>
+                <div class="text-right">
+                    <p class="font-bold text-on-surface">$42.50</p>
+                    <span class="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded uppercase tracking-tighter">Delivered</span>
+                </div>
+            </div>
+            <!-- Static Activity Item 2 -->
+            <div class="p-4 flex items-center hover:bg-surface-container-low transition-colors">
+                <div class="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 bg-surface-variant flex items-center justify-center">
+                    <span class="material-symbols-outlined text-outline">restaurant</span>
+                </div>
+                <div class="ml-4 flex-grow">
+                    <p class="font-label-md text-label-md text-on-surface font-semibold">Order #SB-9920 from 'Iron Grill Burgers'</p>
+                    <p class="text-xs text-on-surface-variant">Customer: Michael Ross • 4 hours ago</p>
+                </div>
+                <div class="text-right">
+                    <p class="font-bold text-on-surface">$28.90</p>
+                    <span class="text-[10px] font-bold text-primary bg-primary-container/10 px-2 py-0.5 rounded uppercase tracking-tighter">Preparing</span>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const store = window.SwiftBiteStore;
+        if (!store) return;
+
+        function refreshDashboard() {
+            const orders = store.getOrders();
+            
+            // Calculate dynamic totals
+            const seedOrdersCount = 24892;
+            const seedRevenue = 542190.00;
+
+            const newOrdersCount = orders.length;
+            const newRevenue = orders.reduce((sum, o) => sum + o.total, 0);
+
+            const activeOrders = orders.filter(o => o.status !== "Delivered").length;
+
+            // Update DOM
+            document.getElementById("admin-total-orders").textContent = (seedOrdersCount + newOrdersCount).toLocaleString();
+            document.getElementById("admin-total-revenue").textContent = "$" + (seedRevenue + newRevenue).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById("admin-donut-orders").textContent = ((seedOrdersCount + newOrdersCount) / 1000).toFixed(1) + "k";
+            document.getElementById("admin-active-orders").textContent = activeOrders.toString();
+
+            // Populate recent activity
+            const listContainer = document.getElementById("admin-transactions-list");
+            
+            // Keep the default static entries, but prepend the real new ones!
+            // First remove any existing dynamic ones to prevent duplication on refresh
+            document.querySelectorAll(".dynamic-transaction").forEach(el => el.remove());
+
+            orders.forEach(order => {
+                const totalItems = order.items.reduce((sum, item) => sum + item.quantity, 0);
+                
+                let statusLabel = "";
+                if (order.status === "Delivered") {
+                    statusLabel = `<span class="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded uppercase tracking-tighter">Delivered</span>`;
+                } else if (order.status === "Dispatched") {
+                    statusLabel = `<span class="text-[10px] font-bold text-primary bg-primary-container/10 px-2 py-0.5 rounded uppercase tracking-tighter">Dispatched</span>`;
+                } else if (order.status === "Preparing") {
+                    statusLabel = `<span class="text-[10px] font-bold text-primary bg-primary-container/10 px-2 py-0.5 rounded uppercase tracking-tighter">Preparing</span>`;
+                } else {
+                    statusLabel = `<span class="text-[10px] font-bold text-on-surface-variant bg-surface-variant px-2 py-0.5 rounded uppercase tracking-tighter">Pending</span>`;
+                }
+
+                // Format time ago
+                const timeDiff = Date.now() - new Date(order.timestamp);
+                let timeAgoStr = "Just now";
+                const mins = Math.floor(timeDiff / 60000);
+                if (mins > 0) {
+                    timeAgoStr = mins === 1 ? "1 min ago" : `${mins} mins ago`;
+                }
+
+                const tr = document.createElement("div");
+                tr.className = "dynamic-transaction p-4 flex items-center hover:bg-surface-container-low transition-colors border-b border-outline-variant/10";
+                tr.innerHTML = `
+                    <div class="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 bg-primary/10 flex items-center justify-center text-primary">
+                        <span class="material-symbols-outlined">restaurant</span>
+                    </div>
+                    <div class="ml-4 flex-grow">
+                        <p class="font-label-md text-label-md text-on-surface font-semibold">Order #${order.id} from '${order.restaurantName}'</p>
+                        <p class="text-xs text-on-surface-variant">Customer: ${order.customer.name} • ${timeAgoStr}</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="font-bold text-on-surface">$${order.total.toFixed(2)}</p>
+                        ${statusLabel}
+                    </div>
+                `;
+                listContainer.prepend(tr);
+            });
+        }
+
+        refreshDashboard();
+        
+        // Listen to live order updates
+        window.addEventListener("storage", () => {
+            refreshDashboard();
+        });
+    });
+</script>
+</body>
+</html>
